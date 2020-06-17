@@ -14,14 +14,14 @@
             width: 170px;
             height: 150px;
             background-position: center center;
-            background:url('{{asset('/images/default/school.png')}}');
+            background: url('{{asset('/images/default/school.png')}}');
             background-color: #fff;
             background-size: cover;
             background-repeat: no-repeat;
             border-radius: 10px;
             display: inline-block;
-            webkit-box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0,0,0,.075);
-            box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0,0,0,.075);
+            webkit-box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
+            box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
             border: 3px solid #fff;
         }
 
@@ -136,437 +136,509 @@
             @endif
         </ul>
         <hr>
-        <form action="{{ route('submitSchool') }}" method="POST" id="addSchoolForm" enctype="multipart/form-data">
-            @csrf
-            <div class="tab-content">
-                @if(isset($school))
-                    <input type="hidden" id="id" name="id" value="{{ $school->id }}">
-                @endif
-                <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+        @if(isset($school))
+            <form action="{{ route('updateSchool') }}" method="POST" id="updateSchoolForm" enctype="multipart/form-data">
+                {{ method_field('put') }}
+                @else
+                    <form action="{{ route('submitSchool') }}" method="POST" id="addSchoolForm"
+                          enctype="multipart/form-data">
+                        @endif
+                        @csrf
+                        <div class="tab-content">
+                            @if(isset($school))
+                                <input type="hidden" id="id" name="id" value="{{ $school->id }}">
+                            @endif
+                            <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
 
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>School Type</label>
-                            <select class="multiple-select" name="type[]" multiple="multiple">
-                                <option value="" disabled>Select School Type</option>
-                                @foreach($schoolsType as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name_en }}</option>
-                                @endforeach
-                            </select>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>School Type</label>
+                                        <select class="multiple-select" name="type[]" multiple="multiple">
+                                            <option value="" disabled>Select School Type</option>
+                                            @if(isset($school))
+                                                @foreach($schoolsType as $type)
 
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>School Order</label>
-                            <input type="number" class="form-control" placeholder="School Order" name="school_order"
-                                   id="school_order" value="{{ isset($school) ? $school->school_order : '' }}">
-                            <small>Last School Order: <b>{{$lastSchoolOrder }}</b></small>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Arabic Name</label>
-                            <input type="text" class="form-control" id="name_ar" name="name_ar" style="direction: rtl"
-                                   placeholder="Arabic Name" value="{{ isset($school) ? $school->name_ar : '' }}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>English Name</label>
-                            <input type="text" class="form-control" id="name_en" name="name_en"
-                                   placeholder="English Name" value="{{ isset($school) ? $school->name_en : '' }}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Email Address </label>
-                            <input type="email" class="form-control" id="email_school" name="email_school"
-                                   placeholder="Email School Address"
-                                   value="{{ isset($school) ? $school->email_school : '' }}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Phone </label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"
-                                   value="{{ isset($school) ? $school->phone : '' }}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Fax</label>
-                            <input type="text" class="form-control" id="fax" name="fax" placeholder="Fax"
-                                   value="{{ isset($school) ? $school->fax : '' }}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Website</label>
-                            <input type="text" class="form-control" id="website" name="website" placeholder="Website"
-                                   value="{{ isset($school) ? $school->website : '' }}"
-                            >
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Principal Title Arabic</label>
-                            <input type="text" class="form-control" id="principle_title_ar" name="principle_title_ar"
-                                   style="direction: rtl"
-                                   placeholder="Principal Title Arabic"
-                                   value="{{ isset($school) ? $school->principle_title_ar : '' }}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Principal Title English</label>
-                            <input type="text" class="form-control" id="principle_title_en" name="principle_title_en"
-                                   placeholder=" Principal Title English"
-                                   value="{{ isset($school) ? $school->principle_title_en : '' }}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Zip Code</label>
-                            <input type="text" class="form-control" id="zip_code" name="zip_code"
-                                   placeholder="Zip Code" value="{{ isset($school) ? $school->zip_code : '' }}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>P.O. box</label>
-                            <input type="text" class="form-control" id="po_box" name="po_box" placeholder="P.O. box"
-                                   value="{{ isset($school) ? $school->po_box : '' }}"
-                            >
-                        </div>
+                                                    @if(in_array($type->id, $schoolTypesExploded))
+                                                        <option value="{{ $type->id }}"
+                                                                selected>{{ $type->name_en }}</option>
+                                                    @else
+                                                        <option value="{{ $type->id }}">{{ $type->name_en }}</option>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                @foreach($schoolsType as $type)
+                                                    <option value="{{ $type->id }}">{{ $type->name_en }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
 
-                        <div class="col-sm-2 imgUp">
-                            <label>School Logo </label>
-                            <div class="imagePreview" style="@if(isset($school))
-                                background:url('{{asset('/images/'.$school->name_en.'/'.$school->school_logo.'')}}');
-                                background-position: center center;
-                                background-color: #fff;
-                                background-size: cover;
-                                background-repeat: no-repeat;
-                            @endif"></div>
-                            <label class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" style="color: #262673 !important;">
-                                <i class="fa fa-pen icon-sm text-muted"></i>
-                                <input type="file" name="logo" id="logo" class="uploadFile img" value="{{ isset($school) ? $school->school_logo: '' }}"
-                                                   style="width: 0px;height: 0px;overflow: hidden;">
-                            </label>
-                        </div>
-                        {{-- <div class="col-md-4">
-                             <label>School Logo</label>
-                             <input type="file" name="logo" id="logo" class="form-control-file">
-                             <img src="{{ asset('images/Zarqa University Schools & KG/1592143263.png') }}" alt="">
-                         </div>--}}
-                    </div>
-
-                </div>
-
-                <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label> Principal Arabic</label>
-                            <textarea name="principle_ar" id="principle_ar"
-                                      placeholder="Principal Arabic">@if(isset($school)) {!! $school->principle_ar!!} @endif</textarea>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Principal English</label>
-                            <textarea name="principle_en" id="principle_en"
-                                      placeholder="Principal English">@if(isset($school)) {!! $school->principle_en!!} @endif</textarea>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>School details Arabic </label>
-                            <textarea name="school_details_ar" id="school_details_ar"
-                                      placeholder="School details Arabic">@if(isset($school)) {!! $school->school_details_ar!!} @endif</textarea>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>School details English</label>
-                            <textarea name="school_details_en" id="school_details_en"
-                                      placeholder="School details English">@if(isset($school)) {!! $school->school_details_en!!} @endif</textarea>
-                        </div>
-                    </div>
-                    <script>
-                        ClassicEditor.create(document.querySelector('#principle_ar'));
-                        ClassicEditor.create(document.querySelector('#principle_en'));
-                        ClassicEditor.create(document.querySelector('#school_details_ar'));
-                        ClassicEditor.create(document.querySelector('#school_details_en'));
-                    </script>
-
-                </div>
-                <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label> Country</label>
-                            <select class="form-control" id="country" name="country" disabled>
-                                <option disabled selected value="1">Jordan</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> City</label>
-                            <select class="form-control" id="city_id" name="city_id">
-
-                                @foreach($cities as $city)
-                                    <option @if(isset($school) && $city->id == $school->city->id) value="{{ $city->id }}"
-                                            selected
-                                            @else value="{{ $city->id }}" @endif>{{ $city->city_name_ar }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label> Region</label>
-                            <select class="form-control" id="region_id" name="region_id"
-                                    @if(isset($school)) @else disabled="" @endif>
-                                <option value="" selected>Select Region</option>
-                                @if(isset($school))
-                                    <script>
-                                        var value = {{ $school->city_id }}
-                                        $.ajax({
-                                            url: '/getRegions/' + value,
-                                            method: 'get',
-                                            success: function (result) {
-                                                var schoolId = {{ $school->region_id }}
-                                                $('#region_id option:not(:first)').remove();
-                                                $.each(result, function (index, value) {
-                                                    if (schoolId == value.id)
-                                                        $('#region_id').append("<option value='" + value.id + "' selected>" + value.area_name_ar + "");
-                                                    else
-                                                        $('#region_id').append("<option value='" + value.id + "'>" + value.area_name_ar + "");
-                                                });
-
-                                                $('#region_id').removeAttr('disabled');
-                                            }
-                                        });
-                                    </script>
-                                @endif
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>School Brochure </label>
-                            <input type="file" name="brochure" id="brochure" class="form-control-file" value="{{ isset($school) ? $school->school_brochure : '' }}">
-                        </div>
-                    </div>
-
-                </div>
-                <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>Facebook Link </label>
-                            <input type="text" class="form-control" id="facebook_link" name="facebook_link"
-                                   placeholder="Facebook Link" value="{{isset($school) ? $school->facebook_link : ''}}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Twitter Link </label>
-                            <input type="text" class="form-control" id="twitter_link" name="twitter_link"
-                                   placeholder="Instagram Link" value="{{isset($school) ? $school->twitter_link : ''}}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Instagram Link</label>
-                            <input type="text" class="form-control" id="instagram_link" name="instagram_link"
-                                   placeholder="Instagram Link" value="{{isset($school) ? $school->instagram_link : ''}}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Linkedin Link</label>
-                            <input type="text" class="form-control" id="linkedin_link" name="linkedin_link"
-                                   placeholder="Linkedin Link" value="{{isset($school) ? $school->linkedin_link : ''}}">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <label> Google Map</label>
-                            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                            <div id="map-canvas"></div>
-                            <input type="hidden" name="lat" id="lat" value="{{ isset($school) ? $school->lat : '' }}" readonly="yes">
-                            <input type="hidden" name="lng" id="lng" value="{{ isset($school) ? $school->lng : '' }}" readonly="yes">
-                        </div>
-                    </div>
-                </div>
-                <div id="step-5" class="tab-pane" role="tabpanel" aria-labelledby="step-5">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label> Curriculum Is Local</label>
-                            <select class="form-control" id="curriculum_ls_local" name="curriculum_ls_local">
-
-                                <option value="0" selected> false</option>
-                                <option value="1"> True</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Curriculum Is Public </label>
-                            <select class="form-control" id="curriculum_ls_public" name="curriculum_ls_public">
-                                @if(isset($school))
-                                    @foreach($trueFalseArray as $index => $value)
-                                        <option value="{{ $index }}" @if($school->curriculum_ls_public == $index) selected @endif> {{ $value }}</option>
-                                    @endforeach
-                                @else
-                                    <option selected value="0"> False</option>
-                                    <option value="1"> True</option>
-                                @endif
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Discounts Superior </label>
-                            <select class="form-control" id="discounts_superior" name="discounts_superior">
-                                @if(isset($school))
-                                    @foreach($trueFalseArray as $index => $value)
-                                        <option value="{{ $index }}" @if($school->discounts_superior == $index) selected @endif> {{ $value }}</option>
-                                    @endforeach
-                                @else
-                                    <option selected value="0"> False</option>
-                                    <option value="1"> True</option>
-                                @endif
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Discounts Quran </label>
-                            <select class="form-control" id="discounts_quran" name="discounts_quran">
-                                @if(isset($school))
-                                    @foreach($trueFalseArray as $index => $value)
-                                        <option value="{{ $index }}" @if($school->discounts_quran == $index) selected @endif> {{ $value }}</option>
-                                    @endforeach
-                                @else
-                                    <option selected value="0"> False</option>
-                                    <option value="1"> True</option>
-                                @endif
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Discounts Sport </label>
-                            <select class="form-control" id="discounts_sport" name="discounts_sport">
-                                @if(isset($school))
-                                    @foreach($trueFalseArray as $index => $value)
-                                        <option value="{{ $index }}" @if($school->discounts_sport == $index) selected @endif> {{ $value }}</option>
-                                    @endforeach
-                                @else
-                                    <option selected value="0"> False</option>
-                                    <option value="1"> True</option>
-                                @endif
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Discount Brothers</label>
-                            <select class="form-control" id="discounts_brothers" name="discounts_brothers">
-                                @if(isset($school))
-                                    @foreach($trueFalseArray as $index => $value)
-                                        <option value="{{ $index }}" @if($school->discounts_brothers == $index) selected @endif> {{ $value }}</option>
-                                    @endforeach
-                                @else
-                                    <option selected value="0"> False</option>
-                                    <option value="1"> True</option>
-                                @endif
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Gender </label>
-
-                            <select class="multiple-select" name="type[]" multiple="multiple" id="gender" name="gender">
-                                <option disabled value=""> Select Gender</option>
-                                <option value="0"> Female</option>
-                                <option value="1"> Male</option>
-                                <option value="2">Mixed</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Madaresona Discount</label>
-                            <input type="text" class="form-control" id="madaresona_discounts" name="madaresona_discounts"
-                                   placeholder="Madaresona Discount" value="{{isset($school) ? $school->madaresona_discounts : ''}}">
-                        </div>
-                    </div>
-                </div>
-                <div id="step-6" class="tab-pane" role="tabpanel" aria-labelledby="step-6">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label> Contact Person Name</label>
-                            <input type="text" class="form-control" id="contact_person_name" name="contact_person_name"
-                                   placeholder="Contact Person Name" value="{{isset($school) ? $school->contact_person_name : ''}}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Contact Person Phone</label>
-                            <input type="text" class="form-control" id="contact_person_phone"
-                                   name="contact_person_phone"
-                                   placeholder="Contact Person Phone"value="{{isset($school) ? $school->contact_person_phone : ''}}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> Contact Person Email Address</label>
-                            <input type="text" class="form-control" id="contact_person_email"
-                                   name="contact_person_email"
-                                   placeholder="Contact Person Email Address " value="{{isset($school) ? $school->contact_person_email : ''}}">
-                        </div>
-                    </div>
-                </div>
-                <div id="step-7" class="tab-pane" role="tabpanel" aria-labelledby="step-7">
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label> Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
-                                   value="{{isset($school) ? $school->Email : ''}}" >
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label> User Name</label>
-                            <input type="text" class="form-control" id="user_name" name="user_name"
-                                   placeholder="User Name" value="{{isset($school) ? $school->user_name : ''}}">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Active</label>
-                            <select class="form-control" id="active" name="active">
-                                @if(isset($school))
-                                    @foreach($trueFalseArray as $index => $value)
-                                        <option value="{{ $index }}" @if($school->active == $index) selected @endif> {{ $value }}</option>
-                                    @endforeach
-                                @else
-                                    <option selected value="0"> False</option>
-                                    <option value="1"> True</option>
-                                @endif
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>special</label>
-                            <select class="form-control" id="special" name="special">
-                                @if(isset($school))
-                                    @foreach($trueFalseArray as $index => $value)
-                                        <option value="{{ $index }}" @if($school->special == $index) selected @endif> {{ $value }}</option>
-                                    @endforeach
-                                @else
-                                    <option selected value="0"> False</option>
-                                    <option value="1"> True</option>
-                                @endif
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Status </label>
-                            <select class="form-control" id="status" name="status">
-                                <option selected disabled> Select Status</option>
-                                @foreach($schoolsStatus as $status)
-                                    <option value="{{ $status->id }}">{{ $status->name_ar }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                @if(!isset($school))
-                    <div id="step-8" class="tab-pane" role="tabpanel" aria-labelledby="step-8">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>Subscribe Price</label>
-                                <input type="text" name="subscribe_price" class="form-control"
-                                       placeholder="Subscribe Price">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Subscribe Type</label>
-                                <input type="text" name="subscribe_type" class="form-control"
-                                       placeholder="Subscribe Type">
-                            </div>
-
-                            <div class="col-md-12 form-group">
-
-                                <label>Date</label>
-                                <div class="input-daterange input-group" id="kt_datepicker_5">
-                                    <input type="text" class="form-control" name="start" placeholder="From Date">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fa fa-ellipsis-h"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" name="end" placeholder="To Date">
+                                    <div class="col-md-6 form-group">
+                                        <label>School Order</label>
+                                        <input type="number" class="form-control" placeholder="School Order"
+                                               name="school_order"
+                                               id="school_order"
+                                               value="{{ isset($school) ? $school->school_order : '' }}">
+                                        <small>Last School Order: <b>{{$lastSchoolOrder }}</b></small>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Arabic Name</label>
+                                        <input type="text" class="form-control" id="name_ar" name="name_ar"
+                                               style="direction: rtl"
+                                               placeholder="Arabic Name"
+                                               value="{{ isset($school) ? $school->name_ar : '' }}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>English Name</label>
+                                        <input type="text" class="form-control" id="name_en" name="name_en"
+                                               placeholder="English Name"
+                                               value="{{ isset($school) ? $school->name_en : '' }}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Email Address </label>
+                                        <input type="email" class="form-control" id="email_school" name="email_school"
+                                               placeholder="Email School Address"
+                                               value="{{ isset($school) ? $school->email_school : '' }}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Phone </label>
+                                        <input type="text" class="form-control" id="phone" name="phone"
+                                               placeholder="Phone"
+                                               value="{{ isset($school) ? $school->phone : '' }}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Fax</label>
+                                        <input type="text" class="form-control" id="fax" name="fax" placeholder="Fax"
+                                               value="{{ isset($school) ? $school->fax : '' }}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Website</label>
+                                        <input type="text" class="form-control" id="website" name="website"
+                                               placeholder="Website"
+                                               value="{{ isset($school) ? $school->website : '' }}"
+                                        >
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Principal Title Arabic</label>
+                                        <input type="text" class="form-control" id="principle_title_ar"
+                                               name="principle_title_ar"
+                                               style="direction: rtl"
+                                               placeholder="Principal Title Arabic"
+                                               value="{{ isset($school) ? $school->principle_title_ar : '' }}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Principal Title English</label>
+                                        <input type="text" class="form-control" id="principle_title_en"
+                                               name="principle_title_en"
+                                               placeholder=" Principal Title English"
+                                               value="{{ isset($school) ? $school->principle_title_en : '' }}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Zip Code</label>
+                                        <input type="text" class="form-control" id="zip_code" name="zip_code"
+                                               placeholder="Zip Code"
+                                               value="{{ isset($school) ? $school->zip_code : '' }}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>P.O. box</label>
+                                        <input type="text" class="form-control" id="po_box" name="po_box"
+                                               placeholder="P.O. box"
+                                               value="{{ isset($school) ? $school->po_box : '' }}"
+                                        >
+                                    </div>
+
+                                    <div class="col-sm-2 imgUp">
+                                        <label>School Logo </label>
+                                        <div class="imagePreview" style="@if(isset($school))
+                                                background:url('{{asset('/images/'.$school->name_en.'/'.$school->school_logo.'')}}');
+                                                background-position: center center;
+                                                background-color: #fff;
+                                                background-size: cover;
+                                                background-repeat: no-repeat;
+                                        @endif"></div>
+                                        <label class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                               style="color: #262673 !important;">
+                                            <i class="fa fa-pen icon-sm text-muted"></i>
+                                            <input type="file" name="logo" id="logo" class="uploadFile img"
+                                                   value="{{ isset($school) ? $school->school_logo: '' }}"
+                                                   style="width: 0px;height: 0px;overflow: hidden;">
+                                        </label>
+                                    </div>
+                                    {{-- <div class="col-md-4">
+                                         <label>School Logo</label>
+                                         <input type="file" name="logo" id="logo" class="form-control-file">
+                                         <img src="{{ asset('images/Zarqa University Schools & KG/1592143263.png') }}" alt="">
+                                     </div>--}}
+                                </div>
+
+                            </div>
+
+                            <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label> Principal Arabic</label>
+                                        <textarea name="principle_ar" id="principle_ar"
+                                                  placeholder="Principal Arabic">@if(isset($school)) {!! $school->principle_ar!!} @endif</textarea>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Principal English</label>
+                                        <textarea name="principle_en" id="principle_en"
+                                                  placeholder="Principal English">@if(isset($school)) {!! $school->principle_en!!} @endif</textarea>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>School details Arabic </label>
+                                        <textarea name="school_details_ar" id="school_details_ar"
+                                                  placeholder="School details Arabic">@if(isset($school)) {!! $school->school_details_ar!!} @endif</textarea>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>School details English</label>
+                                        <textarea name="school_details_en" id="school_details_en"
+                                                  placeholder="School details English">@if(isset($school)) {!! $school->school_details_en!!} @endif</textarea>
+                                    </div>
+                                </div>
+                                <script>
+                                    ClassicEditor.create(document.querySelector('#principle_ar'));
+                                    ClassicEditor.create(document.querySelector('#principle_en'));
+                                    ClassicEditor.create(document.querySelector('#school_details_ar'));
+                                    ClassicEditor.create(document.querySelector('#school_details_en'));
+                                </script>
+
+                            </div>
+                            <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label> Country</label>
+                                        <select class="form-control" id="country" name="country" disabled>
+                                            <option disabled selected value="1">Jordan</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> City</label>
+                                        <select class="form-control" id="city_id" name="city_id">
+                                            @if(!isset($school))
+                                                <option value="" selected disabled>Select city</option>
+                                            @endif
+
+                                            @foreach($cities as $city)
+                                                <option @if(isset($school) && $city->id == $school->city->id) value="{{ $city->id }}"
+                                                        selected
+                                                        @else value="{{ $city->id }}" @endif>{{ $city->city_name_ar }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6 form-group">
+                                        <label> Region</label>
+                                        <select class="form-control" id="region_id" name="region_id"
+                                                @if(isset($school)) @else disabled="" @endif>
+                                            <option value="" selected>Select Region</option>
+                                            @if(isset($school))
+                                                <script>
+                                                    var value = {{ $school->city_id }}
+                                        $.ajax({
+                                                        url: '/getRegions/' + value,
+                                                        method: 'get',
+                                                        success: function (result) {
+                                                            var schoolId = {{ $school->region_id }}
+                                                $('#region_id option:not(:first)').remove();
+                                                            $.each(result, function (index, value) {
+                                                                if (schoolId == value.id)
+                                                                    $('#region_id').append("<option value='" + value.id + "' selected>" + value.area_name_ar + "");
+                                                                else
+                                                                    $('#region_id').append("<option value='" + value.id + "'>" + value.area_name_ar + "");
+                                                            });
+
+                                                            $('#region_id').removeAttr('disabled');
+                                                        }
+                                                    });
+                                                </script>
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>School Brochure </label>
+                                        <input type="file" name="brochure" id="brochure" class="form-control-file">
+                                        @if(isset($school))
+                                            <label>{{ $school->name_en }} has brochure name:
+                                                <b>{{ $school->school_brochure }}</b></label>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>Facebook Link </label>
+                                        <input type="text" class="form-control" id="facebook_link" name="facebook_link"
+                                               placeholder="Facebook Link"
+                                               value="{{isset($school) ? $school->facebook_link : ''}}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Twitter Link </label>
+                                        <input type="text" class="form-control" id="twitter_link" name="twitter_link"
+                                               placeholder="Instagram Link"
+                                               value="{{isset($school) ? $school->twitter_link : ''}}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Instagram Link</label>
+                                        <input type="text" class="form-control" id="instagram_link"
+                                               name="instagram_link"
+                                               placeholder="Instagram Link"
+                                               value="{{isset($school) ? $school->instagram_link : ''}}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Linkedin Link</label>
+                                        <input type="text" class="form-control" id="linkedin_link" name="linkedin_link"
+                                               placeholder="Linkedin Link"
+                                               value="{{isset($school) ? $school->linkedin_link : ''}}">
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label> Google Map</label>
+                                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                                        <div id="map-canvas"></div>
+                                        <input type="hidden" name="lat" id="lat"
+                                               value="{{ isset($school) ? $school->lat : '' }}"
+                                               readonly="yes">
+                                        <input type="hidden" name="lng" id="lng"
+                                               value="{{ isset($school) ? $school->lng : '' }}"
+                                               readonly="yes">
+                                    </div>
                                 </div>
                             </div>
+                            <div id="step-5" class="tab-pane" role="tabpanel" aria-labelledby="step-5">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label> Curriculum Is Local</label>
+                                        <select class="form-control" id="curriculum_ls_local"
+                                                name="curriculum_ls_local">
 
-                            <div class="col-md-6 form-group">
-                                <label>Tax</label>
-                                <select class="form-control" id="tax" name="tax">
-                                    <option selected value="0">False</option>
-                                    <option value="1"> True</option>
-                                </select>
+                                            <option value="0" selected> false</option>
+                                            <option value="1"> True</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Curriculum Is Public </label>
+                                        <select class="form-control" id="curriculum_ls_public"
+                                                name="curriculum_ls_public">
+                                            @if(isset($school))
+                                                @foreach($trueFalseArray as $index => $value)
+                                                    <option value="{{ $index }}"
+                                                            @if($school->curriculum_ls_public == $index) selected @endif> {{ $value }}</option>
+                                                @endforeach
+                                            @else
+                                                <option selected value="0"> False</option>
+                                                <option value="1"> True</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Discounts Superior </label>
+                                        <select class="form-control" id="discounts_superior" name="discounts_superior">
+                                            @if(isset($school))
+                                                @foreach($trueFalseArray as $index => $value)
+                                                    <option value="{{ $index }}"
+                                                            @if($school->discounts_superior == $index) selected @endif> {{ $value }}</option>
+                                                @endforeach
+                                            @else
+                                                <option selected value="0"> False</option>
+                                                <option value="1"> True</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Discounts Quran </label>
+                                        <select class="form-control" id="discounts_quran" name="discounts_quran">
+                                            @if(isset($school))
+                                                @foreach($trueFalseArray as $index => $value)
+                                                    <option value="{{ $index }}"
+                                                            @if($school->discounts_quran == $index) selected @endif> {{ $value }}</option>
+                                                @endforeach
+                                            @else
+                                                <option selected value="0"> False</option>
+                                                <option value="1"> True</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Discounts Sport </label>
+                                        <select class="form-control" id="discounts_sport" name="discounts_sport">
+                                            @if(isset($school))
+                                                @foreach($trueFalseArray as $index => $value)
+                                                    <option value="{{ $index }}"
+                                                            @if($school->discounts_sport == $index) selected @endif> {{ $value }}</option>
+                                                @endforeach
+                                            @else
+                                                <option selected value="0"> False</option>
+                                                <option value="1"> True</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Discount Brothers</label>
+                                        <select class="form-control" id="discounts_brothers" name="discounts_brothers">
+                                            @if(isset($school))
+                                                @foreach($trueFalseArray as $index => $value)
+                                                    <option value="{{ $index }}"
+                                                            @if($school->discounts_brothers == $index) selected @endif> {{ $value }}</option>
+                                                @endforeach
+                                            @else
+                                                <option selected value="0"> False</option>
+                                                <option value="1"> True</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Gender </label>
+
+                                        <select class="multiple-select" name="gender[]" multiple="multiple" id="gender">
+                                            @if(!isset($school))
+                                                <option disabled value=""> Select Gender</option>
+                                            @endif
+                                            @foreach($genderArray as $key => $value)
+                                                <option value="{{ $key }}" {{ isset($school) ? (in_array($key, $genderSchool)) ? 'selected' : '' : ''}}>{{ $value }}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Madaresona Discount</label>
+                                        <input type="text" class="form-control" id="madaresona_discounts"
+                                               name="madaresona_discounts"
+                                               placeholder="Madaresona Discount"
+                                               value="{{isset($school) ? $school->madaresona_discounts : ''}}">
+                                    </div>
+                                </div>
                             </div>
+                            <div id="step-6" class="tab-pane" role="tabpanel" aria-labelledby="step-6">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label> Contact Person Name</label>
+                                        <input type="text" class="form-control" id="contact_person_name"
+                                               name="contact_person_name"
+                                               placeholder="Contact Person Name"
+                                               value="{{isset($school) ? $school->contact_person_name : ''}}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Contact Person Phone</label>
+                                        <input type="text" class="form-control" id="contact_person_phone"
+                                               name="contact_person_phone"
+                                               placeholder="Contact Person Phone"
+                                               value="{{isset($school) ? $school->contact_person_phone : ''}}">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label> Contact Person Email Address</label>
+                                        <input type="text" class="form-control" id="contact_person_email"
+                                               name="contact_person_email"
+                                               placeholder="Contact Person Email Address "
+                                               value="{{isset($school) ? $school->contact_person_email : ''}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="step-7" class="tab-pane" role="tabpanel" aria-labelledby="step-7">
+                                <div class="row">
 
+                                    @if(!isset($school))
+                                        <div class="col-md-6 form-group">
+                                            <label> Email</label>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                   placeholder="Email">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label> User Name</label>
+                                            <input type="text" class="form-control" id="user_name" name="user_name"
+                                                   placeholder="User Name">
+                                        </div>
+                                    @endif
+                                    <div class="col-md-6 form-group">
+                                        <label>Active</label>
+                                        <select class="form-control" id="active" name="active">
+                                            @if(isset($school))
+                                                @foreach($trueFalseArray as $index => $value)
+                                                    <option value="{{ $index }}"
+                                                            @if($school->active == $index) selected @endif> {{ $value }}</option>
+                                                @endforeach
+                                            @else
+                                                <option selected value="0"> False</option>
+                                                <option value="1"> True</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>special</label>
+                                        <select class="form-control" id="special" name="special">
+                                            @if(isset($school))
+                                                @foreach($trueFalseArray as $index => $value)
+                                                    <option value="{{ $index }}"
+                                                            @if($school->special == $index) selected @endif> {{ $value }}</option>
+                                                @endforeach
+                                            @else
+                                                <option selected value="0"> False</option>
+                                                <option value="1"> True</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Status </label>
+                                        <select class="form-control" id="status" name="status">
+                                            <option selected disabled> Select Status</option>
+                                            @foreach($schoolsStatus as $status)
+                                                <option value="{{ $status->id }}"
+                                                        @if(isset($school)) @if($status->id == $school->status) selected @endif @endif>{{ $status->name_ar }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            @if(!isset($school))
+                                <div id="step-8" class="tab-pane" role="tabpanel" aria-labelledby="step-8">
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Subscribe Price</label>
+                                            <input type="text" name="subscribe_price" class="form-control"
+                                                   placeholder="Subscribe Price">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Subscribe Type</label>
+                                            <input type="text" name="subscribe_type" class="form-control"
+                                                   placeholder="Subscribe Type">
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+
+                                            <label>Date</label>
+                                            <div class="input-daterange input-group" id="kt_datepicker_5">
+                                                <input type="text" class="form-control" name="start"
+                                                       placeholder="From Date">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i
+                                                                class="fa fa-ellipsis-h"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" name="end"
+                                                       placeholder="To Date">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Tax</label>
+                                            <select class="form-control" id="tax" name="tax">
+                                                <option selected value="0">False</option>
+                                                <option value="1"> True</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            @endif
+                            {{--<button class="btn btn-info sw-btn-group-extra" id="submitBtn" type="submit"
+                                    style="float: right;margin-top: 11px;color: #fff;background-color: #5cb85c;border: 1px solid #5cb85c;padding: .375rem .75rem;border-radius: .25rem;font-weight: 400;">
+                                Submit
+                            </button>--}}
                         </div>
-
-                    </div>
-                @endif
-                {{--<button class="btn btn-info sw-btn-group-extra" id="submitBtn" type="submit"
-                        style="float: right;margin-top: 11px;color: #fff;background-color: #5cb85c;border: 1px solid #5cb85c;padding: .375rem .75rem;border-radius: .25rem;font-weight: 400;">
-                    Submit
-                </button>--}}
-            </div>
-        </form>
+                    </form>
     </div>
 </div>
 
@@ -762,9 +834,9 @@
     initialize();
     function initialize() {
         if ($("#map-canvas").length != 0) {
-                @if(isset($school))
-                 lat =  parseFloat(document.getElementById('lat').value);
-                 lng =  parseFloat(document.getElementById('lng').value);
+            @if(isset($school))
+                lat = parseFloat(document.getElementById('lat').value);
+            lng = parseFloat(document.getElementById('lng').value);
 
             var myLocationEdit = {
                 lat: lat,
@@ -780,15 +852,15 @@
                 map: map,
                 draggable: true
             });
-               @else
+                    @else
             var markers = [];
             map = new google.maps.Map(document.getElementById('map-canvas'), {
                 center: {lat: 31.95411763246642, lng: 35.89202087546278},
                 zoom: 12
             });
-                @endif
+                    @endif
             var input = /** @type {HTMLInputElement} */(
-                document.getElementById('pac-input'));
+                    document.getElementById('pac-input'));
             new google.maps.places.Autocomplete(input);
             google.maps.event.addDomListener(window, 'load', initialize);
 

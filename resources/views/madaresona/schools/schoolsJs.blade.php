@@ -27,15 +27,16 @@
             ajax: "{{ route('schoolsDatable') }}",
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
-                {data: 'name_ar', title: 'SN'},
+                {data: 'sn', title: 'SN'},
                 {data: 'name_ar', title: 'Name'},
                 {data: 'school_order', title: 'Order'},
 
                 {
-                   title: 'Case', "mRender": function (data, type, row) {
-                    if (row.active == 0) {
-                        return "<span class='label font-weight-bold label-lg  label-light-danger label-inline'>Not Active</span>";
-                    } else if (row.active == 1) {
+                   data: 'active', title: 'Case', "mRender": function (data, type, row) {
+                       console.log(row);
+                    if (row.active == 'InActive') {
+                        return "<span class='label font-weight-bold label-lg  label-light-danger label-inline'>InActive</span>";
+                    } else if (row.active == 'Active') {
                         return "<span class='label font-weight-bold label-lg  label-light-success label-inline'>Active</span>";
 
                     }
@@ -66,10 +67,10 @@
                 },
 
                 {
-                    title: 'Special', "mRender": function (data, type, row) {
-                    if (row.special == 0) {
-                        return "<span class='label font-weight-bold label-lg  label-light-primary label-inline'> Not Special</span>";
-                    } else if (row.special == 1) {
+                    data: 'special', title: 'Special', "mRender": function (data, type, row) {
+                    if (row.special == 'General') {
+                        return "<span class='label font-weight-bold label-lg  label-light-primary label-inline'>General</span>";
+                    } else if (row.special == 'Special') {
                         return "<span class='label font-weight-bold label-lg  label-light-warning label-inline'>Special</span>";
 
                     }
@@ -92,7 +93,7 @@
                 },
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon editSchool action-btn" id="' + row.id + '" data-toggle="modal" data-target="#schoolModal" data-toggle="tooltip" data-placement="bottom" title="View & Edit"><i class="fas fa-edit" style="color: #3699ff"></i></a>';
+                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon editSchool action-btn" id="' + row.id + '"  data-toggle="tooltip" data-placement="bottom" title="View & Edit"><i class="fas fa-edit" style="color: #3699ff"></i></a>';
                     var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
                     return  edit + remove;
                     /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
@@ -121,9 +122,55 @@
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
+                    $('#schoolModal').modal('show');
+                    $("#updateSchoolForm").submit(function (e) {
+
+                        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+                        var form = $(this);
+                        var url = form.attr('action');
+
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: new FormData(this),
+                            dataType: "json",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            //data: form.serialize(), // serializes the form's elements.
+                            success: function (data) {
+                                if (data.status === 422) {
+                                    console.log(data);
+                                    var error_html = '';
+
+                                    for (let value of Object.values(data.errors)) {
+                                        error_html += '<div class="alert alert-danger">' + value + '</div>';
+                                    }
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        html: error_html,
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: data.message
+                                    });
+                                    //$('.data-table').DataTable.ajax().reload();
+
+                                    $('#schoolModal').modal('hide');
+                                    table.ajax.reload();
+                                }
+
+                            }
+                        });
+
+                    });
                 }
             })
         });
+
 
         $('#addSchool').on('click', function () {
 

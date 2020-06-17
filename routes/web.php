@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'SchoolController@edit')->name('editSchool');
         Route::get('create', 'SchoolController@create')->name('addSchool');
         Route::post('store', 'SchoolController@store')->name('submitSchool');
+        Route::put('update', 'SchoolController@update')->name('updateSchool');
     });
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');
