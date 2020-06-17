@@ -38,7 +38,7 @@
     <!--end::Layout Themes-->
 
     <link rel="shortcut icon"
-          href="https://keenthemes.com/metronic/themes/metronic/theme/html/demo1/dist/assets/media/logos/favicon.ico"/>
+          href="{{ asset('assets/media/logos/header_logo.png') }}"/>
 
     <!-- Hotjar Tracking Code for keenthemes.com -->
     <script>
@@ -81,7 +81,7 @@
                 <!--begin::Login Header-->
                 <div class="d-flex flex-center mb-15">
                     <a href="#">
-                        <img src="{{ asset('assets/media/logos/logo-letter-13.png') }}" class="max-h-75px" alt=""/>
+                        <img src="{{ asset('assets/media/logos/madaresona_logo.png') }}" class="max-h-125px" alt=""/>
                     </a>
                 </div>
                 <!--end::Login Header-->

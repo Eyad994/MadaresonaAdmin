@@ -9,40 +9,30 @@
     <link rel="stylesheet" href="{{ asset('assets/smartwizard/css/smart_wizard_all.css') }}">
     <style>
 
+
         .imagePreview {
-            width: 100%;
+            width: 170px;
             height: 150px;
             background-position: center center;
-            background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+            background:url('{{asset('/images/default/school.png')}}');
             background-color: #fff;
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
-            border-radius: 10px 10px 0px 0px;
+            border-radius: 10px;
             display: inline-block;
-            box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+            webkit-box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0,0,0,.075);
+            box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0,0,0,.075);
+            border: 3px solid #fff;
         }
 
-        .btn-primary {
-            display: block;
-            border-radius: 0px;
-            box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
-            margin-top: -5px;
+        .btn_edit_img {
+            margin-top: -333px;
+            margin-left: 155px;
+
         }
 
         .imgUp {
             margin-bottom: 15px;
-        }
-
-        .del {
-            position: absolute;
-            top: 0px;
-            right: 15px;
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            line-height: 30px;
-            background-color: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
         }
 
         .controls {
@@ -229,10 +219,17 @@
                         </div>
 
                         <div class="col-sm-2 imgUp">
-                            <div class="imagePreview"
-                                 style="background-image: url({{ asset('') }})"></div>
-                            <label class="btn btn-primary">
-                                Change Image<input type="file" class="uploadFile img" value="Upload Photo"
+                            <label>School Logo </label>
+                            <div class="imagePreview" style="@if(isset($school))
+                                background:url('{{asset('/images/'.$school->name_en.'/'.$school->school_logo.'')}}');
+                                background-position: center center;
+                                background-color: #fff;
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                            @endif"></div>
+                            <label class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" style="color: #262673 !important;">
+                                <i class="fa fa-pen icon-sm text-muted"></i>
+                                <input type="file" name="logo" id="logo" class="uploadFile img" value="{{ isset($school) ? $school->school_logo: '' }}"
                                                    style="width: 0px;height: 0px;overflow: hidden;">
                             </label>
                         </div>
@@ -328,7 +325,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label>School Brochure </label>
-                            <input type="file" name="brochure" id="brochure" class="form-control-file">
+                            <input type="file" name="brochure" id="brochure" class="form-control-file" value="{{ isset($school) ? $school->school_brochure : '' }}">
                         </div>
                     </div>
 
@@ -338,30 +335,29 @@
                         <div class="col-md-6 form-group">
                             <label>Facebook Link </label>
                             <input type="text" class="form-control" id="facebook_link" name="facebook_link"
-                                   placeholder="Facebook Link">
+                                   placeholder="Facebook Link" value="{{isset($school) ? $school->facebook_link : ''}}">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Twitter Link </label>
                             <input type="text" class="form-control" id="twitter_link" name="twitter_link"
-                                   placeholder="Instagram Link">
+                                   placeholder="Instagram Link" value="{{isset($school) ? $school->twitter_link : ''}}">
                         </div>
                         <div class="col-md-6 form-group">
                             <label> Instagram Link</label>
                             <input type="text" class="form-control" id="instagram_link" name="instagram_link"
-                                   placeholder="Instagram Link">
+                                   placeholder="Instagram Link" value="{{isset($school) ? $school->instagram_link : ''}}">
                         </div>
                         <div class="col-md-6 form-group">
                             <label> Linkedin Link</label>
                             <input type="text" class="form-control" id="linkedin_link" name="linkedin_link"
-                                   placeholder="Linkedin Link">
+                                   placeholder="Linkedin Link" value="{{isset($school) ? $school->linkedin_link : ''}}">
                         </div>
                         <div class="col-md-12 form-group">
-
                             <label> Google Map</label>
                             <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                             <div id="map-canvas"></div>
-                            <input type="hidden" name="lat" id="lat" readonly="yes">
-                            <input type="hidden" name="lng" id="lng" readonly="yes">
+                            <input type="hidden" name="lat" id="lat" value="{{ isset($school) ? $school->lat : '' }}" readonly="yes">
+                            <input type="hidden" name="lng" id="lng" value="{{ isset($school) ? $school->lng : '' }}" readonly="yes">
                         </div>
                     </div>
                 </div>
@@ -404,28 +400,47 @@
                         <div class="col-md-6 form-group">
                             <label>Discounts Quran </label>
                             <select class="form-control" id="discounts_quran" name="discounts_quran">
-                                <option value="0"> False</option>
-                                <option value="1"> True</option>
+                                @if(isset($school))
+                                    @foreach($trueFalseArray as $index => $value)
+                                        <option value="{{ $index }}" @if($school->discounts_quran == $index) selected @endif> {{ $value }}</option>
+                                    @endforeach
+                                @else
+                                    <option selected value="0"> False</option>
+                                    <option value="1"> True</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Discounts Sport </label>
                             <select class="form-control" id="discounts_sport" name="discounts_sport">
-                                <option value="0"> False</option>
-                                <option value="1"> True</option>
+                                @if(isset($school))
+                                    @foreach($trueFalseArray as $index => $value)
+                                        <option value="{{ $index }}" @if($school->discounts_sport == $index) selected @endif> {{ $value }}</option>
+                                    @endforeach
+                                @else
+                                    <option selected value="0"> False</option>
+                                    <option value="1"> True</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Discount Brothers</label>
                             <select class="form-control" id="discounts_brothers" name="discounts_brothers">
-                                <option selected value="0"> False</option>
-                                <option value="1"> True</option>
+                                @if(isset($school))
+                                    @foreach($trueFalseArray as $index => $value)
+                                        <option value="{{ $index }}" @if($school->discounts_brothers == $index) selected @endif> {{ $value }}</option>
+                                    @endforeach
+                                @else
+                                    <option selected value="0"> False</option>
+                                    <option value="1"> True</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Gender </label>
-                            <select class="form-control" id="gender" name="gender">
-                                <option selected disabled> Select Gender</option>
+
+                            <select class="multiple-select" name="type[]" multiple="multiple" id="gender" name="gender">
+                                <option disabled value=""> Select Gender</option>
                                 <option value="0"> Female</option>
                                 <option value="1"> Male</option>
                                 <option value="2">Mixed</option>
@@ -433,9 +448,8 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label> Madaresona Discount</label>
-                            <input type="text" class="form-control" id="madaresona_discounts"
-                                   name="madaresona_discounts"
-                                   placeholder="Madaresona Discount">
+                            <input type="text" class="form-control" id="madaresona_discounts" name="madaresona_discounts"
+                                   placeholder="Madaresona Discount" value="{{isset($school) ? $school->madaresona_discounts : ''}}">
                         </div>
                     </div>
                 </div>
@@ -444,19 +458,19 @@
                         <div class="col-md-6 form-group">
                             <label> Contact Person Name</label>
                             <input type="text" class="form-control" id="contact_person_name" name="contact_person_name"
-                                   placeholder="Contact Person Name">
+                                   placeholder="Contact Person Name" value="{{isset($school) ? $school->contact_person_name : ''}}">
                         </div>
                         <div class="col-md-6 form-group">
                             <label> Contact Person Phone</label>
                             <input type="text" class="form-control" id="contact_person_phone"
                                    name="contact_person_phone"
-                                   placeholder="Contact Person Phone">
+                                   placeholder="Contact Person Phone"value="{{isset($school) ? $school->contact_person_phone : ''}}">
                         </div>
                         <div class="col-md-6 form-group">
                             <label> Contact Person Email Address</label>
                             <input type="text" class="form-control" id="contact_person_email"
                                    name="contact_person_email"
-                                   placeholder="Contact Person Email Address">
+                                   placeholder="Contact Person Email Address " value="{{isset($school) ? $school->contact_person_email : ''}}">
                         </div>
                     </div>
                 </div>
@@ -464,25 +478,38 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label> Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                   value="{{isset($school) ? $school->Email : ''}}" >
                         </div>
                         <div class="col-md-6 form-group">
                             <label> User Name</label>
                             <input type="text" class="form-control" id="user_name" name="user_name"
-                                   placeholder="User Name">
+                                   placeholder="User Name" value="{{isset($school) ? $school->user_name : ''}}">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Active</label>
                             <select class="form-control" id="active" name="active">
-                                <option selected value="0"> False</option>
-                                <option value="1"> True</option>
+                                @if(isset($school))
+                                    @foreach($trueFalseArray as $index => $value)
+                                        <option value="{{ $index }}" @if($school->active == $index) selected @endif> {{ $value }}</option>
+                                    @endforeach
+                                @else
+                                    <option selected value="0"> False</option>
+                                    <option value="1"> True</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>special</label>
                             <select class="form-control" id="special" name="special">
-                                <option selected value="0"> False</option>
-                                <option value="1"> True</option>
+                                @if(isset($school))
+                                    @foreach($trueFalseArray as $index => $value)
+                                        <option value="{{ $index }}" @if($school->special == $index) selected @endif> {{ $value }}</option>
+                                    @endforeach
+                                @else
+                                    <option selected value="0"> False</option>
+                                    <option value="1"> True</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
@@ -730,14 +757,36 @@
     // google maps
     var map;
     var marker = false;
+    var lat;
+    var lng;
     initialize();
     function initialize() {
         if ($("#map-canvas").length != 0) {
+                @if(isset($school))
+                 lat =  parseFloat(document.getElementById('lat').value);
+                 lng =  parseFloat(document.getElementById('lng').value);
+
+            var myLocationEdit = {
+                lat: lat,
+                lng: lng
+            };
+            map = new google.maps.Map(document.getElementById('map-canvas'), {
+                center: myLocationEdit,
+                zoom: 16,
+                mapTypeId: 'roadmap'
+            });
+            marker = new google.maps.Marker({
+                position: myLocationEdit,
+                map: map,
+                draggable: true
+            });
+               @else
             var markers = [];
             map = new google.maps.Map(document.getElementById('map-canvas'), {
                 center: {lat: 31.95411763246642, lng: 35.89202087546278},
                 zoom: 12
             });
+                @endif
             var input = /** @type {HTMLInputElement} */(
                 document.getElementById('pac-input'));
             new google.maps.places.Autocomplete(input);

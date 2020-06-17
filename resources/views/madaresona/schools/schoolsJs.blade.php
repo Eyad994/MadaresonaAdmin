@@ -6,8 +6,8 @@
         var table = $('.data-table').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
-                {"width": "120px", "targets": 8},
-                {"width": "100px", "targets": 9},
+                {"width": "160px", "targets": 8},
+                {"width": "50px", "targets": 9},
                 {"className": "text-center", "targets": 1}
             ],
             processing: true,
@@ -79,11 +79,12 @@
 
                 {
                     title: 'Services', "mRender": function (data, type, row) {
-                    var view = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa fa-bus" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" style="color: orange"></i></a>';
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" toolbar="asd"><i class="fa fa-credit-card" style="color: #ffa800"></i></a>';
-                    var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-newspaper" style="color: #f64e60"></i></i></a>';
-                    var news = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-sticky-note" style="color: #f64e60"></i></i></a>';
-                    return view + edit + remove + news;
+                        var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-file-image" style="color: #d20051" data-toggle="tooltip" data-placement="bottom" title="School gallery"></i></i></a>';
+                    var transportations = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa fa-bus" data-toggle="tooltip" data-placement="bottom" title="Transportations" style="color: #f3aa1f"></i></a>';
+                    var premiums = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" toolbar="asd"><i class="fa fa-credit-card" style="color: #24b102" data-toggle="tooltip" data-placement="bottom" title="Premiums"></i></a>';
+                    var news = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-newspaper" style="color: #9aa3a8   " data-toggle="tooltip" data-placement="bottom" title="News"></i></i></a>';
+                    var notes = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-sticky-note" style="color: #fbb540" data-toggle="tooltip" data-placement="bottom" title="Notes"></i></i></a>';
+                    return gallery + transportations + premiums + news+notes;
                     /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
                      return show;*/
                 }
@@ -91,8 +92,8 @@
                 },
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon editSchool action-btn" id="' + row.id + '" data-toggle="modal" data-target="#schoolModal"><i class="fas fa-edit" style="color: #3699ff"></i></a>';
-                    var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
+                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon editSchool action-btn" id="' + row.id + '" data-toggle="modal" data-target="#schoolModal" data-toggle="tooltip" data-placement="bottom" title="View & Edit"><i class="fas fa-edit" style="color: #3699ff"></i></a>';
+                    var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
                     return  edit + remove;
                     /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
                      return show;*/

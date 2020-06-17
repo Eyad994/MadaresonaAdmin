@@ -1,7 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
-
+<style>
+    .bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+    .bs-tooltip-bottom .arrow::before {
+        border-bottom-color: #f00; /* Red */
+    }
+</style>
     <div class="container">
 
         <div class="card">

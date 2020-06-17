@@ -36,6 +36,8 @@
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle7a4a.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="{{ asset('assets/smartwizard/css/smart_wizard.css') }}">
     <!--end::Layout Themes-->
+    <link rel="shortcut icon"
+          href="{{ asset('assets/media/logos/header_logo.png') }}"/>
 
 @yield('css')
 

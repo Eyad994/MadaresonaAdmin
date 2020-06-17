@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> School</h5>
                 <a href="#" class="far fa-times-circle" data-dismiss="modal" style="font-size: 20px;"></a>
 
             </div>
