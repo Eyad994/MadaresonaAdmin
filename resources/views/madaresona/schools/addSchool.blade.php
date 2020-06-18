@@ -633,10 +633,6 @@
 
                                 </div>
                             @endif
-                            {{--<button class="btn btn-info sw-btn-group-extra" id="submitBtn" type="submit"
-                                    style="float: right;margin-top: 11px;color: #fff;background-color: #5cb85c;border: 1px solid #5cb85c;padding: .375rem .75rem;border-radius: .25rem;font-weight: 400;">
-                                Submit
-                            </button>--}}
                         </div>
                     </form>
     </div>
@@ -686,53 +682,6 @@
         $('#datepicker').on('changeDate', function (evt) {
             console.log(evt.date);
         });
-
-
-        /*$("#addSchoolForm").submit(function(e) {
-
-         e.preventDefault(); // avoid to execute the actual submit of the form.
-
-         var form = $(this);
-         var url = form.attr('action');
-
-         $.ajax({
-         type: "POST",
-         url: url,
-         data: new FormData(this),
-         dataType: "json",
-         contentType: false,
-         cache: false,
-         processData: false,
-         //data: form.serialize(), // serializes the form's elements.
-         success: function(data)
-         {
-         if (data.status === 422) {
-         console.log(data);
-         var error_html = '';
-
-         for (let value of Object.values(data.errors)) {
-         error_html += '<div class="alert alert-danger">' + value + '</div>';
-         }
-         Swal.fire({
-         icon: 'error',
-         title: 'Oops...',
-         html: error_html,
-         })
-         } else  {
-         Swal.fire({
-         icon: 'success',
-         title: data.message
-         });
-         //$('.data-table').DataTable.ajax().reload();
-         $('#schoolModal').modal('hide');
-         //$('#data-table').ajax.reload();
-         }
-
-         }
-         });
-
-         });*/
-
 
         $('#smartwizard').smartWizard({
             selected: 0, // Initial selected step, 0 = first step
@@ -788,23 +737,7 @@
 
         });
 
-        $("#smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection) {
-
-            switch (stepNumber) {
-                    /*case  0:
-                     if ($('#name_ar').val().length <=2){
-                     $('#name_ar').addClass('is-invalid');
-                     return false;
-                     } else {
-                     $('#name_ar').removeClass('is-invalid');
-                     $('#name_ar').addClass('is-valid');
-                     return true;
-                     }*/
-            }
-        });
-
         $('.multiple-select').select2();
-
 
     });
 

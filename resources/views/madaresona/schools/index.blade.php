@@ -2,10 +2,7 @@
 
 @section('content')
 <style>
-    .blue {
-        color: blue !important;
-        text-decoration : underline;
-    }
+
 </style>
     <div class="container">
 

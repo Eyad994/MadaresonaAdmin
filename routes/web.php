@@ -24,6 +24,9 @@ Route::middleware('auth')->group(function () {
         Route::get('create', 'SchoolController@create')->name('addSchool');
         Route::post('store', 'SchoolController@store')->name('submitSchool');
         Route::put('update', 'SchoolController@update')->name('updateSchool');
+        Route::get('gallery/{id}', 'GalleryController@gallery')->name('gallery');
+        Route::post('submitGallery', 'GalleryController@store')->name('submitGallery');
+        Route::get('removeGallery/{id}', 'GalleryController@destroy')->name('removeGallery');
     });
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');

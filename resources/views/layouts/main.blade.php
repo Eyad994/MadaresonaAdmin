@@ -172,7 +172,6 @@
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle7a4a.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/ckeditor/ckeditor-classic.bundle7a4a.js') }}"></script>
 
-
 @yield('script')
 
 </body>

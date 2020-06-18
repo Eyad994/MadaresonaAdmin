@@ -32,8 +32,7 @@
                 {data: 'school_order', title: 'Order'},
 
                 {
-                   data: 'active', title: 'Case', "mRender": function (data, type, row) {
-                       console.log(row);
+                    data: 'active', title: 'Case', "mRender": function (data, type, row) {
                     if (row.active == 'InActive') {
                         return "<span class='label font-weight-bold label-lg  label-light-danger label-inline'>InActive</span>";
                     } else if (row.active == 'Active') {
@@ -55,7 +54,7 @@
                 }
                 },
                 {
-                   data:'status_name', title: 'Status', "mRender": function (data, type, row) {
+                    data: 'status_name', title: 'Status', "mRender": function (data, type, row) {
                     if (row.status == 1) {
                         return '<span class="label font-weight-bold label-lg  label-light-danger label-inline">' + row.status_name + '</span>'
                     } else if (row.status == 2) {
@@ -80,12 +79,12 @@
 
                 {
                     title: 'Services', "mRender": function (data, type, row) {
-                        var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-file-image"  title="School gallery"></i></i></a>';
-                    var transportations = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa fa-bus"  title="Transportations" ></i></a>';
-                    var premiums = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" toolbar="asd"><i class="fa fa-credit-card"  title="Premiums"></i></a>';
+                    var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn gallerySchool" id="' + row.id + '"><i class="fa fa-file-image"  title="School gallery"></i></i></a>';
+                    var transportation = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa fa-bus"  title="Transportations" ></i></a>';
+                    var premiums = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" ><i class="fa fa-credit-card"  title="Premiums"></i></a>';
                     var news = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-newspaper" title="News"></i></i></a>';
                     var notes = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-sticky-note" title="Notes"></i></i></a>';
-                    return gallery + transportations + premiums + news+notes;
+                    return gallery + transportation + premiums + news + notes;
                     /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
                      return show;*/
                 }
@@ -95,7 +94,7 @@
                     title: 'Actions', "mRender": function (data, type, row) {
                     var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon editSchool action-btn" id="' + row.id + '"  data-toggle="tooltip" data-placement="bottom" title="View & Edit"><i class="fas fa-edit" style="color: #3699ff"></i></a>';
                     var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                    return  edit + remove;
+                    return edit + remove;
                     /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
                      return show;*/
                 }
@@ -114,6 +113,52 @@
                 .draw();
         });
 
+        $(document).on('click', '.gallerySchool', function () {
+
+            var id = $(this).attr('id');
+
+            $.ajax({
+                url: '/schools/gallery/' + id,
+                method: 'get',
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $('.modal-title').text('School Gallery');
+                    $('#schoolModal').modal('show');
+                }
+            });
+        });
+
+        $(document).on('click', '.galleryDelete', function () {
+            var id = $(this).attr('id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        url: 'removeGallery/' + id,
+                        method: 'get',
+                        success: function (data) {
+                            console.log(data);
+                            $('.galleryDeleteDiv_'+id).remove();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Your image has been removed',
+                                showConfirmButton: false,
+                                timer: 1500
+                                })
+                        }
+                    });
+                }
+            });
+
+        });
 
         $(document).on('click', '.editSchool', function () {
             var id = $(this).attr('id');
