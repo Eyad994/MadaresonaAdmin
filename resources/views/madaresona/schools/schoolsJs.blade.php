@@ -6,9 +6,9 @@
         var table = $('.data-table').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
+
                 {"width": "160px", "targets": 8},
                 {"width": "50px", "targets": 9},
-                {"className": "text-center", "targets": 1}
             ],
             processing: true,
             serverSide: true,
@@ -80,11 +80,11 @@
 
                 {
                     title: 'Services', "mRender": function (data, type, row) {
-                        var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-file-image" style="color: #d20051" data-toggle="tooltip" data-placement="bottom" title="School gallery"></i></i></a>';
-                    var transportations = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa fa-bus" data-toggle="tooltip" data-placement="bottom" title="Transportations" style="color: #f3aa1f"></i></a>';
-                    var premiums = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" toolbar="asd"><i class="fa fa-credit-card" style="color: #24b102" data-toggle="tooltip" data-placement="bottom" title="Premiums"></i></a>';
-                    var news = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-newspaper" style="color: #9aa3a8   " data-toggle="tooltip" data-placement="bottom" title="News"></i></i></a>';
-                    var notes = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-sticky-note" style="color: #fbb540" data-toggle="tooltip" data-placement="bottom" title="Notes"></i></i></a>';
+                        var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-file-image"  title="School gallery"></i></i></a>';
+                    var transportations = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa fa-bus"  title="Transportations" ></i></a>';
+                    var premiums = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" toolbar="asd"><i class="fa fa-credit-card"  title="Premiums"></i></a>';
+                    var news = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-newspaper" title="News"></i></i></a>';
+                    var notes = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-sticky-note" title="Notes"></i></i></a>';
                     return gallery + transportations + premiums + news+notes;
                     /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
                      return show;*/

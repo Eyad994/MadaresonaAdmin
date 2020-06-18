@@ -2,9 +2,9 @@
 
 @section('content')
 <style>
-    .bs-tooltip-auto[x-placement^=bottom] .arrow::before,
-    .bs-tooltip-bottom .arrow::before {
-        border-bottom-color: #f00; /* Red */
+    .blue {
+        color: blue !important;
+        text-decoration : underline;
     }
 </style>
     <div class="container">
