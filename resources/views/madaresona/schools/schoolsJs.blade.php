@@ -27,7 +27,13 @@
             ajax: "{{ route('schoolsDatable') }}",
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
-                {data: 'sn', title: 'SN'},
+
+                {
+                    title: 'SN', "mRender": function (data, type, row) {
+                        return '<label style="font-weight: 600 !important; color: #0d8ddc;">' + row.sn + ' </label>'
+
+                    }
+                },
                 {data: 'name_ar', title: 'Name'},
                 {data: 'school_order', title: 'Order'},
 
