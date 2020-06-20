@@ -211,7 +211,7 @@
                                     title: 'Your image has been removed',
                                     showConfirmButton: false,
                                     timer: 1500
-                                })
+                                });
                                 table.ajax.reload();
                             }
                         });
@@ -220,17 +220,6 @@
 
             });
 
-            /*$(document).on('click', '.remove-trans-btn', function () {
-                var id = $(this).attr('id');
-
-                $.ajax({
-                    url: '/schools/transportation/'+id+'/destroy',
-                    method: 'get',
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });*/
 
 
     </script>

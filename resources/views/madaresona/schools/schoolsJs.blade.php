@@ -87,8 +87,8 @@
                     title: 'Services', "mRender": function (data, type, row) {
                     var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn gallerySchool" id="' + row.id + '"><i class="fa fa-file-image"  title="School gallery"></i></i></a>';
                     var transportation = '<a href="/schools/transportation/' + row.id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa-bus"  title="Transportation" ></i></a>';
-                    var premiums = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" ><i class="fa fa-credit-card"  title="Premiums"></i></a>';
-                    var news = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-newspaper" title="News"></i></i></a>';
+                    var premiums = '<a href="/schools/premium/' + row.id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '" ><i class="fa fa-credit-card"  title="Premiums"></i></a>';
+                    var news = '<a href="/schools/news/' + row.id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-newspaper" title="News"></i></i></a>';
                     var notes = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-sticky-note" title="Notes"></i></i></a>';
                     return gallery + transportation + premiums + news + notes;
                     /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
@@ -104,8 +104,8 @@
                     /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
                      return show;*/
                 }
-                },
-            ],
+                }
+            ]
         });
 
 
