@@ -42,7 +42,7 @@ class SchoolController extends Controller
                     return $data->special == 0 ? 'General' : 'Special';
                 })
                 ->editColumn('active', function ($data){
-                    return $data->special == 0 ? 'InActive' : 'Active';
+                    return $data->active == 0 ? 'InActive' : 'Active';
                 })
                 ->addColumn('sn', function ($data){
                     $finance = Finance::where('user_id', $data->user_id)->orderBy('end_date', 'desc')->first();
@@ -234,6 +234,8 @@ class SchoolController extends Controller
             'zip_code' => $request->zip_code,
             'po_box' => $request->po_box,
             'country' => 1,
+            'special' => $request->special,
+            'active' => $request->active,
             'city_id' => $request->city_id,
             'region_id' => $request->region_id,
             'status' => $request->status,

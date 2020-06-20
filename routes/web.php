@@ -27,6 +27,12 @@ Route::middleware('auth')->group(function () {
         Route::get('gallery/{id}', 'GalleryController@gallery')->name('gallery');
         Route::post('submitGallery', 'GalleryController@store')->name('submitGallery');
         Route::get('removeGallery/{id}', 'GalleryController@destroy')->name('removeGallery');
+        Route::get('transportation/{id}/create', 'TransportationController@create')->name('transportationCreate');
+        Route::get('transportation/{id}/edit', 'TransportationController@edit')->name('transportationEdit');
+        Route::put('transportation/update', 'TransportationController@update')->name('transportationUpdate');
+        Route::post('transportation', 'TransportationController@store')->name('transportationStore');
+        Route::get('transportation/{id}', 'TransportationController@index')->name('transportation');
+        Route::get('transportationDatable', 'TransportationController@transportationDatatble')->name('transportationDatatble');
     });
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');

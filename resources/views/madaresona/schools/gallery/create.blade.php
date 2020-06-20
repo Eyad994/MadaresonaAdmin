@@ -27,8 +27,9 @@
 </div>
 <br>
 <div class="row">
-    <form action="{{ route('submitGallery') }}" method="POST" enctype="multipart/form-data" style="width: 100%">
+    <form id="galleryForm" action="{{ route('submitGallery') }}" method="POST" enctype="multipart/form-data" style="width: 100%" onsubmit="false">
         @csrf
+
         <input type="hidden" name="school_id" value="{{ $id }}">
         <div class="col-md-3">
             <div class="form-group">

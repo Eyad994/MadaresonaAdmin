@@ -28,10 +28,13 @@ class GalleryController extends Controller
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
+        $counter = 0;
         foreach ($request->galleries as $gallery) {
             $image = $gallery;
-            $imageGallery = time() . '_gallery.' . $image->getClientOriginalExtension();
+            $imageGallery = time()+$counter. '_gallery.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/' . $schoolName . '/gallery'), $imageGallery);
+
+            $counter++;
 
             GallarySchool::create([
                 'school_id' => $request->school_id,
@@ -50,4 +53,5 @@ class GalleryController extends Controller
         $gallery->delete();
         return response()->json(['message' => 'Successfully deleted']);
     }
+
 }

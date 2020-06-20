@@ -30,9 +30,9 @@
 
                 {
                     title: 'SN', "mRender": function (data, type, row) {
-                        return '<label style="font-weight: 600 !important; color: #0d8ddc;">' + row.sn + ' </label>'
+                    return '<label style="font-weight: 600 !important; color: #0d8ddc;">' + row.sn + ' </label>'
 
-                    }
+                }
                 },
                 {data: 'name_ar', title: 'Name'},
                 {data: 'school_order', title: 'Order'},
@@ -86,7 +86,7 @@
                 {
                     title: 'Services', "mRender": function (data, type, row) {
                     var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn gallerySchool" id="' + row.id + '"><i class="fa fa-file-image"  title="School gallery"></i></i></a>';
-                    var transportation = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa fa-bus"  title="Transportations" ></i></a>';
+                    var transportation = '<a href="/schools/transportation/' + row.id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '"><i class="fa fa-bus"  title="Transportation" ></i></a>';
                     var premiums = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn" ><i class="fa fa-credit-card"  title="Premiums"></i></a>';
                     var news = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-newspaper" title="News"></i></i></a>';
                     var notes = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn"><i class="fa fa-sticky-note" title="Notes"></i></i></a>';
@@ -130,9 +130,51 @@
                     $('.modal-body').html(data);
                     $('.modal-title').text('School Gallery');
                     $('#schoolModal').modal('show');
+
+                    $("#galleryForm").submit(function (e) {
+
+                        e.preventDefault();
+                        var form = $(this);
+                        var url = form.attr('action');
+
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: new FormData(this),
+                            dataType: "json",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+
+                                if (data.status === 422) {
+                                    console.log(data);
+                                    var error_html = '';
+
+                                    for (let value of Object.values(data.errors)) {
+                                        error_html += '<div class="alert alert-danger">' + value + '</div>';
+                                    }
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        html: error_html,
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: data.message
+                                    });
+
+                                    $('#schoolModal').modal('hide');
+                                }
+                            }
+                        });
+
+                    });
                 }
             });
         });
+
 
         $(document).on('click', '.galleryDelete', function () {
             var id = $(this).attr('id');
@@ -151,14 +193,15 @@
                         url: 'removeGallery/' + id,
                         method: 'get',
                         success: function (data) {
-                            console.log(data);
-                            $('.galleryDeleteDiv_'+id).remove();
+                            $('.galleryDeleteDiv_' + id).fadeOut('slow', function () {
+                                $('.galleryDeleteDiv_' + id).remove();
+                            });
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Your image has been removed',
                                 showConfirmButton: false,
                                 timer: 1500
-                                })
+                            })
                         }
                     });
                 }

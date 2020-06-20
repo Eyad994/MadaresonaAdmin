@@ -400,10 +400,10 @@
                                         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                                         <div id="map-canvas"></div>
                                         <input type="hidden" name="lat" id="lat"
-                                               value="{{ isset($school) ? $school->lat : '' }}"
+                                               value="{{ isset($school) ? $school->lat : 0.0 }}"
                                                readonly="yes">
                                         <input type="hidden" name="lng" id="lng"
-                                               value="{{ isset($school) ? $school->lng : '' }}"
+                                               value="{{ isset($school) ? $school->lng : 0.0 }}"
                                                readonly="yes">
                                     </div>
                                 </div>
@@ -650,6 +650,7 @@
         $(document).on("click", "i.del", function () {
             $(this).parent().remove();
         });
+
         $(function () {
             $(document).on("change", ".uploadFile", function () {
                 var uploadFile = $(this);
