@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
         Route::get('transportation/{id}/create', 'TransportationController@create')->name('transportationCreate');
         Route::get('transportation/{id}/edit', 'TransportationController@edit')->name('transportationEdit');
         Route::put('transportation/update', 'TransportationController@update')->name('transportationUpdate');
+        Route::get('removeTransportation/{id}', 'TransportationController@destroy')->name('removeTransportation');
         Route::post('transportation', 'TransportationController@store')->name('transportationStore');
         Route::get('transportation/{id}', 'TransportationController@index')->name('transportation');
         Route::get('transportationDatable', 'TransportationController@transportationDatatble')->name('transportationDatatble');

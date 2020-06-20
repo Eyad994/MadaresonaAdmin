@@ -76,6 +76,11 @@ class TransportationController extends Controller
 
         return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
+    public function destroy($id)
+    {
+        Transportation::where('id', $id)->delete();
+        return response()->json(['message' => 'Successfully deleted']);
+    }
 
 
 }

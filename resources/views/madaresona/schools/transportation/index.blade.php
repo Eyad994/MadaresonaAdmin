@@ -184,6 +184,36 @@
                 });
             });
 
+            $(document).on('click', '.remove-trans-btn', function () {
+                var id = $(this).attr('id');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then(function (result) {
+                    if (result.value) {
+                        $.ajax({
+                            url: 'removeTransportation/' + id,
+                            method: 'get',
+                            success: function (data) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Your image has been removed',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                });
+
+            });
 
             /*$(document).on('click', '.remove-trans-btn', function () {
                 var id = $(this).attr('id');
