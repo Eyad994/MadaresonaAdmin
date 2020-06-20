@@ -216,6 +216,7 @@
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
+                    $('.modal-title').text('Edit School');
                     $('#schoolModal').modal('show');
                     $("#updateSchoolForm").submit(function (e) {
 
@@ -273,6 +274,7 @@
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
+                    $('.modal-title').text('Add School');
                     $('#schoolModal').modal('show');
 
                     $("#addSchoolForm").submit(function (e) {

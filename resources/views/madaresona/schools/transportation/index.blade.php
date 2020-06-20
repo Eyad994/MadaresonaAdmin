@@ -38,6 +38,9 @@
     <script type="text/javascript">
             var table = $('#transportationTable').DataTable({
                 dom: 'Bfrtip',
+                "columnDefs": [
+                    {"width": "50px", "targets": 5}
+                ],
                 processing: true,
                 serverSide: true,
                 data: {
@@ -85,6 +88,7 @@
                     method: 'get',
                     success: function (data) {
                        $('.modal-body').html(data);
+                        $('.modal-title').text('Add Transportation');
                        $('#schoolModal').modal('show');
 
                         $('#transportationForm').submit(function (e) {
@@ -139,6 +143,7 @@
                     method: 'get',
                     success: function (data) {
                         $('.modal-body').html(data);
+                        $('.modal-title').text(' Edit Transportation');
                         $('#schoolModal').modal('show');
 
                         $('#transportationForm').submit(function (e) {
