@@ -3,7 +3,7 @@
         width: 170px;
         height: 150px;
         background-position: center center;
-        background: url('{{asset('/images/default/school.png')}}');
+        background: url('{{asset('/images/default/news.png')}}');
         background-color: #fff;
         background-size: cover;
         background-repeat: no-repeat;

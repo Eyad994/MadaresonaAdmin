@@ -13,7 +13,8 @@ class NewsController extends Controller
 {
     public function index($id)
     {
-        return view('madaresona.schools.news.index', compact('id'));
+        $school_name= School::where('id', $id)->value('name_en');
+        return view('madaresona.schools.news.index', compact('id','school_name'));
     }
 
     public function newsDatatble(Request $request)

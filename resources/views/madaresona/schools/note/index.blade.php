@@ -5,30 +5,28 @@
 
         <div class="card">
             <div class="card-header">
-                <b>News</b>
+                <b>Nots's</b>
                 <div class="card-toolbar" style="float: right">
 
-                    <a id="addNews" class="btn btn-primary font-weight-bolder">
+                    <a id="addNote" class="btn btn-primary font-weight-bolder">
 	<span class="svg-icon svg-icon-md">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-             viewBox="0 0 24 24" version="1.1">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect x="0" y="0" width="24" height="24"></rect>
         <circle fill="#000000" cx="9" cy="15" r="6"></circle>
         <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
               fill="#000000" opacity="0.3"></path>
     </g>
-</svg></span>New News</a>
+</svg></span>New Note</a>
                 </div>
 
             </div>
-
             <input type="hidden" id="school_id" name="school_id" value="{{ $id }}">
             <div class="col-md-12">
-                <label class="" style="padding: 10px 0px 0px 19px;"> School Name : <b style="color:#ffa800;">{{$school_name}}</b> </label>
+            <label class="" style="padding: 10px 0px 0px 19px;"> School Name : <b style="color:#ffa800;">{{$school_name}}</b> </label>
             </div>
             <div class="card-body">
-                <table class="table" id="newsTable"></table>
+                <table class="table" id="noteTable"></table>
             </div>
         </div>
 
@@ -40,11 +38,11 @@
 @section('script')
 
     <script type="text/javascript">
-        var table = $('#newsTable').DataTable({
+        var table = $('#noteTable').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
-             {"width": "50px", "targets": 4}
-             ],
+                {"width": "50px", "targets": 4}
+            ],
             processing: true,
             serverSide: true,
             data: {
@@ -63,49 +61,38 @@
                 {'extend': 'pdf'}
             ],
             ajax: {
-                url: "{{ route('newsDatatble') }}",
+                url: "{{ route('noteDatatble') }}",
                 type: "get",
                 data: {
                     "school_id": $('#school_id').val()
-                }
-            },
+                }},
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
-                {data: 'title_ar', title: 'Arabic Title'},
-                {data: 'title_en', title: 'English Title'},
-                {
-                    data: 'img', title: 'Image', "mRender": function (data, type, row) {
-                    var imgeUrl = '{{ asset('images/') }}';
-                    if (row.img != '') {
-                        return '<img src="' + imgeUrl + '/' + row.school_name_en + '/news/' + row.img + '" class="avatar" width="50" height="50"/>';
-                    }
-                    else
-                        return "Not Found Logo";
-                }
-                },
-
+                {data: 'note', title: 'Note'},
+                {data: 'added_by', title: 'Add by'},
+                {data: 'created_at', title: 'Created at'},
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                    var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-news-btn" id="' + row.id + '"  title="View & Edit"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-news-btn" id="' + row.id + '" d title="Remove"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
-                    return edit + remove;
-                }
+                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-trans-btn" id="' + row.id + '" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
+                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-trans-btn" id="' + row.id + '"  title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
+                        return edit + remove;
+                    }
                 }
             ]
         });
 
-        $('#addNews').on('click', function () {
+        $('#addNote').on('click', function () {
 
             var id = '{{ $id }}';
             $.ajax({
-                url: '/schools/news/' + id + '/create',
+                url: '/schools/note/'+id+'/create',
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
-                    $('.modal-title').text('Add News');
+                    $('.modal-title').text('Add Note');
                     $('#schoolModal').modal('show');
 
-                    $('#newsForm').submit(function (e) {
+                    $('#noteForm').submit(function (e) {
                         e.preventDefault();
                         var form = $(this);
                         var url = form.attr('action');
@@ -133,6 +120,7 @@
                                     })
                                 } else {
                                     Swal.fire({
+
                                         icon: 'success',
                                         title: data.message,
                                         showConfirmButton: false,
@@ -151,18 +139,18 @@
         });
 
 
-        $(document).on('click', '.edit-news-btn', function () {
+        $(document).on('click', '.edit-trans-btn', function () {
             var id = $(this).attr('id');
 
             $.ajax({
-                url: '/schools/news/' + id + '/edit',
+                url: '/schools/note/'+id+'/edit',
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
-                    $('.modal-title').text('Edit News');
+                    $('.modal-title').text('Edit Note');
                     $('#schoolModal').modal('show');
 
-                    $('#newsForm').submit(function (e) {
+                    $('#noteForm').submit(function (e) {
                         e.preventDefault();
                         var form = $(this);
                         var url = form.attr('action');
@@ -207,7 +195,7 @@
             });
         });
 
-        $(document).on('click', '.remove-news-btn', function () {
+        $(document).on('click', '.remove-trans-btn', function () {
             var id = $(this).attr('id');
 
             Swal.fire({
@@ -221,7 +209,7 @@
             }).then(function (result) {
                 if (result.value) {
                     $.ajax({
-                        url: 'removeNews/' + id,
+                        url: 'removeNote/' + id,
                         method: 'get',
                         success: function (data) {
                             Swal.fire({
@@ -237,6 +225,7 @@
             });
 
         });
+
 
 
     </script>

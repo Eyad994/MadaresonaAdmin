@@ -62,7 +62,23 @@ Route::middleware('auth')->group(function () {
         Route::get('newsDatable', 'NewsController@newsDatatble')->name('newsDatatble');
         /*************************************************************************/
 
+        // Note
+        Route::get('note/{id}/create', 'NoteController@create')->name('noteCreate');
+        Route::get('note/{id}/edit', 'NoteController@edit')->name('noteEdit');
+        Route::put('note/update', 'NoteController@update')->name('noteUpdate');
+        Route::get('note/removeNote/{id}', 'NoteController@destroy')->name('removeNote');
+        Route::post('note', 'NoteController@store')->name('noteStore');
+        Route::get('note/{id}', 'NoteController@index')->name('note');
+        Route::get('noteDatable', 'NoteController@noteDatatble')->name('noteDatatble');
+        /*************************************************************************/
+
     });
+    Route::prefix('finance')->group(function (){
+        Route::get('all', 'FinanceController@index')->name('allFinance');
+        Route::get('datable', 'FinanceController@schoolsDatable')->name('FinanceDatable');
+
+    });
+
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');
 });

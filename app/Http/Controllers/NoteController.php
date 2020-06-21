@@ -1,27 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Transportation;
+use App\Models\Note;
 use App\School;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
-class TransportationController extends Controller
+class NoteController extends Controller
 {
     public function index($id)
     {
-        $school_name= School::where('id', $id)->value('name_en');
-        return view('madaresona.schools.transportation.index', compact('id','school_name'));
+       $school_name= School::where('id', $id)->value('name_en');
+        return view('madaresona.schools.note.index', compact('id','school_name'));
     }
 
-    public function transportationDatatble(Request $request)
+    public function noteDatatble(Request $request)
     {
         if ($request->ajax()) {
-            $data = Transportation::where('school_id', $request->school_id)->get();
+            $data = Note::where('school_id', $request->school_id)->where('note_type',1)->get();
             return Datatables::of($data)
                 ->addIndexColumn()
+                ->editColumn('added_by', function ($data){
+                    return User::where('id', $data->added_by)->value('name');
+                })
+                ->editColumn('created_at', function ($data) {
+                    return $data->created_at->format('d m Y - g:i A');
+                })
                 ->make(true);
         }
 
@@ -29,31 +35,29 @@ class TransportationController extends Controller
 
     public function create($id)
     {
-        return view('madaresona.schools.transportation.create', compact('id'));
+        return view('madaresona.schools.note.create', compact('id'));
     }
 
     public function edit($id)
     {
-        $transportation = Transportation::where('id', $id)->first();
-        return view('madaresona.schools.transportation.create', compact('transportation','id'));
+        $note = Note::where('id', $id)->first();
+        return view('madaresona.schools.note.create', compact('note','id'));
     }
 
     public function store(Request $request)
     {
         $validations = Validator::make($request->all(), [
-            'region_ar' => 'required',
-            'region_en' => 'required'
+            'note_text' => 'required',
         ]);
         if ($validations->fails()){
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
-        Transportation::create([
+        Note::create([
             'school_id' => $request->school_id,
-            'region_ar' => $request->region_ar,
-            'region_en' => $request->region_en,
-            'one_way' => $request->one_way,
-            'two_way' => $request->two_way,
+            'note_type' => 1,
+            'note' => $request->note_text,
+            'added_by' => auth()->user()->id,
         ]);
 
         return response()->json(['message' => 'Added successfully', 'status' => 200]);
@@ -62,27 +66,23 @@ class TransportationController extends Controller
     public function update(Request $request)
     {
         $validations = Validator::make($request->all(), [
-            'region_ar' => 'required',
-            'region_en' => 'required'
+            'note_text' => 'required',
+
         ]);
         if ($validations->fails()){
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
-        Transportation::where('id', $request->school_id)->update([
-            'region_ar' => $request->region_ar,
-            'region_en' => $request->region_en,
-            'one_way' => $request->one_way,
-            'two_way' => $request->two_way,
+        Note::where('id', $request->school_id)->update([
+            'note' => $request->note_text,
         ]);
 
         return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
     public function destroy($id)
     {
-        Transportation::where('id', $id)->delete();
+        Note::where('id', $id)->delete();
         return response()->json(['message' => 'Successfully deleted']);
     }
-
 
 }

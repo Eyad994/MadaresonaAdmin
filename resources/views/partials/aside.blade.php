@@ -54,7 +54,7 @@
 </svg><!--end::Svg Icon--></span>
                         <span class="menu-text">Dashboard</span></a></li>
                 <li class="menu-section ">
-                    <h4 class="menu-text">Content Management</h4>
+                    <h4 class="menu-text" style="color:#5d93c3bf;">Content Management</h4>
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
 
@@ -84,6 +84,12 @@
                     <a href="{{ route('allSchools') }}" class="menu-link ">
                         <i class="fa fa-university left-icon-menu"><span></span></i>
                         <span class="menu-text">Schools</span>
+                    </a>
+                </li>
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('allFinance') }}" class="menu-link ">
+                        <i class="fas fa-hand-holding-usd left-icon-menu"><span></span></i>
+                        <span class="menu-text">Finance</span>
                     </a>
                 </li>
 

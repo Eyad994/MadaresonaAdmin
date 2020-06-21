@@ -67,6 +67,8 @@ class SchoolController extends Controller
         $genderArray = [0 => 'Female', 1 => 'Male' , 2 => 'Mixed'];
         $schoolsStatus = Status::all();
         $lastSchoolOrder = School::orderBy('id', 'desc')->value('school_order');
+        if ($lastSchoolOrder == '')
+        { $lastSchoolOrder=0;}
         return view('madaresona.schools.addSchool', compact('schoolsType', 'cities', 'regions', 'schoolsStatus', 'lastSchoolOrder', 'genderArray'));
     }
 

@@ -23,6 +23,9 @@
             </div>
 
             <input type="hidden" id="school_id" name="school_id" value="{{ $id }}">
+            <div class="col-md-12">
+                <label class="" style="padding: 10px 0px 0px 19px;"> School Name : <b style="color:#ffa800;">{{$school_name}}</b> </label>
+            </div>
             <div class="card-body">
                 <table class="table" id="transportationTable"></table>
             </div>
@@ -72,8 +75,8 @@
                     {data: 'two_way', title: 'Two Way'},
                     {
                         title: 'Actions', "mRender": function (data, type, row) {
-                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-trans-btn" id="' + row.id + '" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-trans-btn" id="' + row.id + '" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
+                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-trans-btn" id="' + row.id + '" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
+                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-trans-btn" id="' + row.id + '"  title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
                         return edit + remove;
                     }
                     }
@@ -120,7 +123,9 @@
                                     } else {
                                         Swal.fire({
                                             icon: 'success',
-                                            title: data.message
+                                            title: data.message,
+                                            showConfirmButton: false,
+                                            timer: 1500
                                         });
 
                                         table.ajax.reload();
@@ -175,7 +180,9 @@
                                     } else {
                                         Swal.fire({
                                             icon: 'success',
-                                            title: data.message
+                                            title: data.message,
+                                            showConfirmButton: false,
+                                            timer: 1500
                                         });
 
                                         table.ajax.reload();

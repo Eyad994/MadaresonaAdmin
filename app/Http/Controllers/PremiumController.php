@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Premium;
 use App\Models\SchoolClass;
+use App\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -12,7 +13,8 @@ class PremiumController extends Controller
 {
     public function index($id)
     {
-        return view('madaresona.schools.premium.index', compact('id'));
+        $school_name= School::where('id', $id)->value('name_en');
+        return view('madaresona.schools.premium.index', compact('id','school_name'));
     }
 
     public function premiumDatatble(Request $request)
