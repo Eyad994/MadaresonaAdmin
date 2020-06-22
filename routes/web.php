@@ -78,6 +78,11 @@ Route::middleware('auth')->group(function () {
         Route::get('all', 'FinanceController@index')->name('allFinance');
         Route::get('datable', 'FinanceController@financeDatable')->name('FinanceDatable');
 
+        // note
+        Route::get('note/{id}', 'NoteController@note');
+        Route::post('note', 'NoteController@store_note_finance')->name('noteStoreFinance');
+        Route::get('note/removeNote/{id}', 'NoteController@destroy')->name('removeNote');
+
         // Subscription
         Route::get('subscription/{id}', 'FinanceController@subscription');
         Route::post('subscription', 'FinanceController@store')->name('subscriptionStore');

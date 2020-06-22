@@ -145,4 +145,6 @@ class FinanceController extends Controller
         $payment = Paymenet::where('id', $id)->first();
         $payment->delete();
     }
+
+
 }

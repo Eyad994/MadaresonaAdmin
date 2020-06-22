@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Finance;
 use App\Models\Note;
 use App\School;
 use App\User;
@@ -85,5 +86,32 @@ class NoteController extends Controller
         Note::where('id', $id)->delete();
         return response()->json(['message' => 'Successfully deleted']);
     }
+
+    public function note($id)
+    {
+        $User_id=  $id;
+        $note = Note::where('user_id',$id )->where('note_type',2)->latest()->get();
+        return view('madaresona.finance.note', compact('note' , 'User_id'));
+    }
+
+    public function store_note_finance(Request $request)
+    {
+        $validations = Validator::make($request->all(), [
+            'note_text' => 'required',
+        ]);
+        if ($validations->fails()){
+            return response()->json(['errors' => $validations->errors(), 'status' => 422]);
+        }
+        $user_id= School::where('id', $request->school_id)->value('user_id');
+        Note::create([
+            'user_id' => $request->user_id,
+            'note_type' => 2,
+            'note' => $request->note_text,
+            'added_by' => auth()->user()->id,
+        ]);
+
+        return response()->json(['message' => 'Added successfully', 'status' => 200]);
+    }
+
 
 }

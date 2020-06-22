@@ -50,7 +50,7 @@
 
                     var subscription = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn subscription-btn" data-toggle="tooltip"  user_id="' + row.user_finance_id + '" data-placement="bottom" title="Subscriptions"><i class="fa fa-bars" style="color: #00aff0"></i></a>';
                     var payment = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn payment-btn" data-toggle="tooltip" finance_id="'+ row.id +'" user_id="' + row.user_finance_id + '"  data-placement="bottom" title="Payment"><i class="fa fa-credit-card" style="color: green"></i></i></a>'
-                         var notes = '<a href="#" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" title="Notes"  user_id="' + row.user_finance_id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
+                         var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon note-btn" title="Notes"  user_id="' + row.user_finance_id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
                     return subscription + payment+notes;
                 }
                 }
@@ -230,6 +230,91 @@
                 }
             })
         })
+        $(document).on('click', '.note-btn', function () {
+            var user_id = $(this).attr('user_id');
+            $.ajax({
+                url: '/finance/note/'+user_id,
+                method: 'get',
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $('.modal-title').text('Subscriptions');
+                    $('#schoolModal').modal('show');
+
+                    $("#noteForm").submit(function (e) {
+
+                        e.preventDefault();
+                        var form = $(this);
+                        var url = form.attr('action');
+
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: new FormData(this),
+                            dataType: "json",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+
+                                if (data.status === 422) {
+                                    var error_html = '';
+
+                                    for (let value of Object.values(data.errors)) {
+                                        error_html += '<div class="alert alert-danger">' + value + '</div>';
+                                    }
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        html: error_html,
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+
+                                    table.ajax.reload();
+                                    $('#schoolModal').modal('hide');
+                                }
+                            }
+                        });
+
+                    });
+
+                    $('.note-remove-btn').on('click', function () {
+                        var id = $(this).attr('id');
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then(function (result) {
+                            if (result.value) {
+                                $.ajax({
+                                    url: '/finance/note/removeNote/' + id,
+                                    method: 'get',
+                                    success: function (data) {
+                                        $('#noteRow_' + id).remove();
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Your subscription has been removed',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    }
+                                });
+                            }
+                        });
+                    })
+                }
+            })
+        });
     });
 
 </script>

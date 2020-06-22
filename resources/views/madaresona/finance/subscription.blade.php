@@ -1,3 +1,4 @@
+@if(!$finance->isEmpty())
 <table class="table table-striped">
     <thead>
     <tr>
@@ -9,23 +10,26 @@
     </tr>
     </thead>
     <tbody>
+    <?php $i=1;?>
     @foreach($finance as $item)
         <tr id="subscriptionRow_{{ $item->id }}">
-            <th scope="row">{{ $item->id }}</th>
+            <th scope="row">{{ $i }}</th>
             <td>{{ $item->balance }}</td>
             <td>{{ $item->type }}</td>
             <td>{{ $item->start_date }}</td>
             <td>{{ $item->end_date }}</td>
-            <td>
+            <td style="text-align: center;">
                 <a href="#" class="btn btn-sm btn-clean btn-icon subscription-remove-btn action-btn"
                    id="{{ $item->id }}" data-toggle="tooltip" data-placement="bottom" title="Remove"><i
                             class="far fa-trash-alt" style="color: #f64e60"></i></a>
             </td>
         </tr>
+        <?php $i++;?>
     @endforeach
     </tbody>
 </table>
 <hr>
+@endif
 <div class="row">
     <div class="col-md-3">
         <b>Add New Subscription Form</b>

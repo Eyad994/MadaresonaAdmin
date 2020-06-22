@@ -1,3 +1,4 @@
+@if(!$payment->isEmpty())
 <table class="table table-striped">
     <thead>
     <tr>
@@ -8,22 +9,28 @@
     </tr>
     </thead>
     <tbody>
+
+    <?php $i=1;
+    ?>
     @foreach($payment as $item)
         <tr id="paymentRow_{{ $item->id }}">
-            <th scope="row">{{ $item->id }}</th>
+            <th scope="row">{{ $i}}</th>
             <td>{{ $item->payed }}</td>
             <td>{{ $item->user->name }}</td>
             <td>{{ $item->created_at != null ? $item->created_at->format('d-m-Y  g:i A') : '' }}</td>
-            <td>
+            <td style="text-align: center;">
                 <a href="#" class="btn btn-sm btn-clean btn-icon payment-remove-btn action-btn"
                    id="{{ $item->id }}" data-toggle="tooltip" data-placement="bottom" title="Remove"><i
-                            class="far fa-trash-alt" style="color: #f64e60"></i></i></a>
+                        class="far fa-trash-alt" style="color: #f64e60"></i></a>
             </td>
         </tr>
+        <?php $i++;?>
     @endforeach
+
     </tbody>
 </table>
 <hr>
+@endif
 <div class="row">
     <div class="col-md-3">
         <b>Add New Payment Form</b>
