@@ -19,7 +19,7 @@
             <td>
                 <a href="#" class="btn btn-sm btn-clean btn-icon subscription-remove-btn action-btn"
                    id="{{ $item->id }}" data-toggle="tooltip" data-placement="bottom" title="Remove"><i
-                            class="far fa-trash-alt" style="color: #f64e60"></i></i></a>
+                            class="far fa-trash-alt" style="color: #f64e60"></i></a>
             </td>
         </tr>
     @endforeach

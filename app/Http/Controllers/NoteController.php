@@ -19,7 +19,8 @@ class NoteController extends Controller
     public function noteDatatble(Request $request)
     {
         if ($request->ajax()) {
-            $data = Note::where('school_id', $request->school_id)->where('note_type',1)->get();
+            $user_id= School::where('id', $request->school_id)->value('user_id');
+            $data = Note::where('user_id', $user_id)->where('note_type',1)->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('added_by', function ($data){
@@ -52,9 +53,9 @@ class NoteController extends Controller
         if ($validations->fails()){
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
-
+        $user_id= School::where('id', $request->school_id)->value('user_id');
         Note::create([
-            'school_id' => $request->school_id,
+            'user_id' => $user_id,
             'note_type' => 1,
             'note' => $request->note_text,
             'added_by' => auth()->user()->id,

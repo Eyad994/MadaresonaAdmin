@@ -22,6 +22,7 @@
 
             </div>
             <input type="hidden" id="school_id" name="school_id" value="{{ $id }}">
+            <input type="hidden" id="note_type" name="note_type" value="1">
             <div class="col-md-12">
             <label class="" style="padding: 10px 0px 0px 19px;"> School Name : <b style="color:#ffa800;">{{$school_name}}</b> </label>
             </div>

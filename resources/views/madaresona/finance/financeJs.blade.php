@@ -5,6 +5,10 @@
         // show all products
         var table = $('.data-table').DataTable({
             dom: 'Bfrtip',
+            "columnDefs": [
+
+                {"width": "100px", "targets": 7},
+            ],
             processing: true,
             serverSide: true,
             buttons: [
@@ -44,10 +48,10 @@
                     title: 'Actions', "mRender": function (data, type, row) {
 
 
-                    var subscription = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn subscription-btn" data-toggle="tooltip"  user_id="' + row.user_finance_id + '" data-placement="bottom" title="Subscriptions"><i class="fa fa-bars" style="color: #00aff0"></i></i></a>';
-                    var payment = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn payment-btn" data-toggle="tooltip" finance_id="'+ row.id +'" user_id="' + row.user_finance_id + '"  data-placement="bottom" title="Payment"><i class="fa fa-credit-card" style="color: green"></i></i></a>';
-
-                    return subscription + payment;
+                    var subscription = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn subscription-btn" data-toggle="tooltip"  user_id="' + row.user_finance_id + '" data-placement="bottom" title="Subscriptions"><i class="fa fa-bars" style="color: #00aff0"></i></a>';
+                    var payment = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn payment-btn" data-toggle="tooltip" finance_id="'+ row.id +'" user_id="' + row.user_finance_id + '"  data-placement="bottom" title="Payment"><i class="fa fa-credit-card" style="color: green"></i></i></a>'
+                         var notes = '<a href="#" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" title="Notes"  user_id="' + row.user_finance_id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
+                    return subscription + payment+notes;
                 }
                 }
 
