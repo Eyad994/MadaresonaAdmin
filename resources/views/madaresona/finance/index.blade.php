@@ -30,7 +30,7 @@
         </div>
 
 
-
+@include('madaresona.schools.shcoolModal')
 </div>
 @endsection
 

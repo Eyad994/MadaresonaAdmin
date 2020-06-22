@@ -73,10 +73,20 @@ Route::middleware('auth')->group(function () {
         /*************************************************************************/
 
     });
+
     Route::prefix('finance')->group(function (){
         Route::get('all', 'FinanceController@index')->name('allFinance');
-        Route::get('datable', 'FinanceController@schoolsDatable')->name('FinanceDatable');
+        Route::get('datable', 'FinanceController@financeDatable')->name('FinanceDatable');
 
+        // Subscription
+        Route::get('subscription/{id}', 'FinanceController@subscription');
+        Route::post('subscription', 'FinanceController@store')->name('subscriptionStore');
+        Route::get('removeSubscription/{id}', 'FinanceController@destroy')->name('removeSubscription');
+
+        // Payment
+        Route::get('payment/{id}', 'FinanceController@payment');
+        Route::post('payment', 'FinanceController@storePayment')->name('paymentStore');
+        Route::get('removePayment/{id}', 'FinanceController@destroyPayment')->name('removePayment');
     });
 
 
