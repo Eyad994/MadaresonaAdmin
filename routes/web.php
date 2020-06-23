@@ -93,7 +93,21 @@ Route::middleware('auth')->group(function () {
         Route::post('payment', 'FinanceController@storePayment')->name('paymentStore');
         Route::get('removePayment/{id}', 'FinanceController@destroyPayment')->name('removePayment');
     });
+    Route::prefix('news')->group(function (){
+        Route::get('all', 'NewsController@indexMain')->name('allMainNews');
+        Route::get('newsMainDatatable', 'NewsController@newsMainDatatable')->name('newsMainDatatable');
+        Route::get('create', 'NewsController@createMainNews')->name('createMainNews');
+        Route::post('store', 'NewsController@storeMainNews')->name('MainNewsStore');
+        Route::get('{id}/edit', 'NewsController@editMainNews')->name('mainNewsEdit');
+        Route::put('/main/update', 'NewsController@updateMainNews')->name('newsMainUpdate');
+        Route::get('main/remove/{id}', 'NewsController@destroyMainNews');
 
+    });
+    Route::prefix('advertisement')->group(function (){
+        Route::get('all', 'AdvertisementController@index')->name('allAdvertisement');
+        Route::get('datable', 'AdvertisementController@advertisementDatatable')->name('advertisementDatable');
+
+    });
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');
 });

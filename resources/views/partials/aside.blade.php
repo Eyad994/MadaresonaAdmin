@@ -92,6 +92,18 @@
                         <span class="menu-text">Finance</span>
                     </a>
                 </li>
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('allMainNews') }}" class="menu-link ">
+                        <i class="fa fa-newspaper left-icon-menu"><span></span></i>
+                        <span class="menu-text">Main News</span>
+                    </a>
+                </li>
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('allAdvertisement') }}" class="menu-link ">
+                        <i class="fa fa-newspaper left-icon-menu"><span></span></i>
+                        <span class="menu-text"> Advertisement</span>
+                    </a>
+                </li>
 
             </ul>
             <!--end::Menu Nav-->

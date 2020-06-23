@@ -35,6 +35,10 @@
 
                     @csrf
                     <input type="hidden" name="school_id" value="{{ $id }}">
+                    @if(isset($news))
+                        <input type="hidden" name="school_id" value="{{ $news->user_id }}">
+                        <input type="hidden" name="news_id" value="{{ $news->id }}">
+                    @endif
                     <div class="row">
 
                     <div class="col-md-6 form-group">

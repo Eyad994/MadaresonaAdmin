@@ -20,15 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e7d3968-ad1e-4cec-9468-883bea321944" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/madaresona/finance/note.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/madaresonaAdmin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/madaresonaAdmin.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/madaresona/MainNews/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/madaresona/MainNews/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/madaresona/advertisement/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FinanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FinanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NoteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Note.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Note.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/finance/financeJs.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/finance/financeJs.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/finance/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/finance/payment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/finance/subscription.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/finance/subscription.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/schools/news/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/schools/news/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/schools/news/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/schools/news/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/aside.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,7 +167,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/madaresona/advertisement" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -177,11 +176,11 @@
       <recent name="C:\Users\Eyad\Documents\Laravel Projects\MadersonaAdmin\app\Models" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/madaresona/advertisement" />
+      <recent name="$PROJECT_DIR$/resources/views/madaresona/MainNews" />
       <recent name="C:\Users\Eyad\Documents\Laravel Projects\MadaresonaAdmin\resources\views\madaresona\finance" />
       <recent name="$PROJECT_DIR$/resources/views/madaresona/finance" />
       <recent name="$PROJECT_DIR$/resources/views/madaresona/Finance" />
-      <recent name="$PROJECT_DIR$/resources/views/madaresona/schools/note" />
-      <recent name="C:\Users\Eyad\Documents\Laravel Projects\MadersonaAdmin\public\assets" />
     </key>
   </component>
   <component name="RunManager">
@@ -257,7 +256,11 @@
       <workItem from="1592747648781" duration="8803000" />
       <workItem from="1592772368494" duration="4018000" />
       <workItem from="1592808865588" duration="21000" />
-      <workItem from="1592835335533" duration="8212000" />
+      <workItem from="1592835335533" duration="11641000" />
+      <workItem from="1592905415221" duration="47000" />
+      <workItem from="1592905473099" duration="114000" />
+      <workItem from="1592905604060" duration="40000" />
+      <workItem from="1592905652769" duration="10998000" />
     </task>
     <servers />
   </component>
@@ -281,10 +284,10 @@
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="579" y="346" width="821" height="421" key="#com.intellij.fileTypes.FileTypeChooser/70.27.1850.1053@70.27.1850.1053" timestamp="1592738396866" />
-    <state x="728" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592850242868">
+    <state x="728" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1592916535328">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state x="728" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1592850242868" />
+    <state x="728" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1592916535328" />
     <state x="170" y="127" width="1650" height="853" key="DiffContextDialog" timestamp="1592577299602">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
@@ -305,5 +308,9 @@
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="651" y="239" width="687" height="628" key="find.popup/70.27.1850.1053@70.27.1850.1053" timestamp="1592318133086" />
+    <state x="658" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1592907379786">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="658" y="259" width="672" height="678" key="search.everywhere.popup/70.27.1850.1053@70.27.1850.1053" timestamp="1592907379786" />
   </component>
 </project>
