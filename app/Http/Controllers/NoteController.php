@@ -89,7 +89,7 @@ class NoteController extends Controller
 
     public function note($id)
     {
-        $User_id=  $id;
+        $User_id = $id;
         $note = Note::where('user_id',$id )->where('note_type',2)->latest()->get();
         return view('madaresona.finance.note', compact('note' , 'User_id'));
     }

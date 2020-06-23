@@ -106,8 +106,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('advertisement')->group(function (){
         Route::get('all', 'AdvertisementController@index')->name('allAdvertisement');
         Route::get('datable', 'AdvertisementController@advertisementDatatable')->name('advertisementDatable');
-
     });
+
+    Route::resource('registration', 'RegistrationController');
+    Route::get('registrationDatatable', 'RegistrationController@registrationDatatable')->name('registrationDatatable');
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');
 });
