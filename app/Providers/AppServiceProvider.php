@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\FaqType;
 use App\Models\SchoolClass;
 use App\School;
 use Illuminate\Support\Facades\View;
@@ -35,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
             $allSchools = School::all();
             $allClasses = SchoolClass::all();
             $view->with(['allSchools' => $allSchools, 'allClasses' => $allClasses]);
+        });
+
+        View::composer('madaresona.faq.create', function ($view) {
+            $types = FaqType::all();
+            $view->with('types', $types);
         });
     }
 }

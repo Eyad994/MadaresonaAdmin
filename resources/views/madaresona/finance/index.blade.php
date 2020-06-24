@@ -1,9 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-<style>
-
-</style>
     <div class="container">
 
         <div class="card">

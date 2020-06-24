@@ -25,6 +25,9 @@ class AdvertisementController extends Controller
                 ->editColumn('active', function ($data){
                     return $data->active == 0 ? 'InActive' : 'Active';
                 })
+                ->editColumn('added_by', function ($data){
+                    return $data->user->name;
+                })
                 ->make(true);
         }
 
@@ -104,6 +107,15 @@ class AdvertisementController extends Controller
         $advertisement->save();
 
         return response()->json(['message' => 'Updated successfully', 'status' => 200]);
+    }
+
+    public function destroy($id)
+    {
+        $advertisement = Advertisement::where('id', $id)->first();
+        $file = 'images/'.'Advertisement/'.$advertisement->img;
+        File::delete($file);
+        $advertisement->delete();
+        return response()->json(['message' => 'Successfully deleted']);
     }
 
 }

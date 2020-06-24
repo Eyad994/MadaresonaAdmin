@@ -65,17 +65,11 @@
                 {data: 'DT_RowIndex', title: 'ID'},
                 {
                     data: 'schools', title: 'Schools', "mRender": function (data, type, row) {
-
-                        var arr = [];
-                     row.schools.map(function(a) {
-                         arr.push(a.name_ar+' ');
+                    var arr = [];
+                    row.schools.map(function (a) {
+                        arr.push(a.name_ar + ' ');
                     });
-
-                     return arr;
-
-                    /*row.schools.map(function(a) {
-
-                     });*/
+                    return arr;
                 }
                 },
                 {data: 'parent', title: 'Parent'},
@@ -86,8 +80,9 @@
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
                     var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-registration-btn" id="' + row.id + '"  title="View & Edit"><i class="far fa-trash-alt" style="color: #f64e60"></i></a>';
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-registration-btn" id="' + row.id + '" d title="Remove"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
-                    return edit + remove;
+                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-registration-btn" id="' + row.id + '" title="Remove"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
+                    var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon action-btn note-registration-btn" title="Notes"  id="' + row.id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
+                    return edit + remove + notes;
                 }
                 }
             ]
@@ -153,7 +148,7 @@
         $(document).on('click', '.edit-registration-btn', function () {
             var id = $(this).attr('id');
             $.ajax({
-                url: '/registration/' + id +'/edit',
+                url: '/registration/' + id + '/edit',
                 type: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
@@ -239,6 +234,91 @@
         });
 
 
+        $(document).on('click', '.note-registration-btn', function () {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: '/registration/note/'+ id,
+                method: 'get',
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $('.modal-title').text('Subscriptions');
+                    $('#schoolModal').modal('show');
+
+                    $("#noteForm").submit(function (e) {
+
+                        e.preventDefault();
+                        var form = $(this);
+                        var url = form.attr('action');
+
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: new FormData(this),
+                            dataType: "json",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+
+                                if (data.status === 422) {
+                                    var error_html = '';
+
+                                    for (let value of Object.values(data.errors)) {
+                                        error_html += '<div class="alert alert-danger">' + value + '</div>';
+                                    }
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        html: error_html,
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+
+                                    table.ajax.reload();
+                                    $('#schoolModal').modal('hide');
+                                }
+                            }
+                        });
+
+                    });
+
+                    $('.note-remove-btn').on('click', function () {
+                        var id = $(this).attr('id');
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then(function (result) {
+                            if (result.value) {
+                                $.ajax({
+                                    url: '/finance/note/removeNote/' + id,
+                                    method: 'get',
+                                    success: function (data) {
+                                        $('#noteRow_' + id).remove();
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Your subscription has been removed',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    }
+                                });
+                            }
+                        });
+                    })
+                }
+            })
+        });
     </script>
 
 @endsection

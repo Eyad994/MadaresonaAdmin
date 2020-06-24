@@ -110,11 +110,22 @@ Route::middleware('auth')->group(function () {
         Route::post('store', 'AdvertisementController@store')->name('storeAdvertisement');
         Route::get('{id}/edit', 'AdvertisementController@edit')->name('EditAdvertisement');
         Route::put('update', 'AdvertisementController@update')->name('UpdateAdvertisement');
-
+        Route::get('destroy/{id}', 'AdvertisementController@destroy')->name('destroyAdvertisement');
     });
 
+    // Registration
     Route::resource('registration', 'RegistrationController');
     Route::get('registrationDatatable', 'RegistrationController@registrationDatatable')->name('registrationDatatable');
+    Route::prefix('registration')->group(function (){
+        Route::get('note/{id}', 'RegistrationController@note');
+        Route::get('note/destroy/{id}', 'RegistrationController@destroyNote');
+        Route::post('note', 'RegistrationController@storeNote')->name('noteStoreRegistration');
+    });
+    /************************************************************************************/
+
+    // FAQ'S
+    Route::resource('faq', 'FaqController');
+    Route::get('faqDatatable', 'FaqController@faqDatatable')->name('faqDatatble');
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');
 });

@@ -39,53 +39,6 @@
                         </li>
                         <!--end::Item-->
 
-                        <!--begin::Item-->
-                        <li class="navi-item active">
-                            <a href="#" class="navi-link">
-            <span class="symbol symbol-20 mr-3">
-                <img src="https://keenthemes.com/metronic/themes/metronic/theme/html/demo1/dist/assets/media/svg/flags/128-spain.svg"
-                     alt=""/>
-            </span>
-                                <span class="navi-text">Spanish</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-            <span class="symbol symbol-20 mr-3">
-                <img src="https://keenthemes.com/metronic/themes/metronic/theme/html/demo1/dist/assets/media/svg/flags/162-germany.svg"
-                     alt=""/>
-            </span>
-                                <span class="navi-text">German</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-            <span class="symbol symbol-20 mr-3">
-                <img src="https://keenthemes.com/metronic/themes/metronic/theme/html/demo1/dist/assets/media/svg/flags/063-japan.svg"
-                     alt=""/>
-            </span>
-                                <span class="navi-text">Japanese</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-            <span class="symbol symbol-20 mr-3">
-                <img src="https://keenthemes.com/metronic/themes/metronic/theme/html/demo1/dist/assets/media/svg/flags/195-france.svg"
-                     alt=""/>
-            </span>
-                                <span class="navi-text">French</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
                     </ul>
                     <!--end::Nav-->
                 </div>

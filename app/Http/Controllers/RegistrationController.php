@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use App\Models\Registration;
 use App\Models\SchoolClass;
 use App\School;
@@ -131,12 +132,46 @@ class RegistrationController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('schools', function ($data) {
-
                     $schoolsArray = explode(',', $data->schools);
                     $schools = School::whereIn('id', $schoolsArray)->get('name_ar')->toArray();
                     return $schools;
                 })
+                ->editColumn('by_admin', function ($data){
+                    return $data->user->name;
+                })
+                ->editColumn('class_id', function ($data){
+                    return $data->schoolClass->class_en;
+                })
                 ->make(true);
         }
+    }
+
+    public function note($id)
+    {
+        $note = Note::where('registration_id', $id)->get();
+        return view('madaresona.registration.note', compact('id', 'note'));
+    }
+
+    public function storeNote(Request $request)
+    {
+        $validations = Validator::make($request->all(), [
+            'note_text' => 'required',
+        ]);
+        if ($validations->fails()){
+            return response()->json(['errors' => $validations->errors(), 'status' => 422]);
+        }
+
+        Note::create([
+            'note' => $request->note_text,
+            'added_by' => auth()->user()->id,
+            'registration_id' => $request->registration_id
+        ]);
+
+        return response()->json(['message' => 'Added successfully', 'status' => 200]);
+    }
+
+    public function destroyNote($id)
+    {
+        dd($id);
     }
 }
