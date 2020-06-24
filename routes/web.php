@@ -106,6 +106,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('advertisement')->group(function (){
         Route::get('all', 'AdvertisementController@index')->name('allAdvertisement');
         Route::get('datable', 'AdvertisementController@advertisementDatatable')->name('advertisementDatable');
+        Route::get('create', 'AdvertisementController@create')->name('createAdvertisement');
+        Route::post('store', 'AdvertisementController@store')->name('storeAdvertisement');
+        Route::get('{id}/edit', 'AdvertisementController@edit')->name('EditAdvertisement');
+        Route::put('update', 'AdvertisementController@update')->name('UpdateAdvertisement');
+
     });
 
     Route::resource('registration', 'RegistrationController');

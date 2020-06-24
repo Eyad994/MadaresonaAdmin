@@ -40,7 +40,7 @@
         var table = $('#advertisementTable').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
-                {"width": "50px", "targets": 6}
+                {"width": "50px", "targets": 5}
             ],
             processing: true,
             serverSide: true,
@@ -64,7 +64,7 @@
                 {data: 'DT_RowIndex', title: 'ID'},
                 {
                     data: 'img', title: 'Image', "mRender": function (data, type, row) {
-                        var imgeUrl = '{{ asset('images/Main News') }}';
+                        var imgeUrl = '{{ asset('images/Advertisement') }}';
                         if (row.img != '') {
                             return '<img src="' + imgeUrl + '/'  + row.img + '" class="avatar" width="50" height="50"/>';
                         }
@@ -89,26 +89,26 @@
 
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-news-btn" id="' + row.id + '"  title="View & Edit"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-news-btn" id="' + row.id + '" d title="Remove"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
+                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-advertisement-btn" id="' + row.id + '"  title="View & Edit"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
+                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-advertisement-btn" id="' + row.id + '" d title="Remove"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
                         return edit + remove;
                     }
                 }
             ]
         });
 
-        $('#addNews').on('click', function () {
+        $('#addAdvertisement').on('click', function () {
 
 
             $.ajax({
-                url: '{{ route('createMainNews') }}',
+                url: '{{ route('createAdvertisement') }}',
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
-                    $('.modal-title').text('Add News');
+                    $('.modal-title').text('Add Advertisement');
                     $('#schoolModal').modal('show');
 
-                    $('#newsForm').submit(function (e) {
+                    $('#advertisementForm').submit(function (e) {
                         e.preventDefault();
                         var form = $(this);
                         var url = form.attr('action');
@@ -154,21 +154,24 @@
         });
 
 
-        $(document).on('click', '.edit-news-btn', function () {
+        $(document).on('click', '.edit-advertisement-btn', function () {
             var id = $(this).attr('id');
             $.ajax({
-                url: '/news/' + id + '/edit',
+                url: '/advertisement/' + id + '/edit',
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
-                    $('.modal-title').text('Edit News');
+                    $('.modal-title').text('Edit Advertisement');
                     $('#schoolModal').modal('show');
 
-                    $('#newsForm').submit(function (e) {
+                    $('#advertisementForm').submit(function (e) {
                         e.preventDefault();
                         var form = $(this);
                         var url = form.attr('action');
                         $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
                             type: "POST",
                             url: url,
                             data: new FormData(this),
