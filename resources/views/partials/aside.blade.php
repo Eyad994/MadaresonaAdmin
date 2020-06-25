@@ -100,24 +100,60 @@
                 </li>
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('allAdvertisement') }}" class="menu-link ">
-                        <i class="fa fa-newspaper left-icon-menu"><span></span></i>
+                        <i class="fas fa-ad left-icon-menu"><span></span></i>
                         <span class="menu-text"> Advertisement</span>
+                    </a>
+                </li>
+
+
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('faq.index') }}" class="menu-link ">
+                        <i class="far fa-question-circle left-icon-menu"><span></span></i>
+                        <span class="menu-text">FAQ's</span>
+                    </a>
+                </li>
+
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('suggestions.index') }}" class="menu-link ">
+                        <i class="fas fa-lightbulb left-icon-menu"><span></span></i>
+                        <span class="menu-text">Suggestions</span>
+                    </a>
+                </li>
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('allSubscribesEmail') }}" class="menu-link ">
+                        <i class="fas fa-mail-bulk left-icon-menu"><span></span></i>
+                        <span class="menu-text">Subscribes Email</span>
+                    </a>
+                </li>
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('allDiscount') }}" class="menu-link ">
+                        <i class="fas fa-percent left-icon-menu"><span></span></i>
+                        <span class="menu-text"> Discount Forms</span>
+                    </a>
+                </li>
+
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('allDiscount') }}" class="menu-link ">
+                        <i class="fas fa-paper-plane left-icon-menu"><span></span></i>
+                        <span class="menu-text">Requests join</span>
                     </a>
                 </li>
 
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('registration.index') }}" class="menu-link ">
-                        <i class="fa fa-newspaper left-icon-menu"><span></span></i>
+                        <i class="fas fa-registered left-icon-menu"><span></span></i>
                         <span class="menu-text">Registrations</span>
                     </a>
                 </li>
 
                 <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ route('faq.index') }}" class="menu-link ">
-                        <i class="fa fa-newspaper left-icon-menu"><span></span></i>
-                        <span class="menu-text">FAQ's</span>
+                    <a href="{{ route('sales.index') }}" class="menu-link ">
+                        <i class="fas fa-funnel-dollar left-icon-menu"><span></span></i>
+                        <span class="menu-text">Sales</span>
                     </a>
                 </li>
+
+
 
             </ul>
             <!--end::Menu Nav-->

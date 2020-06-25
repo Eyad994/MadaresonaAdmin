@@ -7,8 +7,8 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 /***************End Auth Routes*************/
-Route::get('/test', function (){
-   return view('home');
+Route::get('/test', function () {
+    return view('home');
 });
 
 Route::middleware('auth')->group(function () {
@@ -16,7 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::prefix('schools')->group(function (){
+    Route::prefix('schools')->group(function () {
         Route::get('all', 'SchoolController@index')->name('allSchools');
         Route::get('datable', 'SchoolController@schoolsDatable')->name('schoolsDatable');
         Route::get('show/{id}', 'SchoolController@show')->name('showSchool');
@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    Route::prefix('finance')->group(function (){
+    Route::prefix('finance')->group(function () {
         Route::get('all', 'FinanceController@index')->name('allFinance');
         Route::get('datable', 'FinanceController@financeDatable')->name('FinanceDatable');
 
@@ -93,7 +93,7 @@ Route::middleware('auth')->group(function () {
         Route::post('payment', 'FinanceController@storePayment')->name('paymentStore');
         Route::get('removePayment/{id}', 'FinanceController@destroyPayment')->name('removePayment');
     });
-    Route::prefix('news')->group(function (){
+    Route::prefix('news')->group(function () {
         Route::get('all', 'NewsController@indexMain')->name('allMainNews');
         Route::get('newsMainDatatable', 'NewsController@newsMainDatatable')->name('newsMainDatatable');
         Route::get('create', 'NewsController@createMainNews')->name('createMainNews');
@@ -103,7 +103,7 @@ Route::middleware('auth')->group(function () {
         Route::get('main/remove/{id}', 'NewsController@destroyMainNews');
 
     });
-    Route::prefix('advertisement')->group(function (){
+    Route::prefix('advertisement')->group(function () {
         Route::get('all', 'AdvertisementController@index')->name('allAdvertisement');
         Route::get('datable', 'AdvertisementController@advertisementDatatable')->name('advertisementDatable');
         Route::get('create', 'AdvertisementController@create')->name('createAdvertisement');
@@ -116,7 +116,7 @@ Route::middleware('auth')->group(function () {
     // Registration
     Route::resource('registration', 'RegistrationController');
     Route::get('registrationDatatable', 'RegistrationController@registrationDatatable')->name('registrationDatatable');
-    Route::prefix('registration')->group(function (){
+    Route::prefix('registration')->group(function () {
         Route::get('note/{id}', 'RegistrationController@note');
         Route::get('note/destroy/{id}', 'RegistrationController@destroyNote');
         Route::post('note', 'RegistrationController@storeNote')->name('noteStoreRegistration');
@@ -126,6 +126,30 @@ Route::middleware('auth')->group(function () {
     // FAQ'S
     Route::resource('faq', 'FaqController');
     Route::get('faqDatatable', 'FaqController@faqDatatable')->name('faqDatatble');
+    /************************************************************************************/
+    // Sales
+    Route::resource('sales', 'SalesController');
+    /************************************************************************************/
+    //Suggestions
+    Route::resource('suggestions', 'SuggestionsController');
+    Route::get('suggestionsDatatable', 'SuggestionsController@suggestionsDatatable')->name('suggestionsDatatable');
+    /************************************************************************************/
+
+    //subscribes email
+    Route::prefix('subscribes_email')->group(function () {
+        Route::get('all', 'SubscribesEmailController@index')->name('allSubscribesEmail');
+        Route::get('SubscribesEmailDatatable', 'SubscribesEmailController@subscribesEmailDatatable')->name('SubscribesEmailDatatable');
+        Route::get('destroy/{id}', 'SubscribesEmailController@destroy');
+    });
+    /************************************************************************************/
+
+    //subscribes email
+    Route::prefix('discount')->group(function () {
+        Route::get('all', 'DiscountController@index')->name('allDiscount');
+        Route::get('DiscountDatatable', 'DiscountController@discountDatatable')->name('DiscountDatatable');
+        Route::get('destroy/{id}', 'DiscountController@destroy');
+    });
+    /************************************************************************************/
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');
 });

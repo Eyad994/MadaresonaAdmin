@@ -236,7 +236,7 @@
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
-                    $('.modal-title').text('Subscriptions');
+                    $('.modal-title').text('Finance Note');
                     $('#schoolModal').modal('show');
 
                     $("#noteForm").submit(function (e) {
