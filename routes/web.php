@@ -151,6 +151,14 @@ Route::middleware('auth')->group(function () {
     });
     /************************************************************************************/
 
+    //requests
+    Route::prefix('requests')->group(function () {
+        Route::get('all', 'RequestsController@index')->name('allRequests');
+        Route::get('requestsDatatable', 'RequestsController@requestsDatatable')->name('requestsDatatable');
+        Route::get('destroy/{id}', 'RequestsController@destroy');
+    });
+    /************************************************************************************/
+
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');
 });
 

@@ -133,7 +133,7 @@
                 </li>
 
                 <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ route('allDiscount') }}" class="menu-link ">
+                    <a href="{{ route('allRequests') }}" class="menu-link ">
                         <i class="fas fa-paper-plane left-icon-menu"><span></span></i>
                         <span class="menu-text">Requests join</span>
                     </a>
