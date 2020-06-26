@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Suggestions extends Model
+class SupplierType extends Model
 {
-    //
-    protected $guarded = [];
+    protected $table = 'supplier_types';
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Suggestions;
+use App\Models\Suggestion;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -16,13 +16,12 @@ class SuggestionsController extends Controller
      */
     public function index()
     {
-        //
         return view('madaresona.suggestions.index');
     }
     public function suggestionsDatatable(Request $request)
     {
         if ($request->ajax()) {
-            $data = Suggestions::latest()->get();
+            $data = Suggestion::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('created_at', function ($data) {
@@ -55,35 +54,35 @@ class SuggestionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Suggestions  $suggestions
+     * @param  \App\Models\Suggestion  $suggestions
      * @return \Illuminate\Http\Response
      */
-    public function show(Suggestions $suggestions)
-
+    public function show(Suggestion $suggestions)
     {
-
         return view('madaresona.suggestions.show', compact('suggestions'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Suggestions  $suggestions
+     * @param  \App\Models\Suggestion  $suggestions
      * @return \Illuminate\Http\Response
      */
-    public function edit(Suggestions $suggestions)
+    public function edit(Suggestion $suggestions)
     {
-        //
+
+        dd($suggestions);
+        return view('madaresona.suggestions.show', compact('suggestions'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Suggestions  $suggestions
+     * @param  \App\Models\Suggestion  $suggestions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Suggestions $suggestions)
+    public function update(Request $request, Suggestion $suggestions)
     {
         //
     }
@@ -91,10 +90,10 @@ class SuggestionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Suggestions  $suggestions
+     * @param  \App\Models\Suggestion  $suggestions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Suggestions $suggestions)
+    public function destroy(Suggestion $suggestions)
     {
         $suggestions->delete();
     }

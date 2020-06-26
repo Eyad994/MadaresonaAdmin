@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\FaqType;
 use App\Models\SchoolClass;
+use App\Models\SupplierType;
 use App\School;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
         View::composer('madaresona.schools.index', function ($view) {
             $schools = School::get('status')->unique('status');
             $view->with('schools', $schools);
+        });
+
+        View::composer('madaresona.supplier.addSupplier', function ($view) {
+            $supplierTypes = SupplierType::all();
+            $view->with('supplierTypes', $supplierTypes);
         });
 
         View::composer('madaresona.registration.create', function ($view) {

@@ -160,5 +160,9 @@ Route::middleware('auth')->group(function () {
     /************************************************************************************/
 
     Route::get('getRegions/{id}', 'SchoolController@regions')->name('getRegions');
+
+    // Supplier
+    Route::resource('supplier', 'SupplierController');
+    Route::get('supplierDatatatble', 'SupplierController@datatable')->name('supplierDatatatble');
 });
 

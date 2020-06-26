@@ -29,7 +29,7 @@ class MailtrapExample extends Mailable
      */
     public function build()
     {
-        return $this->from('Admin@madaresona.com', 'Mailtrap')
+        return $this->from('0e90b5d90d@emailmonkey.club', 'Mailtrap')
             ->subject('Madaresona Confirmation')
             ->markdown('mails.email')
             ->with([

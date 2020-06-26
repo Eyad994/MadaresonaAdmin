@@ -153,7 +153,12 @@
                     </a>
                 </li>
 
-
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('supplier.index') }}" class="menu-link ">
+                        <i class="fas fa-funnel-dollar left-icon-menu"><span></span></i>
+                        <span class="menu-text">Suppliers</span>
+                    </a>
+                </li>
 
             </ul>
             <!--end::Menu Nav-->

@@ -6,8 +6,6 @@
         <div class="card">
             <div class="card-header">
                 <b>Suggestions</b>
-
-
             </div>
 
             <div class="card-body">
@@ -66,7 +64,7 @@
         $(document).on('click', '.show-suggestions-btn', function () {
             var id = $(this).attr('id');
             $.ajax({
-                url: '/suggestions/' + id ,
+                url: '/suggestions/' + id + '/edit',
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Finance;
 use App\Models\Paymenet;
 use App\Models\Status;
+use App\Models\Supplier;
 use App\School;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -34,7 +35,7 @@ class FinanceController extends Controller
                     if ($userType == 5)
                         return School::where('user_id', $data->user_id)->value('name_en');
                     else if ($userType == 4)
-                        return 'Supplier Name';
+                        return Supplier::withTrashed()->where('user_id', $data->user_id)->value('name_en');
                     else
                         return null;
                 })
