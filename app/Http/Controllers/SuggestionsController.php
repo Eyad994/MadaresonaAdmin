@@ -70,8 +70,6 @@ class SuggestionsController extends Controller
      */
     public function edit(Suggestion $suggestions)
     {
-
-        dd($suggestions);
         return view('madaresona.suggestions.show', compact('suggestions'));
     }
 
