@@ -88,11 +88,8 @@
             }).then(function (result) {
                 if (result.value) {
                     $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        url: '/suggestions/' + id,
-                        method: 'delete',
+                        url: '/suggestions/' + id + '/destroy',
+                        method: 'get',
                         success: function (data) {
                             Swal.fire({
                                 icon: 'success',

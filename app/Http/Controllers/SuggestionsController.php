@@ -18,6 +18,7 @@ class SuggestionsController extends Controller
     {
         return view('madaresona.suggestions.index');
     }
+
     public function suggestionsDatatable(Request $request)
     {
         if ($request->ajax()) {
@@ -28,71 +29,20 @@ class SuggestionsController extends Controller
                     return $data->created_at->format('d m Y - g:i A');
                 })
                 ->make(true);
+
         }
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Suggestion  $suggestions
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Suggestion $suggestions)
-    {
+        $suggestions = Suggestion::where('id', $id)->first();
         return view('madaresona.suggestions.show', compact('suggestions'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Suggestion  $suggestions
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Suggestion $suggestions)
+    public function destroy($id)
     {
-        return view('madaresona.suggestions.show', compact('suggestions'));
+        Suggestion::where('id', $id)->delete();
+        return response()->json(['message' => 'Successfully deleted']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Suggestion  $suggestions
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Suggestion $suggestions)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Suggestion  $suggestions
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Suggestion $suggestions)
-    {
-        $suggestions->delete();
-    }
 }

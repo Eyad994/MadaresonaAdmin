@@ -87,6 +87,12 @@
                     </a>
                 </li>
                 <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('supplier.index') }}" class="menu-link ">
+                        <i class="fas fa-house-user left-icon-menu"><span></span></i>
+                        <span class="menu-text">Suppliers</span>
+                    </a>
+                </li>
+                <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('allFinance') }}" class="menu-link ">
                         <i class="fas fa-hand-holding-usd left-icon-menu"><span></span></i>
                         <span class="menu-text">Finance</span>
@@ -114,7 +120,7 @@
                 </li>
 
                 <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ route('suggestions.index') }}" class="menu-link ">
+                    <a href="{{ route('allSuggestions') }}" class="menu-link ">
                         <i class="fas fa-lightbulb left-icon-menu"><span></span></i>
                         <span class="menu-text">Suggestions</span>
                     </a>
@@ -153,12 +159,7 @@
                     </a>
                 </li>
 
-                <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ route('supplier.index') }}" class="menu-link ">
-                        <i class="fas fa-funnel-dollar left-icon-menu"><span></span></i>
-                        <span class="menu-text">Suppliers</span>
-                    </a>
-                </li>
+
 
             </ul>
             <!--end::Menu Nav-->

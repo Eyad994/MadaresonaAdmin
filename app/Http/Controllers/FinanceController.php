@@ -33,7 +33,7 @@ class FinanceController extends Controller
                 ->editColumn('user_id', function ($data) {
                     $userType = $data->user->type;
                     if ($userType == 5)
-                        return School::where('user_id', $data->user_id)->value('name_en');
+                        return School::withTrashed()->where('user_id', $data->user_id)->value('name_en');
                     else if ($userType == 4)
                         return Supplier::withTrashed()->where('user_id', $data->user_id)->value('name_en');
                     else

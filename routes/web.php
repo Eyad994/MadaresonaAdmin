@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
         Route::get('create', 'SchoolController@create')->name('addSchool');
         Route::post('store', 'SchoolController@store')->name('submitSchool');
         Route::put('update', 'SchoolController@update')->name('updateSchool');
+        Route::get('{id}/destroy', 'SchoolController@destroy');
+        /**************************************************************************/
 
         // Gallery
         Route::get('gallery/{id}', 'GalleryController@gallery')->name('gallery');
@@ -131,8 +133,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('sales', 'SalesController');
     /************************************************************************************/
     //Suggestions
-    Route::resource('suggestions', 'SuggestionsController');
-    Route::get('suggestionsDatatable', 'SuggestionsController@suggestionsDatatable')->name('suggestionsDatatable');
+    Route::prefix('suggestions')->group(function () {
+        Route::get('all', 'SuggestionsController@index')->name('allSuggestions');
+        Route::get('Datatable', 'SuggestionsController@suggestionsDatatable')->name('suggestionsDatatable');
+        Route::get('{id}/edit', 'SuggestionsController@edit');
+        Route::get('{id}/destroy', 'SuggestionsController@destroy');
+    });
     /************************************************************************************/
 
     //subscribes email

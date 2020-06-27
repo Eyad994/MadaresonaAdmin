@@ -25,7 +25,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        // return Mail::to('eyadjaabo@gmail.com')->send(new MailtrapExample('123213213'));
+       /* return Mail::to('omer@arakjo.com')->send(new MailtrapExample('123213213'));*/
         return view('madaresona.supplier.index');
     }
 

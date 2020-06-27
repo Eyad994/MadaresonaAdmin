@@ -5,11 +5,10 @@
         // show all products
         var table = $('.data-table').DataTable({
             dom: 'Bfrtip',
-            /*"columnDefs": [
+            "columnDefs": [
 
-                {"width": "160px", "targets": 8},
-                {"width": "50px", "targets": 9},
-            ],*/
+                {"width": "50px", "targets": 7},
+            ],
             processing: true,
             serverSide: true,
             buttons: [
@@ -30,55 +29,54 @@
 
                 {
                     title: 'SN', "mRender": function (data, type, row) {
-                    return '<label style="font-weight: 600 !important; color: #0d8ddc;">' + row.sn + ' </label>'
+                        return '<label style="font-weight: 600 !important; color: #0d8ddc;">' + row.sn + ' </label>'
 
-                }
+                    }
                 },
                 {data: 'name_ar', title: 'Name'},
                 {data: 'supplier_order', title: 'Order'},
                 {
                     data: 'active', title: 'Case', "mRender": function (data, type, row) {
-                    if (row.active == 'InActive') {
-                        return "<span class='label font-weight-bold label-lg  label-light-danger label-inline'>InActive</span>";
-                    } else if (row.active == 'Active') {
-                        return "<span class='label font-weight-bold label-lg  label-light-success label-inline'>Active</span>";
+                        if (row.active == 'InActive') {
+                            return "<span class='label font-weight-bold label-lg  label-light-danger label-inline'>InActive</span>";
+                        } else if (row.active == 'Active') {
+                            return "<span class='label font-weight-bold label-lg  label-light-success label-inline'>Active</span>";
+
+                        }
 
                     }
-
-                }
                 },
                 {
                     title: 'logo', "mRender": function (data, type, row) {
-                    var imgeUrl = '/images/';
-                    if (row.supplier_logo != '') {
-                        return '<img src="' + imgeUrl + '/' + row.name_en + '/' + row.supplier_logo + '" class="avatar" width="50" height="50"/>';
-                    }
-                    else
-                        return "Not Found Logo";
+                        var imgeUrl = '/images/';
+                        if (row.supplier_logo != '') {
+                            return '<img src="' + imgeUrl + '/' + row.name_en + '/' + row.supplier_logo + '" class="avatar" width="50" height="50"/>';
+                        } else
+                            return "Not Found Logo";
 
-                }
+                    }
                 },
 
                 {
                     data: 'special', title: 'Special', "mRender": function (data, type, row) {
-                    if (row.special == 'General') {
-                        return "<span class='label font-weight-bold label-lg  label-light-primary label-inline'>General</span>";
-                    } else if (row.special == 'Special') {
-                        return "<span class='label font-weight-bold label-lg  label-light-warning label-inline'>Special</span>";
+                        if (row.special == 'General') {
+                            return "<span class='label font-weight-bold label-lg  label-light-primary label-inline'>General</span>";
+                        } else if (row.special == 'Special') {
+                            return "<span class='label font-weight-bold label-lg  label-light-warning label-inline'>Special</span>";
+
+                        }
 
                     }
-
-                }
                 },
 
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon editSupplier action-btn" id="' + row.id + '"  data-toggle="tooltip" data-placement="bottom" title="View & Edit"><i class="fas fa-edit" style="color: #3699ff"></i></a>';
-                    var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn deleteSupplier" id="' + row.id + '" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                    return edit + remove;
-                    /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
-                     return show;*/
-                }
+                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon editSupplier action-btn" id="' + row.id + '"  data-toggle="tooltip" data-placement="bottom" title="View & Edit"><i class="fas fa-edit" style="color: #3699ff"></i></a>';
+                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn deleteSupplier" id="' + row.id + '" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
+                        return edit + remove;
+                        /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
+                         return show;*/
+                    }
                 }
             ]
         });

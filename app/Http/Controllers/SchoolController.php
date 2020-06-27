@@ -35,16 +35,16 @@ class SchoolController extends Controller
             $data = School::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('status_name', function ($data){
+                ->addColumn('status_name', function ($data) {
                     return Status::where('id', $data->status)->value('name_en');
                 })
-                ->editColumn('special', function ($data){
+                ->editColumn('special', function ($data) {
                     return $data->special == 0 ? 'General' : 'Special';
                 })
-                ->editColumn('active', function ($data){
+                ->editColumn('active', function ($data) {
                     return $data->active == 0 ? 'InActive' : 'Active';
                 })
-                ->addColumn('sn', function ($data){
+                ->addColumn('sn', function ($data) {
                     $finance = Finance::where('user_id', $data->user_id)->orderBy('end_date', 'desc')->first();
                     return $finance->uuid;
                 })
@@ -64,18 +64,19 @@ class SchoolController extends Controller
         $schoolsType = SchoolType::all();
         $cities = City::all();
         $regions = Region::all();
-        $genderArray = [0 => 'Female', 1 => 'Male' , 2 => 'Mixed'];
+        $genderArray = [0 => 'Female', 1 => 'Male', 2 => 'Mixed'];
         $schoolsStatus = Status::all();
         $lastSchoolOrder = School::orderBy('id', 'desc')->value('school_order');
-        if ($lastSchoolOrder == '')
-        { $lastSchoolOrder=0;}
+        if ($lastSchoolOrder == '') {
+            $lastSchoolOrder = 0;
+        }
         return view('madaresona.schools.addSchool', compact('schoolsType', 'cities', 'regions', 'schoolsStatus', 'lastSchoolOrder', 'genderArray'));
     }
 
     public function edit($id)
     {
         $trueFalseArray = [0 => 'false', 1 => 'true'];
-        $genderArray = [0 => 'Female', 1 => 'Male' , 2 => 'Mixed'];
+        $genderArray = [0 => 'Female', 1 => 'Male', 2 => 'Mixed'];
         $school = School::with('city')->where('id', $id)->first();
         $genderSchool = explode(',', $school->gender);
         $schoolTypesExploded = explode(',', $school->type);
@@ -160,13 +161,12 @@ class SchoolController extends Controller
 
         ]);
 
-        if ($school)
-        {
+        if ($school) {
             $config = [
                 'table' => 'finances',
                 'length' => 13,
                 'field' => 'uuid',
-                'prefix' => 'MJ-M' . date('Y').'-'
+                'prefix' => 'MJ-M' . date('Y') . '-'
             ];
 
             $uid = IdGenerator::generate($config);
@@ -195,7 +195,7 @@ class SchoolController extends Controller
                 'end_date' => $endDate,
             ]);
 
-           /* Mail::to('newuser@example.com')->send(new MailtrapExample($password));*/
+            /* Mail::to('newuser@example.com')->send(new MailtrapExample($password));*/
 
         }
 
@@ -259,8 +259,7 @@ class SchoolController extends Controller
             'contact_person_phone' => $request->contact_person_phone,
             'contact_person_email' => $request->contact_person_email,
         ]);
-        if (isset($request->logo) && $request->logo != $school->school_logo)
-        {
+        if (isset($request->logo) && $request->logo != $school->school_logo) {
             $image = $request->file('logo');
             $logo = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/' . $request->name_en), $logo);
@@ -270,8 +269,7 @@ class SchoolController extends Controller
             ]);
 
         }
-        if (isset($request->brochure) && $request->brochure != $school->school_brochure)
-        {
+        if (isset($request->brochure) && $request->brochure != $school->school_brochure) {
             $image = $request->file('brochure');
             $brochure = time() . '_brochure.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/' . $request->name_en), $brochure);
@@ -287,5 +285,11 @@ class SchoolController extends Controller
     {
         $regions = Region::where('city_id', $id)->get();
         return $regions;
+    }
+
+    public function destroy($id)
+    {
+        $school = School::where('id', $id)->first();
+        $school->delete();
     }
 }
