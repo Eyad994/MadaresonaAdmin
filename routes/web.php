@@ -130,7 +130,11 @@ Route::middleware('auth')->group(function () {
     Route::get('faqDatatable', 'FaqController@faqDatatable')->name('faqDatatble');
     /************************************************************************************/
     // Sales
-    Route::resource('sales', 'SalesController');
+    Route::resource('sale', 'SaleController');
+    Route::get('saleDatatable', 'SaleController@datatable')->name('saleDatatable');
+    Route::get('sale/target/{id}', 'SaleController@targets');
+    Route::post('sale/storeTarget', 'SaleController@storeTarget')->name('storeTarget');
+    Route::get('sale/targetRemove/{id}', 'SaleController@destroyTarget')->name('destroyTarget');
     /************************************************************************************/
     //Suggestions
     Route::prefix('suggestions')->group(function () {
