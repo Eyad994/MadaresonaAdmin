@@ -136,6 +136,16 @@ Route::middleware('auth')->group(function () {
     Route::post('sale/storeTarget', 'SaleController@storeTarget')->name('storeTarget');
     Route::get('sale/targetRemove/{id}', 'SaleController@destroyTarget')->name('destroyTarget');
     /************************************************************************************/
+
+    // Sales Finances
+    Route::prefix('salesFinances')->group(function () {
+        Route::get('user/{id}', 'SaleFinancesController@index');
+        Route::get('salesFinancesDatable', 'SaleFinancesController@datatable')->name('salesFinancesDatatable');
+
+
+    });
+    /************************************************************************************/
+
     //Suggestions
     Route::prefix('suggestions')->group(function () {
         Route::get('all', 'SuggestionsController@index')->name('allSuggestions');

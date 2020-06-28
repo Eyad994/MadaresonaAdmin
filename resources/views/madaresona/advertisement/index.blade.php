@@ -39,6 +39,9 @@
 
         var table = $('#advertisementTable').DataTable({
             dom: 'Bfrtip',
+            "columnDefs": [
+                {"width": "200px", "targets": 2}
+            ],
             processing: true,
             serverSide: true,
             buttons: [
@@ -71,6 +74,7 @@
                 },
                 {data: 'url', title: 'Url'},
                 {data: 'order', title: 'Order'},
+                {data: 'type', title: 'Type'},
                 {data: 'added_by', title: 'Added By'},
                 {
                     data: 'active', title: 'Status', "mRender": function (data, type, row) {

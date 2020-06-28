@@ -40,9 +40,9 @@
 
         var table = $('#registrationTable').DataTable({
             dom: 'Bfrtip',
-            /*"columnDefs": [
-             {"width": "50px", "targets": 6}
-             ],*/
+            "columnDefs": [
+             {"width": "100px", "targets": 7}
+             ],
             processing: true,
             serverSide: true,
             buttons: [

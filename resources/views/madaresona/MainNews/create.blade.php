@@ -1,13 +1,13 @@
 <style>
     .imagePreview {
-        width: 170px;
-        height: 150px;
+        width: 292px;
+        height: 200px;
+
         background-position: center center;
         background: url('{{asset('/images/default/news.png')}}');
         background-color: #fff;
-        background-size: cover;
+        background-size: 100% 200px;
         background-repeat: no-repeat;
-        border-radius: 10px;
         display: inline-block;
         webkit-box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
         box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
@@ -15,8 +15,8 @@
     }
 
     .btn_edit_img {
-        margin-top: -333px;
-        margin-left: 155px;
+        margin-top: -429px;
+        margin-left: 275px
 
     }
 
@@ -83,27 +83,30 @@
 
                     <div class="col-md-6 form-group">
                         <label>Active Days</label>
-                        <input type="text" placeholder="Active Days" @if(isset($news)) value="{{ $news->active_days }}" @endif name="active_days" class="form-control">
+                        <input type="text" placeholder="Active Days" @if(isset($news)) value="{{ $news->active_days }}"
+                               @endif name="active_days" class="form-control">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>Order</label>
-                        <input type="text" placeholder="Order" @if(isset($news)) value="{{ $news->order }}" @endif name="order" class="form-control">
+                        <input type="text" placeholder="Order" @if(isset($news)) value="{{ $news->order }}"
+                               @endif name="order" class="form-control">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>Youtube Link</label>
-                        <input type="text" placeholder="Youtube Link" @if(isset($news)) value="{{ $news->youtube }}" @endif name="youtube" class="form-control">
+                        <input type="text" placeholder="Youtube Link" @if(isset($news)) value="{{ $news->youtube }}"
+                               @endif name="youtube" class="form-control">
                     </div>
 
                     <div class="col-sm-2 imgUp">
-                        <label>School Logo </label>
+                        <label> Image </label>
                         <div class="imagePreview" style="@if(isset($news))
-                            background:url('{{asset('/images/Main News/'.$news->img.'')}}');
-                            background-position: center center;
-                            background-color: #fff;
-                            background-size: cover;
-                            background-repeat: no-repeat;
+                                background:url('{{asset('/images/Main News/'.$news->img.'')}}');
+                                background-position: center center;
+                                background-color: #fff;
+                                background-size: 100% 200px;
+                                background-repeat: no-repeat;
                         @endif"></div>
                         <label class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                style="color: #262673 !important;">

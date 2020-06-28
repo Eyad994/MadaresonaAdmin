@@ -39,9 +39,9 @@
 
         var table = $('#salesTable').DataTable({
             dom: 'Bfrtip',
-            /*"columnDefs": [
-             {"width": "50px", "targets": 6}
-             ],*/
+            "columnDefs": [
+             {"width": "100px", "targets": 5}
+             ],
             processing: true,
             serverSide: true,
             buttons: [
@@ -68,11 +68,11 @@
                 {data: 'date', title: 'Date'},
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                   // var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-sale-btn" id="' + row.id + '"  title="View & Edit"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-sale-btn" id="' + row.id + '" title="Remove"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
-                    var target = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn target-btn" data-toggle="tooltip"  user_id="' + row.user_id + '"  data-placement="bottom" title="Payment"><i class="fa fa-credit-card" style="color: green"></i></i></a>'
-                    return edit + target ;
-                }
+                        var remove = '<a href="/salesFinances/user/' + row.user_id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" id="' + row.id + '" data-toggle="tooltip" data-placement="bottom" title="sales"><i class="fas fa-money-check-alt" style="color: #f64e60"></i></a>';
+                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-sale-btn" id="' + row.id + '" data-toggle="tooltip" data-placement="bottom" title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
+                        var target = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn target-btn" data-toggle="tooltip"  user_id="' + row.user_id + '"  data-placement="bottom" title="Targets"><i class="far fa-dot-circle" style="color:#fd7e14"></i></a>'
+                        return edit + target +remove;
+                    }
                 }
             ]
         });
@@ -136,7 +136,7 @@
         $(document).on('click', '.target-btn', function () {
             var user_id = $(this).attr('user_id');
             $.ajax({
-                url: '/sale/target/'+user_id,
+                url: '/sale/target/' + user_id,
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);

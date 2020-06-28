@@ -25,6 +25,12 @@ class AdvertisementController extends Controller
                 ->editColumn('active', function ($data){
                     return $data->active == 0 ? 'InActive' : 'Active';
                 })
+                ->editColumn('type', function ($data) {
+                    if ($data->type == 1)
+                        return 'School';
+                    else if ($data->type == 2)
+                        return 'Supplier';
+                })
                 ->editColumn('added_by', function ($data){
                     return $data->user->name;
                 })
@@ -34,9 +40,10 @@ class AdvertisementController extends Controller
     }
 
     public function create()
-    {
+
+    {   $typeArray = [ 1 => 'School', 2 => 'Supplier'];
         $trueFalseArray = [0 => 'false', 1 => 'true'];
-        return view('madaresona.advertisement.create', compact( 'trueFalseArray'));
+        return view('madaresona.advertisement.create', compact( 'trueFalseArray','typeArray'));
     }
 
     public function store(Request $request)
@@ -46,6 +53,8 @@ class AdvertisementController extends Controller
             'active' => 'required',
             'order' => 'required',
             'img' => 'required',
+            'type' => 'required'
+
         ]);
 
         if ($validations->fails()){
@@ -65,6 +74,7 @@ class AdvertisementController extends Controller
             'img' => $imageAdvertisement,
             'active' => $request->active,
             'order' => $request->order,
+            'type' => $request->type,
             'added_by' => $userId,
         ]);
 
@@ -73,8 +83,9 @@ class AdvertisementController extends Controller
     public function edit($id)
     {
         $trueFalseArray = [0 => 'false', 1 => 'true'];
+        $typeArray = [ 1 => 'School', 2 => 'Supplier'];
         $advertisement = Advertisement::where('id', $id)->first();
-        return view('madaresona.advertisement.create', compact('advertisement','id', 'trueFalseArray'));
+        return view('madaresona.advertisement.create', compact('advertisement','id', 'trueFalseArray','typeArray'));
     }
 
     public function update(Request $request)
@@ -83,6 +94,7 @@ class AdvertisementController extends Controller
             'url' => 'required',
             'active' => 'required',
             'order' => 'required',
+            'type' => 'required'
         ]);
         if ($validations->fails()){
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
@@ -94,6 +106,7 @@ class AdvertisementController extends Controller
             'url' => $request->url,
             'active' => $request->active,
             'order' => $request->order,
+            'type' => $request->type,
         ]);
 
         if (isset($request->img) && $request->img != $advertisement->img) {
