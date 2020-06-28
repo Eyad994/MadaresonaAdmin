@@ -8,7 +8,7 @@
                 <b>Sales <b style="color:#ffa800;">{{$user_name}}</b></b>
                 <div class="card-toolbar" style="float: right">
 
-                    <a id="addSales" class="btn btn-primary font-weight-bolder">
+                    <a id="addSalesFinance" class="btn btn-primary font-weight-bolder">
 	<span class="svg-icon svg-icon-md">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
              viewBox="0 0 24 24" version="1.1">
@@ -40,10 +40,34 @@
 
     <script type="text/javascript">
 
+        $('#addSalesFinance').on('click', function () {
+            var userId = $('#user_id').val();
+            $.ajax({
+                url: '/salesFinances/create/' + userId,
+                method: 'get',
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $('.modal-title').text('Add Sales Finance');
+                    $('#schoolModal').modal('show');
+
+                }
+            });
+        });
+
+        $('body').on('click', '.pagination a', function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var outer_html = $('.campaign')[0].outerHTML;
+            $.get(url, function (outer_html) {
+                $('.modal-body').html(outer_html);
+                //$('#test').replaceWith(outer_html);
+            });
+        });
+
         var table = $('#salesFinances').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
-                {"width": "50px", "targets": 2}
+                {"width": "50px", "targets": 4}
             ],
             processing: true,
             serverSide: true,
@@ -67,18 +91,80 @@
                 type: "get",
                 data: {
                     "user_id": $('#user_id').val()
-                }},
+                }
+            },
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
                 {data: 'date', title: 'Data'},
+                {data: 'sum_amount', title: 'Total Amount'},
+                {data: 'target', title: 'Target'},
+
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                        //var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-trans-btn" id="' + row.id + '" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-trans-btn" id="' + row.id + '"  title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
-                        return edit;
-                    }
+                    var view = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn view-trans-btn" month="' + row.month + '"  year="' + row.year + '"  title="View & Edit"><i class="fa fa-eye" style="color: #00aff0"></i></i></a>';
+                    return view;
                 }
+                },
+
             ]
+        });
+
+
+        $(document).on('click', '.view-trans-btn', function () {
+            var month = $(this).attr('month');
+            var year = $(this).attr('year');
+            var userId = $('#user_id').val();
+            $.ajax({
+                url: '/salesFinances/edit/' + userId + '/' + month + '/' + year,
+                method: 'get',
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $('.modal-title').text('Edit Sales');
+                    $('#schoolModal').modal('show');
+
+                    $('#saleForm').submit(function (e) {
+                        e.preventDefault();
+                        var form = $(this);
+                        var url = form.attr('action');
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: new FormData(this),
+                            dataType: "json",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+
+                                if (data.status === 422) {
+                                    console.log(data);
+                                    var error_html = '';
+
+                                    for (let value of Object.values(data.errors)) {
+                                        error_html += '<div class="alert alert-danger">' + value + '</div>';
+                                    }
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        html: error_html,
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+
+                                    table.ajax.reload();
+                                    $('#schoolModal').modal('hide');
+                                }
+                            }
+                        });
+
+                    });
+                }
+            });
         });
     </script>
 

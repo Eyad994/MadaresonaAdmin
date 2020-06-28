@@ -141,8 +141,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('salesFinances')->group(function () {
         Route::get('user/{id}', 'SaleFinancesController@index');
         Route::get('salesFinancesDatable', 'SaleFinancesController@datatable')->name('salesFinancesDatatable');
-
-
+        Route::put('update', 'SaleFinancesController@update')->name('saleFinance.update');
+        Route::post('store', 'SaleFinancesController@store')->name('saleFinance.store');
+        Route::get('create/{id}', 'SaleFinancesController@create')->name('saleFinance.create');
+        Route::get('edit/{userId}/{month}/{year}', 'SaleFinancesController@edit')->name('saleFinance.edit');
+        Route::get('destroy/{id}', 'SaleFinancesController@destroy')->name('saleFinance.destroy');
     });
     /************************************************************************************/
 
