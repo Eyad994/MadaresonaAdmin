@@ -115,6 +115,8 @@ Route::middleware('auth')->group(function () {
         Route::get('destroy/{id}', 'AdvertisementController@destroy')->name('destroyAdvertisement');
     });
 
+    Route::get('mainAdvertisement/all', 'MainAdvertisementController@index')->name('allMainAdvertisement');
+
     // Registration
     Route::resource('registration', 'RegistrationController');
     Route::get('registrationDatatable', 'RegistrationController@registrationDatatable')->name('registrationDatatable');
@@ -161,7 +163,7 @@ Route::middleware('auth')->group(function () {
     //subscribes email
     Route::prefix('subscribes_email')->group(function () {
         Route::get('all', 'SubscribesEmailController@index')->name('allSubscribesEmail');
-        Route::get('SubscribesEmailDatatable', 'SubscribesEmailController@subscribesEmailDatatable')->name('SubscribesEmailDatatable');
+        Route::get('EmailDatatable', 'SubscribesEmailController@subscribesEmailDatatable')->name('SubscribesEmailDatatable');
         Route::get('destroy/{id}', 'SubscribesEmailController@destroy');
     });
     /************************************************************************************/
@@ -186,6 +188,12 @@ Route::middleware('auth')->group(function () {
 
     // Supplier
     Route::resource('supplier', 'SupplierController');
-    Route::get('supplierDatatatble', 'SupplierController@datatable')->name('supplierDatatatble');
+    Route::get('supplierDatatable', 'SupplierController@datatable')->name('supplierDatatatble');
+    /************************************************************************************/
+    // User
+    Route::resource('user', 'UserController');
+    Route::get('userDatatable', 'UserController@userDatatable')->name('userDatatable');
+    /************************************************************************************/
+
 });
 

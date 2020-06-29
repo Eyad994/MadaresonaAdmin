@@ -48,7 +48,11 @@
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
                 {data: 'name', title: 'Name'},
-                {data: 'email', title: 'Email'},
+                {
+                    title: 'Email', "mRender": function (data, type, row) {
+                        return'<span class="font-weight-bold text-primary">' + row.email + '</span>';
+                    }
+                },
                 {data: 'created_at', title: 'date'},
                 {
                     title: 'Actions', "mRender": function (data, type, row) {

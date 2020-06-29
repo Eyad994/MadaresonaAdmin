@@ -42,4 +42,42 @@
 </div>
 <hr>
 @endif
+<script type="text/javascript">
+
+    $(function () {
+        
+
+        $('.salesFinance-remove-btn').on('click', function () {
+            var id = $(this).attr('id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        url: '/salesFinances/destroy/' + id,
+                        method: 'get',
+                        success: function (data) {
+                            $('#salesFinanceRow_' + id).remove();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Your sales has been removed',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                    });
+                }
+            });
+        })
+
+    });
+
+</script>
 

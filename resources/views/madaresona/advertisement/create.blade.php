@@ -3,7 +3,7 @@
         width: 292px;
         height: 200px;
         background-position: center center;
-        background: url('{{asset('/images/default/no_img.jpg')}}');
+        background: url('{{asset('/images/default/add_picture.png')}}');
         background-color: #fff;
         background-size: 100% 200px;
         background-repeat: no-repeat;

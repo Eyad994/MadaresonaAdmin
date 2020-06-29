@@ -64,7 +64,11 @@
                 {data: 'DT_RowIndex', title: 'ID'},
                 {data: 'user_name', title: 'Name'},
                 {data: 'department_id', title: 'Department'},
-                {data: 'target', title: 'Target'},
+                {
+                    title: 'Target', "mRender": function (data, type, row) {
+                        return  '<span class="font-weight-bold text-success">' + row.target + '</span>';
+                    }
+                },
                 {data: 'date', title: 'Date'},
                 {
                     title: 'Actions', "mRender": function (data, type, row) {

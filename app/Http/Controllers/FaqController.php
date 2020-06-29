@@ -17,6 +17,7 @@ class FaqController extends Controller
      */
     public function index()
     {
+
         return view('madaresona.faq.index');
     }
 

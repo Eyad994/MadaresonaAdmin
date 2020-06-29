@@ -41,8 +41,9 @@
         var table = $('#registrationTable').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
-             {"width": "100px", "targets": 7}
-             ],
+                {"width": "100px", "targets": 7},
+                {"width": "330px", "targets": 1}
+            ],
             processing: true,
             serverSide: true,
             buttons: [
@@ -65,25 +66,31 @@
                 {data: 'DT_RowIndex', title: 'ID'},
                 {
                     data: 'schools', title: 'Schools', "mRender": function (data, type, row) {
-                    var arr = [];
-                    row.schools.map(function (a) {
-                        arr.push(a.name_ar + ' ');
-                    });
-                    return arr;
-                }
+                        var arr = [];
+                        row.schools.map(function (a) {
+                            arr.push(a.name_ar + '  ');
+                        });
+                        return arr;
+                    }
                 },
                 {data: 'parent', title: 'Parent'},
                 {data: 'number', title: 'Phone Number'},
                 {data: 'child', title: 'Child'},
                 {data: 'class_id', title: 'Class'},
-                {data: 'by_admin', title: 'By Admin'},
+                {
+                    title: 'Add By', "mRender": function (data, type, row) {
+                        return '<span class="label label-success label-dot mr-2"></span>' +
+                            '<span class="font-weight-bold text-success">' + row.by_admin + '</span>';
+                    }
+                },
+
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                    var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-registration-btn" id="' + row.id + '"  title="View & Edit"><i class="far fa-trash-alt" style="color: #f64e60"></i></a>';
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-registration-btn" id="' + row.id + '" title="Remove"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
-                    var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon action-btn note-registration-btn" title="Notes"  id="' + row.id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
-                    return edit + remove + notes;
-                }
+                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-registration-btn" id="' + row.id + '"  title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></a>';
+                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-registration-btn" id="' + row.id + '" title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
+                        var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon action-btn note-registration-btn" title="Notes"  id="' + row.id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
+                        return edit + notes + remove;
+                    }
                 }
             ]
         });
@@ -237,7 +244,7 @@
         $(document).on('click', '.note-registration-btn', function () {
             var id = $(this).attr('id');
             $.ajax({
-                url: '/registration/note/'+ id,
+                url: '/registration/note/' + id,
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);

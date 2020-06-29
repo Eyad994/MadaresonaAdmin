@@ -52,7 +52,17 @@
                 {data: 'name', title: 'Name'},
                 {data: 'contact_name', title: 'Contact Name'},
                 {data: 'phone', title: 'Phone'},
-                {data: 'type', title: 'Type'},
+                {
+                    title: 'Type', "mRender": function (data, type, row) {
+                        if (row.type == 'School') {
+                            return '<span class="label label-success label-dot mr-2"></span>' +
+                                '<span class="font-weight-bold text-success">' + row.type + '</span>'
+                        } else if (row.type == 'Supplier') {
+                            return '<span class="label label-primary label-dot mr-2"></span>' +
+                                '<span class="font-weight-bold text-primary">' + row.type + '</span>'
+                        }
+                    }
+                },
                 {data: 'email', title: 'Email'},
                 {data: 'created_at', title: 'date'},
                 {
@@ -63,9 +73,6 @@
                 }
             ]
         });
-
-
-
 
 
         $(document).on('click', '.remove-requests-btn', function () {

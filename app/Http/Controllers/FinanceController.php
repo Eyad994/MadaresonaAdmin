@@ -40,7 +40,7 @@ class FinanceController extends Controller
                         return null;
                 })
                 ->editColumn('is_tax', function ($data) {
-                    return $data->is_tax == 0 ? 'True' : 'false';
+                    return $data->is_tax == 1 ? 'True' : 'false';
                 })
                 ->editColumn('end_date', function ($data) {
                     return $data->end_date;

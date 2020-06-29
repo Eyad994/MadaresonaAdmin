@@ -96,12 +96,20 @@
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
                 {data: 'date', title: 'Data'},
-                {data: 'sum_amount', title: 'Total Amount'},
-                {data: 'target', title: 'Target'},
+                {
+                    title: 'Total Amount', "mRender": function (data, type, row) {
+                        return  '<span class="font-weight-bold text-success" style="color: orange !important;">' + row.sum_amount + '</span>';
+                    }
+                },
+                {
+                    title: 'Target', "mRender": function (data, type, row) {
+                        return  '<span class="font-weight-bold text-success">' + row.target + '</span>';
+                    }
+                },
 
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                    var view = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn view-trans-btn" month="' + row.month + '"  year="' + row.year + '"  title="View & Edit"><i class="fa fa-eye" style="color: #00aff0"></i></i></a>';
+                    var view = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn view-trans-btn" month="' + row.month + '"  year="' + row.year + '" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-eye" style="color: #00aff0"></i></a>';
                     return view;
                 }
                 },

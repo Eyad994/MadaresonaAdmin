@@ -83,5 +83,6 @@ class SaleFinancesController extends Controller
     {
         $salesFinance = SaleFinance::where('id', $id)->first();
         $salesFinance->delete();
+        return response()->json(['message' => 'Successfully deleted']);
     }
 }

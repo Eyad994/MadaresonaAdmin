@@ -27,7 +27,7 @@
         var table = $('#discountForms').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
-                {"width": "10px", "targets": 10}
+                {"width": "20px", "targets": 10}
             ],
             processing: true,
             serverSide: true,

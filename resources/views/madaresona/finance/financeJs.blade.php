@@ -35,7 +35,17 @@
                 {data: 'user_id', title: 'Name'},
 
                 {data: 'type', title: 'Type'},
-                {data: 'is_tax', title: 'Is Tax'},
+                {
+                    title: 'Is Tax', "mRender": function (data, type, row) {
+                        if (row.is_tax == 'True') {
+                            return '<span class="label label-success label-dot mr-2"></span>' +
+                                '<span class="font-weight-bold text-success">' + row.is_tax + '</span>'
+                        } else if (row.is_tax == 'false') {
+                            return '<span class="label label-danger label-dot mr-2"></span>' +
+                                '<span class="font-weight-bold text-danger">' + row.is_tax + '</span>'
+                        }
+                    }
+                },
                 {data: 'end_date', title: 'Subscription Expired', "mRender": function (data, type, row) {
 
                 if (row.diff_days > 30)
@@ -43,7 +53,17 @@
                 else
                     return '<span class="label font-weight-bold label-lg  label-light-danger label-inline">'+ row.end_date +'</span>';
                 }},
-                {data: 'school_supplier', title: 'Finance Type'},
+                {
+                    title: 'Finance Type', "mRender": function (data, type, row) {
+                        if (row.school_supplier == 'School') {
+                            return '<span class="label label-success label-dot mr-2"></span>' +
+                                '<span class="font-weight-bold text-success">' + row.school_supplier + '</span>'
+                        } else if (row.school_supplier == 'Supplier') {
+                            return '<span class="label label-primary label-dot mr-2"></span>' +
+                                '<span class="font-weight-bold text-primary">' + row.school_supplier + '</span>'
+                        }
+                    }
+                },
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
 

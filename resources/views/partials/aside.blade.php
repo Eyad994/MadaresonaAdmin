@@ -105,12 +105,18 @@
                     </a>
                 </li>
                 <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('allMainAdvertisement') }}" class="menu-link ">
+                        <i class="fab fa-adversal left-icon-menu"><span></span></i>
+                        <span class="menu-text"> Main Advertisement</span>
+                    </a>
+                </li>
+
+                <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('allAdvertisement') }}" class="menu-link ">
                         <i class="fas fa-ad left-icon-menu"><span></span></i>
                         <span class="menu-text"> Advertisement</span>
                     </a>
                 </li>
-
 
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('faq.index') }}" class="menu-link ">
@@ -154,10 +160,14 @@
 
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('sale.index') }}" class="menu-link ">
-                        <i class="fas fa-funnel-dollar left-icon-menu"><span></span></i>
+                        <i class="fas fa-funnel-dollar left-icon-menu"></i>
                         <span class="menu-text">Sales</span>
                     </a>
                 </li>
+                <li class="menu-item  menu-item-active" aria-haspopup="true">
+                    <a href="{{route('user.index') }}" class="menu-link ">
+                        <i class="fas fa-users-cog left-icon-menu"></i>
+                        <span class="menu-text">User Management</span></a></li>
 
 
             </ul>
