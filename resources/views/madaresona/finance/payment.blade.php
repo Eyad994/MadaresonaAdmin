@@ -43,7 +43,7 @@
     <div class="row">
         @csrf
 
-        <input type="hidden" name="finance_id" value="{{ $financeId }}">
+        <input type="hidden" name="user_id" value="{{ $userId }}">
         <div class="col-md-12 form-group">
             <label>Pay</label>
             <input type="text" name="payed" placeholder="Pay" class="form-control">

@@ -164,7 +164,7 @@
                         <span class="menu-text">Sales</span>
                     </a>
                 </li>
-                <li class="menu-item  menu-item-active" aria-haspopup="true">
+                <li class="menu-item" aria-haspopup="true">
                     <a href="{{route('user.index') }}" class="menu-link ">
                         <i class="fas fa-users-cog left-icon-menu"></i>
                         <span class="menu-text">User Management</span></a></li>

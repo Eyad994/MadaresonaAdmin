@@ -7,6 +7,7 @@ use App\Models\Paymenet;
 use App\Models\Status;
 use App\Models\Supplier;
 use App\School;
+use App\User;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
@@ -44,9 +45,16 @@ class FinanceController extends Controller
                 })
                 ->editColumn('end_date', function ($data) {
                     return $data->end_date;
+                })->editColumn('uuid', function ($data){
+                    return $data->user->type == 5 ? $data->uuid : $data->uuids;
                 })
                 ->addColumn('school_supplier', function ($data) {
                     return $data->user->type == 5 ? 'School' : 'Supplier';
+                })
+                ->addColumn('total_amount', function ($data){
+                    $subscriptions = Finance::where('user_id', $data->user_id)->sum('balance');
+                    $payments = Paymenet::where('user_id', $data->user_id)->sum('payed');
+                    return $payments - $subscriptions;
                 })
                 ->addColumn('diff_days', function ($data) {
                     $date = Carbon::parse($data->end_date);
@@ -62,12 +70,14 @@ class FinanceController extends Controller
 
     public function subscription($id)
     {
-        $finance = Finance::where('user_id', $id)->latest()->get();
+        $finance = Finance::where('user_id', $id)->latest()->paginate(1);
         return view('madaresona.finance.subscription', compact('finance'));
     }
 
     public function store(Request $request)
     {
+        $userType = User::where('id', $request->user_id)->value('type');
+
         $validations = Validator::make($request->all(), [
             'balance' => 'required',
             'type' => 'required'
@@ -80,8 +90,8 @@ class FinanceController extends Controller
         $config = [
             'table' => 'finances',
             'length' => 13,
-            'field' => 'uuid',
-            'prefix' => 'MJ-M' . date('Y') . '-'
+            'field' => $userType == 5 ? 'uuid' : 'uuids',
+            'prefix' => $userType == 5 ?'MJ-M' . date('Y') . '-' : 'MJ-S' . date('Y') . '-'
         ];
 
         $uid = IdGenerator::generate($config);
@@ -91,7 +101,8 @@ class FinanceController extends Controller
 
         Finance::create([
             'user_id' => $request->user_id,
-            'uuid' => $uid,
+            'uuid' => $userType == 5 ? $uid : null,
+            'uuids' => $userType == 4 ? $uid : null,
             'balance' => $request->balance,
             'type' => $request->type,
             'is_tax' => $request->tax,
@@ -109,16 +120,10 @@ class FinanceController extends Controller
         $subscription->delete();
     }
 
-    public function payment($id)
+    public function payment($userId)
     {
-        $lastFinance = Finance::where('user_id', $id)->orderBy('end_date', 'desc')->get();
-        $financeLastRow = $lastFinance->unique('user_id')[0];
-        $financeId = $financeLastRow->id;
-
-        $finance = Finance::where('user_id', $id)->get('id');
-        $payment = Paymenet::whereIn('finance_id', $finance)->latest()->get();
-
-        return view('madaresona.finance.payment', compact('payment', 'financeId'));
+        $payment = Paymenet::where('user_id', $userId)->get();
+        return view('madaresona.finance.payment', compact('payment', 'userId'));
     }
 
     public function storePayment(Request $request)
@@ -132,7 +137,7 @@ class FinanceController extends Controller
         }
 
         Paymenet::create([
-            'finance_id' => $request->finance_id,
+            'user_id' => $request->user_id,
             'payed' => $request->payed,
             'added_by' => auth()->user()->id,
         ]);

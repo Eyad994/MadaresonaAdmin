@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailtrapExample;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -37,7 +41,7 @@ class UserController extends Controller
                     else if ($data->type == 4)
                         return 'Supplier';
                 })
-                ->editColumn('active', function ($data){
+                ->editColumn('active', function ($data) {
                     return $data->active == 0 ? 'InActive' : 'Active';
                 })
                 ->make(true);
@@ -51,7 +55,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('madaresona.user.create');
     }
 
     /**
@@ -62,13 +66,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validations = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'type' => 'required',
+        ]);
+
+        if ($validations->fails()) {
+            return response()->json(['errors' => $validations->errors(), 'status' => 422]);
+        }
+
+        $password = mt_rand(100000, 999999);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'type' => $request->type,
+            'active' => $request->active,
+            'password' => Hash::make($password)
+        ]);
+
+         // Mail::to($request->email)->send(new MailtrapExample($password, $request->name));
+
+         return response()->json(['message' => 'Added successfully', 'status' => 200]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User $user
+     * @param \App\Models\User|User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -84,7 +110,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('madaresona.user.create', compact('user'));
     }
 
     /**
@@ -96,7 +122,25 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validations = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'type' => 'required',
+            'active' => 'required',
+        ]);
+
+        if ($validations->fails()) {
+            return response()->json(['errors' => $validations->errors(), 'status' => 422]);
+        }
+
+        $user->update([
+            'name', $request->name,
+            'email' => $request->email,
+            'type' => $request->type,
+            'active' => $request->active,
+        ]);
+
+        return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
 
     /**

@@ -51,7 +51,7 @@ class AdvertisementController extends Controller
         $validations = Validator::make($request->all(), [
             'url' => 'required',
             'active' => 'required',
-            'order' => 'required',
+            'order' => 'required|numeric',
             'img' => 'required',
             'type' => 'required'
 

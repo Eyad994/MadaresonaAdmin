@@ -43,7 +43,7 @@ class SupplierController extends Controller
                 })
                 ->addColumn('sn', function ($data) {
                     $finance = Finance::where('user_id', $data->user_id)->orderBy('end_date', 'desc')->first();
-                    return $finance->uuid;
+                    return $finance->uuids;
                 })
                 ->make(true);
         }
@@ -121,7 +121,7 @@ class SupplierController extends Controller
             $config = [
                 'table' => 'finances',
                 'length' => 13,
-                'field' => 'uuid',
+                'field' => 'uuids',
                 'prefix' => 'MJ-S' . date('Y').'-'
             ];
 

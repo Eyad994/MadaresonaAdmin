@@ -11,14 +11,16 @@ class MailtrapExample extends Mailable
 {
     use Queueable, SerializesModels;
     protected $password;
+    protected $name;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($password)
+    public function __construct($password, $name)
     {
+        $this->name = $name;
         $this->password = $password;
     }
 
@@ -29,12 +31,11 @@ class MailtrapExample extends Mailable
      */
     public function build()
     {
-        return $this->from('info@madaresonajo.com', 'Mailtrap')
+        return $this->from('info@madaresonajo.com', 'MadaresonaJo')
             ->subject('Madaresona Confirmation')
             ->markdown('mails.email')
             ->with([
-                'name' => 'Admin',
-                'link' => 'https://mailtrap.io/inboxes',
+                'name' => $this->name,
                 'password' => $this->password
             ]);
     }

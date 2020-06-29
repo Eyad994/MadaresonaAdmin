@@ -64,6 +64,7 @@
                         }
                     }
                 },
+                {data: 'total_amount', title: 'Total Amount'},
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
 
@@ -87,78 +88,18 @@
                     $('.modal-title').text('Subscriptions');
                     $('#schoolModal').modal('show');
 
-                    $("#subscriptionForm").submit(function (e) {
-
+                    $('body').on('click', '.pagination a', function(e)
+                    {
                         e.preventDefault();
-                        var form = $(this);
-                        var url = form.attr('action');
-
-                        $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: new FormData(this),
-                            dataType: "json",
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            success: function (data) {
-
-                                if (data.status === 422) {
-                                    var error_html = '';
-
-                                    for (let value of Object.values(data.errors)) {
-                                        error_html += '<div class="alert alert-danger">' + value + '</div>';
-                                    }
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        html: error_html,
-                                    })
-                                } else {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: data.message,
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-
-                                    table.ajax.reload();
-                                    $('#schoolModal').modal('hide');
-                                }
-                            }
+                        var url = $(this).attr('href');
+                        var outer_html = $('.campaign')[0].outerHTML ;
+                        $.get(url, function(outer_html)
+                        {
+                            $('.modal-body').html(outer_html);
+                            //$('#test').replaceWith(outer_html);
                         });
-
                     });
 
-                    $('.subscription-remove-btn').on('click', function () {
-                        var id = $(this).attr('id');
-
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You won't be able to revert this!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
-                        }).then(function (result) {
-                            if (result.value) {
-                                $.ajax({
-                                    url: 'removeSubscription/' + id,
-                                    method: 'get',
-                                    success: function (data) {
-                                        $('#subscriptionRow_' + id).remove();
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Your subscription has been removed',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                    }
-                                });
-                            }
-                        });
-                    })
                 }
             })
         });

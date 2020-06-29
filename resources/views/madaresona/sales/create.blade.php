@@ -23,7 +23,7 @@
 
                     <div class="col-md-6 form-group">
                         <label for="date">Date :</label>
-                        <input name="date" id="datepicker" value="{{ $sale->date->format('m-yy') }}" class="date-picker form-control"/>
+                        <input name="date" id="datepicker" @if(isset($sale)) value="{{ $sale->date->format('m-yy') }}" @endif class="date-picker form-control"/>
                     </div>
 
                     <div class="col-md-6 form-group">
