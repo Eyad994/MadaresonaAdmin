@@ -98,7 +98,8 @@ class SchoolController extends Controller
             'email' => 'required|email|unique:users',
             'start' => 'date|required',
             'end' => 'date|required',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
+            'subscribe_price' => 'numeric|required',
             'status' => 'required'
         ]);
 
@@ -209,7 +210,7 @@ class SchoolController extends Controller
             'name_ar' => 'required',
             'name_en' => 'required|unique:schools,name_en,' . $request->id,
             'gender' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
             'status' => 'required'
         ]);
 

@@ -83,13 +83,13 @@
 
                     <div class="col-md-6 form-group">
                         <label>Active Days</label>
-                        <input type="text" placeholder="Active Days" @if(isset($news)) value="{{ $news->active_days }}"
+                        <input type="number" placeholder="Active Days" @if(isset($news)) value="{{ $news->active_days }}"
                                @endif name="active_days" class="form-control">
                     </div>
 
                     <div class="col-md-6 form-group">
                         <label>Order</label>
-                        <input type="text" placeholder="Order" @if(isset($news)) value="{{ $news->order }}"
+                        <input type="number" placeholder="Order" @if(isset($news)) value="{{ $news->order }}"
                                @endif name="order" class="form-control">
                     </div>
 

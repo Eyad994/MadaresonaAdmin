@@ -51,7 +51,7 @@
 
         <div class="col-md-6 form-group">
             <label>Balance</label>
-            <input type="text" name="balance" placeholder="Balance" class="form-control">
+            <input type="number" name="balance" placeholder="Balance" class="form-control">
         </div>
         <div class="col-md-6 form-group">
             <label>Details</label>

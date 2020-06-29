@@ -54,7 +54,7 @@ class FinanceController extends Controller
                 ->addColumn('total_amount', function ($data){
                     $subscriptions = Finance::where('user_id', $data->user_id)->sum('balance');
                     $payments = Paymenet::where('user_id', $data->user_id)->sum('payed');
-                    return $payments - $subscriptions;
+                    return  $subscriptions-$payments ;
                 })
                 ->addColumn('diff_days', function ($data) {
                     $date = Carbon::parse($data->end_date);
@@ -79,7 +79,7 @@ class FinanceController extends Controller
         $userType = User::where('id', $request->user_id)->value('type');
 
         $validations = Validator::make($request->all(), [
-            'balance' => 'required',
+            'balance' => 'required|numeric',
             'type' => 'required'
         ]);
 
@@ -129,7 +129,7 @@ class FinanceController extends Controller
     public function storePayment(Request $request)
     {
         $validations = Validator::make($request->all(), [
-            'payed' => 'required',
+            'payed' => 'required|numeric',
         ]);
 
         if ($validations->fails()) {

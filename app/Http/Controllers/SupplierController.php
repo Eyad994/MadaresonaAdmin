@@ -76,7 +76,7 @@ class SupplierController extends Controller
             'email' => 'required|email|unique:users',
             'start' => 'date|required',
             'end' => 'date|required',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
         ]);
 
         if ($validations->fails()) {
@@ -197,7 +197,7 @@ class SupplierController extends Controller
         $validations = Validator::make($request->all(), [
             'name_ar' => 'required', // name_en,' . $request->id
             'name_en' => 'required|unique:suppliers,name_en,'. $supplier->id,
-            'phone' => 'required',
+            'phone' => 'required|numeric',
         ]);
 
         if ($validations->fails()) {

@@ -26,11 +26,11 @@
             ajax: "{{ route('FinanceDatable') }}",
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
-                 {
-                   data: 'uuid', title: 'SN', "mRender": function (data, type, row) {
-                    return '<label style="font-weight: 600 !important; color: #0d8ddc;">' + row.uuid + ' </label>'
+                {
+                    data: 'uuid', title: 'SN', "mRender": function (data, type, row) {
+                        return '<label style="font-weight: 600 !important; color: #0d8ddc;">' + row.uuid + ' </label>'
 
-                }
+                    }
                 },
                 {data: 'user_id', title: 'Name'},
 
@@ -46,13 +46,15 @@
                         }
                     }
                 },
-                {data: 'end_date', title: 'Subscription Expired', "mRender": function (data, type, row) {
+                {
+                    data: 'end_date', title: 'Subscription Expired', "mRender": function (data, type, row) {
 
-                if (row.diff_days > 30)
-                    return '<span class="label font-weight-bold label-lg  label-light-success label-inline">'+ row.end_date +'</span>';
-                else
-                    return '<span class="label font-weight-bold label-lg  label-light-danger label-inline">'+ row.end_date +'</span>';
-                }},
+                        if (row.diff_days > 30)
+                            return '<span class="label font-weight-bold label-lg  label-light-success label-inline">' + row.end_date + '</span>';
+                        else
+                            return '<span class="label font-weight-bold label-lg  label-light-danger label-inline">' + row.end_date + '</span>';
+                    }
+                },
                 {
                     title: 'Finance Type', "mRender": function (data, type, row) {
                         if (row.school_supplier == 'School') {
@@ -64,15 +66,25 @@
                         }
                     }
                 },
-                {data: 'total_amount', title: 'Total Amount'},
+                {
+                    title: 'Total Amount', "mRender": function (data, type, row) {
+                        if (row.total_amount > 0) {
+                            return '<span class="font-weight-bold text-danger">' + row.total_amount + '</span>'
+                        } else if (row.total_amount < 0) {
+                            return '<span class="font-weight-bold text-success">' + row.total_amount + '</span>'
+                        }else if (row.total_amount = 0) {
+                            return '<span class="font-weight-bold">' + row.total_amount + '</span>'
+                        }
+                    }
+                },
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
 
-                    var subscription = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn subscription-btn" data-toggle="tooltip"  user_id="' + row.user_finance_id + '" data-placement="bottom" title="Subscriptions"><i class="fa fa-bars" style="color: #00aff0"></i></a>';
-                    var payment = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn payment-btn" data-toggle="tooltip" finance_id="'+ row.id +'" user_id="' + row.user_finance_id + '"  data-placement="bottom" title="Payment"><i class="fa fa-credit-card" style="color: green"></i></i></a>'
-                         var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon note-btn" title="Notes"  user_id="' + row.user_finance_id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
-                    return subscription + payment+notes;
-                }
+                        var subscription = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn subscription-btn" data-toggle="tooltip"  user_id="' + row.user_finance_id + '" data-placement="bottom" title="Subscriptions"><i class="fa fa-bars" style="color: #00aff0"></i></a>';
+                        var payment = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn payment-btn" data-toggle="tooltip" finance_id="' + row.id + '" user_id="' + row.user_finance_id + '"  data-placement="bottom" title="Payment"><i class="fa fa-credit-card" style="color: green"></i></i></a>'
+                        var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon note-btn" title="Notes"  user_id="' + row.user_finance_id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
+                        return subscription + payment + notes;
+                    }
                 }
 
             ]
@@ -81,20 +93,18 @@
         $(document).on('click', '.subscription-btn', function () {
             var user_id = $(this).attr('user_id');
             $.ajax({
-                url: '/finance/subscription/'+user_id,
+                url: '/finance/subscription/' + user_id,
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
                     $('.modal-title').text('Subscriptions');
                     $('#schoolModal').modal('show');
 
-                    $('body').on('click', '.pagination a', function(e)
-                    {
+                    $('body').on('click', '.pagination a', function (e) {
                         e.preventDefault();
                         var url = $(this).attr('href');
-                        var outer_html = $('.campaign')[0].outerHTML ;
-                        $.get(url, function(outer_html)
-                        {
+                        var outer_html = $('.campaign')[0].outerHTML;
+                        $.get(url, function (outer_html) {
                             $('.modal-body').html(outer_html);
                             //$('#test').replaceWith(outer_html);
                         });
@@ -108,7 +118,7 @@
         $(document).on('click', '.payment-btn', function () {
             var user_id = $(this).attr('user_id');
             $.ajax({
-                url: '/finance/payment/'+user_id,
+                url: '/finance/payment/' + user_id,
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);
@@ -193,7 +203,7 @@
         $(document).on('click', '.note-btn', function () {
             var user_id = $(this).attr('user_id');
             $.ajax({
-                url: '/finance/note/'+user_id,
+                url: '/finance/note/' + user_id,
                 method: 'get',
                 success: function (data) {
                     $('.modal-body').html(data);

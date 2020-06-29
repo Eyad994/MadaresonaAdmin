@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Order</label>
-                        <input type="text" placeholder="Order"
+                        <input type="number" placeholder="Order"
                                @if(isset($advertisement)) value="{{ $advertisement->order }}" @endif name="order"
                                class="form-control">
                     </div>

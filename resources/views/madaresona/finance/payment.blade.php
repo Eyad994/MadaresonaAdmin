@@ -46,7 +46,7 @@
         <input type="hidden" name="user_id" value="{{ $userId }}">
         <div class="col-md-12 form-group">
             <label>Pay</label>
-            <input type="text" name="payed" placeholder="Pay" class="form-control">
+            <input type="number" name="payed" placeholder="Pay" class="form-control">
         </div>
 
     </div>

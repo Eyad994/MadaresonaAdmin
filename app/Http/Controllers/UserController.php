@@ -122,10 +122,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        dd($user);
         $validations = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
-            'type' => 'required',
             'active' => 'required',
         ]);
 
@@ -136,7 +136,6 @@ class UserController extends Controller
         $user->update([
             'name', $request->name,
             'email' => $request->email,
-            'type' => $request->type,
             'active' => $request->active,
         ]);
 
@@ -151,6 +150,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
     }
 }

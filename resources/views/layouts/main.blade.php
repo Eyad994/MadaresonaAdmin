@@ -90,7 +90,7 @@
 @include('partials.userPanel')
 
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGhfjv3OpsxmQffc8g91TNKmhBM_T4Yvk&libraries=places&language=ar&region=JO&callback=initAutocomplete"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnpiNImmRHQBxmLIn5o_zTBufGgXzZBko&language=en&region=JO&libraries=places&callback=initAutocomplete"></script>
 
 <script>var HOST_URL = "https://keenthemes.com/metronic/tools/preview";</script>
 <!--begin::Global Config(global config for global JS scripts)-->
