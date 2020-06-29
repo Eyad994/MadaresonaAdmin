@@ -86,7 +86,7 @@ class UserController extends Controller
             'password' => Hash::make($password)
         ]);
 
-         // Mail::to($request->email)->send(new MailtrapExample($password, $request->name));
+         Mail::to($request->email)->send(new MailtrapExample($password, $request->name));
 
          return response()->json(['message' => 'Added successfully', 'status' => 200]);
     }
@@ -122,7 +122,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        dd($user);
         $validations = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
@@ -133,11 +132,16 @@ class UserController extends Controller
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
+        $oldEmail = $user->email;
+
         $user->update([
-            'name', $request->name,
+            'name' => $request->name,
             'email' => $request->email,
             'active' => $request->active,
         ]);
+
+        $newEmail = $user->email;
+
 
         return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
