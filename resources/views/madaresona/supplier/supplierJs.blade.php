@@ -46,7 +46,7 @@
 
                     }
                 },
-                {
+                /*{
                     title: 'logo', "mRender": function (data, type, row) {
                         var imgeUrl = '/images/';
                         if (row.supplier_logo != '') {
@@ -55,7 +55,7 @@
                             return "Not Found Logo";
 
                     }
-                },
+                },*/
 
                 {
                     data: 'special', title: 'Special', "mRender": function (data, type, row) {

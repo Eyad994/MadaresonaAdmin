@@ -97,7 +97,7 @@
                     title: 'Actions', "mRender": function (data, type, row) {
                         var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-user-btn" id="' + row.id + '" title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
                         var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-user-btn" id="' + row.id + '"  title="Remove "><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                        return edit + remove;
+                        return edit ;
                     }
                 }
             ]

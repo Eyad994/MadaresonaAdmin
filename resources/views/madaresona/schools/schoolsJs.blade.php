@@ -48,16 +48,16 @@
 
                     }
                 },
-                {
+                /*{
                     title: 'logo', "mRender": function (data, type, row) {
-                        var imgeUrl = '{{ asset('images/') }}';
+                        var imgeUrl = ' asset('images/') ';
                         if (row.school_logo != '') {
                             return '<img src="' + imgeUrl + '/' + row.name_en + '/' + row.school_logo + '" class="avatar" width="50" height="50"/>';
                         } else
                             return "Not Found Logo";
 
                     }
-                },
+                },*/
                 {
                     data: 'status_name', title: 'Status', "mRender": function (data, type, row) {
                         if (row.status == 1) {
