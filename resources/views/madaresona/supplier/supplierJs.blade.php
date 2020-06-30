@@ -7,7 +7,7 @@
             dom: 'Bfrtip',
             "columnDefs": [
 
-                {"width": "50px", "targets": 7},
+                {"width": "50px", "targets": 6},
             ],
             processing: true,
             serverSide: true,
