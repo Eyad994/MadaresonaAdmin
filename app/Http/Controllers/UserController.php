@@ -124,7 +124,7 @@ class UserController extends Controller
     {
         $validations = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$user->id,
+            'email' => 'required|email|unique:email,'.$user->id,
             'active' => 'required',
         ]);
 

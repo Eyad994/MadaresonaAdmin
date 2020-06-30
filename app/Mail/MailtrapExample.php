@@ -31,7 +31,7 @@ class MailtrapExample extends Mailable
      */
     public function build()
     {
-        return $this->from('info@madaresonajo.com', 'MadaresonaJo')
+        return $this->from('omer@arakjo.com', 'MadaresonaJo')
             ->subject('Madaresona Confirmation')
             ->markdown('mails.email')
             ->with([
