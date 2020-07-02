@@ -30,7 +30,7 @@ class SaleFinancesController extends Controller
                     return $data->month . '-' . $data->year;
                 })
                 ->addColumn('target', function ($data){
-                    return Sale::whereMonth('date', $data->month)->whereYear('date', $data->year)->value('target');
+                    return (int) Sale::whereMonth('date', $data->month)->whereYear('date', $data->year)->value('target');
                 })
                 ->make(true);
         }

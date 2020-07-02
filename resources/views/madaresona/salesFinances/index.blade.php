@@ -64,10 +64,13 @@
             });
         });
 
+        $('#salesFinances').append("<tfoot><tr><td></td><td></td><td></td><td></td><td></td></tr></tfoot>");
         var table = $('#salesFinances').DataTable({
-            dom: 'Bfrtip',
+
+            dom: '<"top"i>rCt<"footer"><"bottom"flp><"clear">',
             "columnDefs": [
-                {"width": "50px", "targets": 4}
+                {"width": "50px", "targets": 4},
+                {"width": "200px", "targets": 0}
             ],
             processing: true,
             serverSide: true,
@@ -97,7 +100,7 @@
                 {data: 'DT_RowIndex', title: 'ID'},
                 {data: 'date', title: 'Data'},
                 {
-                    title: 'Total Amount', "mRender": function (data, type, row) {
+                    title: 'Amount', "mRender": function (data, type, row) {
                         return  '<span class="font-weight-bold text-success" style="color: orange !important;">' + row.sum_amount + '</span>';
                     }
                 },
@@ -112,11 +115,19 @@
                     var view = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn view-trans-btn" month="' + row.month + '"  year="' + row.year + '" data-toggle="tooltip" data-placement="bottom" title="View"><i class="fa fa-eye" style="color: #00aff0"></i></a>';
                     return view;
                 }
-                },
-
-            ]
+                }
+            ],
+            fnFooterCallback: function(nRow, aaData, iStart, iEnd, aiDisplay) {
+                var api = this.api();
+                var amount = 0;
+                var targets = 0;
+                aaData.forEach(function(x) {
+                    amount += (x['sum_amount']);
+                    targets += (x['target']);
+                });
+                $(api.column(0).footer()).html('Total Amount: '+'<b>'+ amount +'</b><br>'+'Total Targets: '+'<b>'+ targets +'</b>');
+            }
         });
-
 
         $(document).on('click', '.view-trans-btn', function () {
             var month = $(this).attr('month');

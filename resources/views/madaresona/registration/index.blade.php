@@ -38,11 +38,18 @@
 
     <script type="text/javascript">
 
+        /*
+         'aTargets': [9],
+         'bSortable': true,
+         'bVisible': true,
+         'mData': 'partlist',
+         'mRender': '[, ].number'
+         */
         var table = $('#registrationTable').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
                 {"width": "100px", "targets": 7},
-                {"width": "330px", "targets": 1}
+                {"width": "330px", "targets": 1},
             ],
             processing: true,
             serverSide: true,
@@ -60,37 +67,29 @@
             ],
             ajax: {
                 url: "{{ route('registrationDatatable') }}",
-                type: "get",
+                type: "get"
             },
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
-                {
-                    data: 'schools', title: 'Schools', "mRender": function (data, type, row) {
-                        var arr = [];
-                        row.schools.map(function (a) {
-                            arr.push(a.name_ar + '  ');
-                        });
-                        return arr;
-                    }
-                },
+                {data: 'schools', title: 'ID'},
                 {data: 'parent', title: 'Parent'},
                 {data: 'number', title: 'Phone Number'},
                 {data: 'child', title: 'Child'},
                 {data: 'class_id', title: 'Class'},
                 {
                     title: 'Add By', "mRender": function (data, type, row) {
-                        return '<span class="label label-success label-dot mr-2"></span>' +
-                            '<span class="font-weight-bold text-success">' + row.by_admin + '</span>';
-                    }
+                    return '<span class="label label-success label-dot mr-2"></span>' +
+                        '<span class="font-weight-bold text-success">' + row.by_admin + '</span>';
+                }
                 },
 
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-registration-btn" id="' + row.id + '"  title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></a>';
-                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-registration-btn" id="' + row.id + '" title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
-                        var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon action-btn note-registration-btn" title="Notes"  id="' + row.id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
-                        return edit + notes + remove;
-                    }
+                    var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-registration-btn" id="' + row.id + '"  title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></a>';
+                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-registration-btn" id="' + row.id + '" title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
+                    var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon action-btn note-registration-btn" title="Notes"  id="' + row.id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
+                    return edit + notes + remove;
+                }
                 }
             ]
         });

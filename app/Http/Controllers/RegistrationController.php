@@ -134,7 +134,12 @@ class RegistrationController extends Controller
                 ->editColumn('schools', function ($data) {
                     $schoolsArray = explode(',', $data->schools);
                     $schools = School::whereIn('id', $schoolsArray)->get('name_ar')->toArray();
-                    return $schools;
+                    $schoolsString = '';
+                    foreach ($schools as $school)
+                    {
+                        $schoolsString .= $school['name_ar'].',';
+                    }
+                    return $schoolsString;
                 })
                 ->editColumn('by_admin', function ($data){
                     return $data->user->name;

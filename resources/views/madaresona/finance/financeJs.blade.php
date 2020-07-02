@@ -107,6 +107,7 @@
                         $.get(url, function (outer_html) {
                             $('.modal-body').html(outer_html);
                             //$('#test').replaceWith(outer_html);
+
                         });
                     });
 

@@ -121,7 +121,6 @@
                         timer: 1500
                     });
 
-                    table.ajax.reload();
                     $('#schoolModal').modal('hide');
                 }
             }

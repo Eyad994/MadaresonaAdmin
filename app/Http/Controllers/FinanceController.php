@@ -70,7 +70,7 @@ class FinanceController extends Controller
 
     public function subscription($id)
     {
-        $finance = Finance::where('user_id', $id)->latest()->paginate(1);
+        $finance = Finance::where('user_id', $id)->latest()->paginate(3);
         return view('madaresona.finance.subscription', compact('finance'));
     }
 
