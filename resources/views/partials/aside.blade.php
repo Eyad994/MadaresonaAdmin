@@ -1,3 +1,4 @@
+
 <!--begin::Aside-->
 <div class="aside aside-left  aside-fixed  d-flex flex-column flex-row-auto" id="kt_aside">
     <!--begin::Brand-->
@@ -82,19 +83,19 @@
 
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('allSchools') }}" class="menu-link ">
-                        <i class="fa fa-university left-icon-menu"><span></span></i>
+                        <i class="fa fa-university left-icon-menu" style="color: #ffa800 !important;"><span></span></i>
                         <span class="menu-text">Schools</span>
                     </a>
                 </li>
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('supplier.index') }}" class="menu-link ">
-                        <i class="fas fa-house-user left-icon-menu"><span></span></i>
+                        <i class="fas fa-house-user left-icon-menu" style="color: #ffa800 !important;"><span></span></i>
                         <span class="menu-text">Suppliers</span>
                     </a>
                 </li>
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('allFinance') }}" class="menu-link ">
-                        <i class="fas fa-hand-holding-usd left-icon-menu"><span></span></i>
+                        <i class="fas fa-hand-holding-usd left-icon-menu" style="color: #ffa800 !important;"><span></span></i>
                         <span class="menu-text">Finance</span>
                     </a>
                 </li>
@@ -153,7 +154,7 @@
 
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('registration.index') }}" class="menu-link ">
-                        <i class="fas fa-registered left-icon-menu"><span></span></i>
+                        <i class="fas fa-registered left-icon-menu orange"style="color: #ffa800 !important;"><span></span></i>
                         <span class="menu-text">Registrations</span>
                     </a>
                 </li>
