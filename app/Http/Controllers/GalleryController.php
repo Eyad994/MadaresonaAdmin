@@ -31,7 +31,7 @@ class GalleryController extends Controller
         $counter = 0;
         foreach ($request->galleries as $gallery) {
             $image = $gallery;
-            $imageGallery = time()+$counter. '_gallery.' . $image->getClientOriginalExtension();
+            $imageGallery = time() + $counter . '_gallery.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/' . $schoolName . '/gallery'), $imageGallery);
 
             $counter++;
@@ -48,7 +48,7 @@ class GalleryController extends Controller
     public function destroy($id)
     {
         $gallery = GallarySchool::with('school:id,name_en')->where('id', $id)->first();
-        $file = 'images/'.$gallery->school->name_en.'/gallery/'.$gallery->img;
+        $file = 'images/' . $gallery->school->name_en . '/gallery/' . $gallery->img;
         File::delete($file);
         $gallery->delete();
         return response()->json(['message' => 'Successfully deleted']);
