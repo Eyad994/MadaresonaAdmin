@@ -1,4 +1,4 @@
-<div class="modal fade" id="schoolModal" tabindex="-1" role="dialog" aria-labelledby="schoolModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true" onsubmit="false">
+<div class="modal fade" id="schoolModal" role="dialog" aria-labelledby="schoolModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true" onsubmit="false">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">

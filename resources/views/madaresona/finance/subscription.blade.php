@@ -1,39 +1,50 @@
 @if(!$finance->isEmpty())
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">#ID</th>
-        <th scope="col">#Subscription</th>
-        <th scope="col">Balance</th>
-        <th scope="col">Details</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <section class="campaign">
-    <?php $i=1;?>
-    @foreach($finance as $item)
-        <tr id="subscriptionRow_{{ $item->id }}">
-            <th scope="row">{{ $i }}</th>
-            <td>@if($item->uuid != null){{ $item->uuid }} @else {{ $item->uuids }} @endif</td>
-            <td>{{ $item->balance }}</td>
-            <td>{{ $item->type }}</td>
-            <td>{{ $item->start_date }}</td>
-            <td>{{ $item->end_date }}</td>
-            <td style="text-align: center;">
-                <a href="#" class="btn btn-sm btn-clean btn-icon subscription-remove-btn action-btn"
-                   id="{{ $item->id }}" data-toggle="tooltip" data-placement="bottom" title="Remove"><i
-                            class="far fa-trash-alt" style="color: #f64e60"></i></a>
-            </td>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">#Subscription</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Details</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
         </tr>
-        <?php $i++;?>
-    @endforeach
-    </section>
-    </tbody>
-</table>
-{!! $finance->links() !!}
-<hr>
+        </thead>
+        <tbody>
+        <section class="campaign">
+            <?php $i = 1;?>
+            @foreach($finance as $item)
+                <tr id="subscriptionRow_{{ $item->id }}">
+                    <th scope="row">{{ $i }}</th>
+                    <td>@if($item->uuid != null){{ $item->uuid }} @else {{ $item->uuids }} @endif</td>
+                    <td>{{ $item->balance }}</td>
+                    <td>{{ $item->type }}</td>
+                    <td>{{ $item->start_date }}</td>
+                    <td>{{ $item->end_date }}</td>
+                    <td style="text-align: center;">
+
+                        <a href="#" class="btn btn-sm btn-clean btn-icon subscription-edit-btn action-btn"
+                           id="{{ $item->id }}" data-toggle="tooltip" data-placement="bottom" title="Edit"><i
+                                    class="fas fa-edit" style="color: #00aff0"></i></a>
+
+                        <a href="#" class="btn btn-sm btn-clean btn-icon subscription-remove-btn action-btn"
+                           id="{{ $item->id }}" data-toggle="tooltip" data-placement="bottom" title="Remove"><i
+                                    class="far fa-trash-alt" style="color: #f64e60"></i></a>
+                    </td>
+
+                    {{--<td style="text-align: center;">
+                        <a href="#" class="btn btn-sm btn-clean btn-icon subscription-edit-btn action-btn"
+                           id="{{ $item->id }}" data-toggle="tooltip"  title="Edit"><i
+                                    class="fas fa-edit-alt" style="color: #f64e60"></i></a>
+                    </td>--}}
+                </tr>
+                <?php $i++;?>
+            @endforeach
+        </section>
+        </tbody>
+    </table>
+    {!! $finance->links() !!}
+    <hr>
 @endif
 <div class="row">
     <div class="col-md-3">
@@ -83,6 +94,7 @@
 
     <input type="submit" value="submit" class="btn btn-success" style="float: right">
 </form>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <script type="text/javascript">
 
@@ -156,6 +168,47 @@
                 });
             }
         });
-    })
+    });
+
+    $('.subscription-edit-btn').on('click', function () {
+        var id = $(this).attr('id');
+        var uid;
+        $.ajax({
+            'async': false,
+            url: '/finance/getSubscription/' + id,
+            method: 'get',
+            success: function (data) {
+                uid = data;
+            }
+        });
+
+        Swal.fire({
+            title: "An input!",
+            text: "Write something interesting:",
+            input: "text",
+            showCancelButton: true,
+            showClass: "slide-from-top",
+            inputValue: uid,
+            inputPlaceholder: "Write something"
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: '/finance/editSubscription/' + id + '/'+ result.value,
+                    method: 'get',
+                    success: function (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Your subscription has been updated',
+                            showConfirmButton: false,
+                            timer: 2500
+                        })
+                    }
+                });
+            }
+        });
+
+
+    });
+
 </script>
 <script src="{{ asset('assets/js/pages/crud/forms/widgets/bootstrap-datepicker7a4a.js') }}"></script>

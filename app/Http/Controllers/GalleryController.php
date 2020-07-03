@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\GallarySchool;
@@ -8,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class GalleryController extends Controller
 {
@@ -32,7 +34,17 @@ class GalleryController extends Controller
         foreach ($request->galleries as $gallery) {
             $image = $gallery;
             $imageGallery = time() + $counter . '_gallery.' . $image->getClientOriginalExtension();
+
             $image->move(public_path('images/' . $schoolName . '/gallery'), $imageGallery);
+
+            $img = Image::make(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
+
+            File::delete(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
+
+            $img->insert(public_path('logo.png'), 'bottom-right', 10, 10);
+
+            $img->save(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
+            //$img->save(public_path('images/main-new.png'));
 
             $counter++;
 

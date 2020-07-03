@@ -67,7 +67,7 @@
         $('#salesFinances').append("<tfoot><tr><td></td><td></td><td></td><td></td><td></td></tr></tfoot>");
         var table = $('#salesFinances').DataTable({
 
-            dom: '<"top"i>rCt<"footer"><"bottom"flp><"clear">',
+            dom: 'Bfrtip',
             "columnDefs": [
                 {"width": "50px", "targets": 4},
                 {"width": "200px", "targets": 0}

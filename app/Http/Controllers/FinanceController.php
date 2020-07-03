@@ -153,4 +153,18 @@ class FinanceController extends Controller
     }
 
 
+    public function getSubscription($id)
+    {
+        return Finance::where('id', $id)->value('uuid');
+    }
+
+    public function editSubscription($id, $uid)
+    {
+        $validation = Finance::where('uuid', $uid)->first();
+        if (is_null($validation)){
+            return 'not found';
+        } else return 'found';
+    }
+
+
 }

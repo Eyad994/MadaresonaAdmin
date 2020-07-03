@@ -94,6 +94,9 @@ Route::middleware('auth')->group(function () {
         Route::get('payment/{id}', 'FinanceController@payment');
         Route::post('payment', 'FinanceController@storePayment')->name('paymentStore');
         Route::get('removePayment/{id}', 'FinanceController@destroyPayment')->name('removePayment');
+
+        Route::get('getSubscription/{id}', 'FinanceController@getSubscription');
+        Route::get('editSubscription/{id}/{uid}', 'FinanceController@editSubscription');
     });
     Route::prefix('news')->group(function () {
         Route::get('all', 'NewsController@indexMain')->name('allMainNews');
