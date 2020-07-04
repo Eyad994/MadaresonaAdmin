@@ -72,7 +72,7 @@
                 {
                     title: 'Services', "mRender": function (data, type, row) {
                         var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn gallerySpecial" id="' + row.id + '"  title="Special gallery"><i class="fa fa-file-image"></i></a>';
-                        var notes = '<a href="/schools/note/' + row.id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" title="Notes"><i class="fa fa-sticky-note""></i></a>';
+                        var notes = '<a href="/supplier/all/' + row.id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" title="Notes"><i class="fa fa-sticky-note""></i></a>';
                         return gallery + notes;
 
                     }
@@ -82,7 +82,7 @@
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
                         var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon editSupplier action-btn" id="' + row.id + '"  data-toggle="tooltip" data-placement="bottom" title="View & Edit"><i class="fas fa-edit" style="color: #3699ff"></i></a>';
-                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn deleteSupplier" id="' + row.id + '" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
+                        var remove = '<a href="/schools/news/' + row.id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn deleteSupplier" id="' + row.id + '" data-toggle="tooltip" data-placement="bottom" title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
                         return edit + remove;
                         /*var show = '<button data-toggle="modal" data-target="#productModal" class="btn btn-success  showM" id="' + row.id + '"><i class="fa fa-eye"></i></button >';
                          return show;*/

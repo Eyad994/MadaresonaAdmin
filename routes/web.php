@@ -198,6 +198,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('supplier', 'SupplierController');
     Route::get('supplierDatatable', 'SupplierController@datatable')->name('supplierDatatatble');
     /************************************************************************************/
+
+    Route::prefix('supplier')->group(function () {
+        Route::get('all/{id}', 'SupplierMessageController@index');
+        Route::get('message/datatable', 'SupplierMessageController@messagesDatatable')->name('messageDatatable');
+        Route::get('message/{id}/edit', 'SupplierMessageController@edit');
+        Route::get('message/{id}/destroy', 'SupplierMessageController@destroy');
+    });
+
     // User
     Route::resource('user', 'UserController');
     Route::get('userDatatable', 'UserController@userDatatable')->name('userDatatable');
