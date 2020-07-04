@@ -19,6 +19,7 @@ class FinanceController extends Controller
     public function index()
     {
         return view('madaresona.finance.index');
+
     }
 
     public function financeDatable(Request $request)
@@ -155,7 +156,8 @@ class FinanceController extends Controller
 
     public function getSubscription($id)
     {
-        return Finance::where('id', $id)->value('uuid');
+        return Finance::where('id', $id)->get();
+
     }
 
     public function editSubscription($id, $uid)

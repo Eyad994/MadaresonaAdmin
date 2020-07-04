@@ -178,7 +178,11 @@
             url: '/finance/getSubscription/' + id,
             method: 'get',
             success: function (data) {
-                uid = data;
+                alert(data.id)
+                if (data.uuid != '')
+                  uid = data.uuid;
+                else
+                    uid = data.uuids;
             }
         });
 

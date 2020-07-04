@@ -37,14 +37,10 @@ class GalleryController extends Controller
 
             $image->move(public_path('images/' . $schoolName . '/gallery'), $imageGallery);
 
-            $img = Image::make(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
-
+           /* $img = Image::make(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
             File::delete(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
-
-            $img->insert(public_path('logo.png'), 'bottom-right', 10, 10);
-
-            $img->save(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
-            //$img->save(public_path('images/main-new.png'));
+            $img->insert(public_path('logo.png'), 'top-right', 10, 10);
+            $img->save(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));*/
 
             $counter++;
 
