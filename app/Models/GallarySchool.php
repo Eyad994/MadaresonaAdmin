@@ -14,3 +14,4 @@ class GallarySchool extends Model
         return $this->belongsTo(School::class, 'school_id');
     }
 
+}
