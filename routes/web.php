@@ -31,7 +31,6 @@ Route::middleware('auth')->group(function () {
         Route::get('gallery/{id}', 'GalleryController@gallery')->name('gallery');
         Route::post('submitGallery', 'GalleryController@store')->name('submitGallery');
         Route::get('removeGallery/{id}', 'GalleryController@destroy')->name('removeGallery');
-        /**************************************************************************/
 
         // Transportation
         Route::get('transportation/{id}/create', 'TransportationController@create')->name('transportationCreate');
@@ -75,6 +74,12 @@ Route::middleware('auth')->group(function () {
         /*************************************************************************/
 
     });
+
+    //Gallery Supplier
+    Route::get('gallery/supplier/{id}', 'GalleryController@gallerySupplier');
+    Route::post('/submitGallerySupplier', 'GalleryController@storeGallerySupplier')->name('submitGallerySupplier');
+    Route::get('removeGallerySupplier/{id}', 'GalleryController@destroyGallerySupplier')->name('removeGallerySupplier');
+    /**************************************************************************/
 
     Route::prefix('finance')->group(function () {
         Route::get('all', 'FinanceController@index')->name('allFinance');

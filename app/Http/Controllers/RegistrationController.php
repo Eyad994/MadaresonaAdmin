@@ -141,6 +141,9 @@ class RegistrationController extends Controller
                     }
                     return $schoolsString;
                 })
+                ->editColumn('created_at', function ($data) {
+                    return $data->created_at->format('d m Y ');
+                })
                 ->editColumn('by_admin', function ($data){
                     return $data->user->name;
                 })

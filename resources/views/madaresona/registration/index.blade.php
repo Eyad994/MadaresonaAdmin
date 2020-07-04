@@ -78,18 +78,19 @@
                 {data: 'class_id', title: 'Class'},
                 {
                     title: 'Add By', "mRender": function (data, type, row) {
-                    return '<span class="label label-success label-dot mr-2"></span>' +
-                        '<span class="font-weight-bold text-success">' + row.by_admin + '</span>';
-                }
+                        return '<span class="label label-success label-dot mr-2"></span>' +
+                            '<span class="font-weight-bold text-success">' + row.by_admin + '</span>';
+                    }
                 },
+                {data: 'created_at', title: 'Date'},
 
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
-                    var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-registration-btn" id="' + row.id + '"  title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></a>';
-                    var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-registration-btn" id="' + row.id + '" title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
-                    var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon action-btn note-registration-btn" title="Notes"  id="' + row.id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
-                    return edit + notes + remove;
-                }
+                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-registration-btn" id="' + row.id + '"  title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></a>';
+                        var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-registration-btn" id="' + row.id + '" title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></a>';
+                        var notes = '<a href="#"  class="btn btn-sm btn-clean btn-icon action-btn note-registration-btn" title="Notes"  id="' + row.id + '"><i class="fa fa-sticky-note" style="color: #ffa800" ></i></a>'
+                        return edit + notes + remove;
+                    }
                 }
             ]
         });

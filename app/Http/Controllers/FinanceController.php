@@ -18,7 +18,9 @@ class FinanceController extends Controller
 {
     public function index()
     {
+
         return view('madaresona.finance.index');
+
 
     }
 
@@ -46,16 +48,16 @@ class FinanceController extends Controller
                 })
                 ->editColumn('end_date', function ($data) {
                     return $data->end_date;
-                })->editColumn('uuid', function ($data){
+                })->editColumn('uuid', function ($data) {
                     return $data->user->type == 5 ? $data->uuid : $data->uuids;
                 })
                 ->addColumn('school_supplier', function ($data) {
                     return $data->user->type == 5 ? 'School' : 'Supplier';
                 })
-                ->addColumn('total_amount', function ($data){
+                ->addColumn('total_amount', function ($data) {
                     $subscriptions = Finance::where('user_id', $data->user_id)->sum('balance');
                     $payments = Paymenet::where('user_id', $data->user_id)->sum('payed');
-                    return  $subscriptions-$payments ;
+                    return $subscriptions - $payments;
                 })
                 ->addColumn('diff_days', function ($data) {
                     $date = Carbon::parse($data->end_date);
@@ -92,7 +94,7 @@ class FinanceController extends Controller
             'table' => 'finances',
             'length' => 13,
             'field' => $userType == 5 ? 'uuid' : 'uuids',
-            'prefix' => $userType == 5 ?'MJ-M' . date('Y') . '-' : 'MJ-S' . date('Y') . '-'
+            'prefix' => $userType == 5 ? 'MJ-M' . date('Y') . '-' : 'MJ-S' . date('Y') . '-'
         ];
 
         $uid = IdGenerator::generate($config);
@@ -156,16 +158,37 @@ class FinanceController extends Controller
 
     public function getSubscription($id)
     {
-        return Finance::where('id', $id)->get();
-
+        $subscription = Finance::where('id', $id)->first();
+        if ($subscription->uuid == '')
+            $uuid = $subscription->uuids;
+        else
+            $uuid = $subscription->uuid;
+        return $uuid;
     }
 
     public function editSubscription($id, $uid)
     {
-        $validation = Finance::where('uuid', $uid)->first();
-        if (is_null($validation)){
-            return 'not found';
-        } else return 'found';
+
+        $subscription = Finance::where('id', $id)->first();
+        if ($subscription->uuid == '') {
+            $validation = Finance::where('uuids', $uid)->first();
+            if (is_null($validation)) {
+                $subscription->update(['uuids' => $uid]);
+                return response()->json(['message' => 'Updated successfully', 'status' => 200]);
+            } else {
+                return response()->json(['message' => 'Please choose another SN', 'status' => 422]);
+            }
+        } else {
+            $validation = Finance::where('uuid', $uid)->first();
+            if (is_null($validation)) {
+                $subscription->update(['uuid' => $uid]);
+                return response()->json(['message' => 'Updated successfully', 'status' => 200]);
+            } else {
+                return response()->json(['message' => 'Please choose another SN', 'status' => 422]);
+            }
+        }
+
+
     }
 
 

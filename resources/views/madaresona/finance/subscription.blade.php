@@ -178,17 +178,13 @@
             url: '/finance/getSubscription/' + id,
             method: 'get',
             success: function (data) {
-                alert(data.id)
-                if (data.uuid != '')
-                  uid = data.uuid;
-                else
-                    uid = data.uuids;
+                uid = data;
             }
         });
 
         Swal.fire({
-            title: "An input!",
-            text: "Write something interesting:",
+            title: "Edit SN!",
+            text: "Please choose a number carefully:",
             input: "text",
             showCancelButton: true,
             showClass: "slide-from-top",
@@ -197,15 +193,25 @@
         }).then(function (result) {
             if (result.value) {
                 $.ajax({
-                    url: '/finance/editSubscription/' + id + '/'+ result.value,
+                    url: '/finance/editSubscription/' + id + '/' + result.value,
                     method: 'get',
                     success: function (data) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Your subscription has been updated',
-                            showConfirmButton: false,
-                            timer: 2500
-                        })
+                        if (data.status === 422) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: data.message,
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: data.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+
+                        }
                     }
                 });
             }
