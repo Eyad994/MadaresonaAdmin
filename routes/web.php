@@ -211,5 +211,10 @@ Route::middleware('auth')->group(function () {
     Route::get('userDatatable', 'UserController@userDatatable')->name('userDatatable');
     /************************************************************************************/
 
+    //Sender
+    Route::get('emailSender', 'SenderController@email');
+    Route::post('emailSender', 'SenderController@sendEmail');
+    Route::get('smsSender', 'SenderController@sms');
+    Route::post('smsSender', 'SenderController@sendSMS');
 });
 

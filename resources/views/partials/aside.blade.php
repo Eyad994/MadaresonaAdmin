@@ -1,4 +1,3 @@
-
 <!--begin::Aside-->
 <div class="aside aside-left  aside-fixed  d-flex flex-column flex-row-auto" id="kt_aside">
     <!--begin::Brand-->
@@ -95,7 +94,8 @@
                 </li>
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('allFinance') }}" class="menu-link ">
-                        <i class="fas fa-hand-holding-usd left-icon-menu" style="color: #ffa800 !important;"><span></span></i>
+                        <i class="fas fa-hand-holding-usd left-icon-menu"
+                           style="color: #ffa800 !important;"><span></span></i>
                         <span class="menu-text">Finance</span>
                     </a>
                 </li>
@@ -154,7 +154,8 @@
 
                 <li class="menu-item " aria-haspopup="true">
                     <a href="{{ route('registration.index') }}" class="menu-link ">
-                        <i class="fas fa-registered left-icon-menu orange"style="color: #ffa800 !important;"><span></span></i>
+                        <i class="fas fa-registered left-icon-menu orange"
+                           style="color: #ffa800 !important;"><span></span></i>
                         <span class="menu-text">Registrations</span>
                     </a>
                 </li>
@@ -170,6 +171,15 @@
                         <i class="fas fa-users-cog left-icon-menu"></i>
                         <span class="menu-text">User Management</span></a></li>
 
+                <li class="menu-item" aria-haspopup="true">
+                    <a href="/emailSender" class="menu-link ">
+                        <i class="fas fa-users-cog left-icon-menu"></i>
+                        <span class="menu-text">Email Sender</span></a></li>
+
+                <li class="menu-item" aria-haspopup="true">
+                    <a href="/smsSender" class="menu-link ">
+                        <i class="fas fa-users-cog left-icon-menu"></i>
+                        <span class="menu-text">SMS Sender</span></a></li>
 
             </ul>
             <!--end::Menu Nav-->

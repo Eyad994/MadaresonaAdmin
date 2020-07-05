@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Finance;
 use App\Models\Region;
 use App\Models\Supplier;
+use App\Models\SupplierMessage;
 use App\User;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -40,6 +41,10 @@ class SupplierController extends Controller
                 })
                 ->editColumn('active', function ($data) {
                     return $data->active == 0 ? 'InActive' : 'Active';
+                })
+                ->addColumn('message_count', function ($data){
+                    $supplierMessage = SupplierMessage::where('user_id', $data->user_id)->where('seen', 0)->count();
+                    return $supplierMessage;
                 })
                 ->addColumn('sn', function ($data) {
                     $finance = Finance::where('user_id', $data->user_id)->orderBy('end_date', 'desc')->first();

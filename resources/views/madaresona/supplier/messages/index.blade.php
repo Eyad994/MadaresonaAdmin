@@ -15,6 +15,7 @@
             </div>
         </div>
 
+        <input type="hidden" name="user_id" id="user_id" value="{{ $id }}">
         @include('madaresona.schools.shcoolModal')
     </div>
 @endsection
@@ -46,6 +47,9 @@
             ajax: {
                 url: "{{ route('messageDatatable') }}",
                 type: "get",
+                data: {
+                    "user_id": $('#user_id').val()
+                }
             },
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},

@@ -26,4 +26,9 @@ class Supplier extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function supplierMessage()
+    {
+        return $this->belongsTo(SupplierMessage::class, 'user_id', 'user_id');
+    }
 }
