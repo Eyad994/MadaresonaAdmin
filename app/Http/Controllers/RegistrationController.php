@@ -128,7 +128,7 @@ class RegistrationController extends Controller
     public function registrationDatatable(Request $request)
     {
         if ($request->ajax()) {
-            $data = Registration::all();
+            $data = Registration::orderBy('created_at', 'desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('schools', function ($data) {
@@ -142,7 +142,7 @@ class RegistrationController extends Controller
                     return $schoolsString;
                 })
                 ->editColumn('created_at', function ($data) {
-                    return $data->created_at->format('d m Y ');
+                    return $data->created_at->format('d-m-Y ');
                 })
                 ->editColumn('by_admin', function ($data){
                     return $data->user->name;

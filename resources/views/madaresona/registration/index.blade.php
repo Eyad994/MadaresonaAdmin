@@ -48,11 +48,15 @@
         var table = $('#registrationTable').DataTable({
             dom: 'Bfrtip',
             "columnDefs": [
-                {"width": "100px", "targets": 7},
-                {"width": "330px", "targets": 1},
+                {"width": "100px", "targets": 8},
+                {"width": "150px", "targets": 1},
             ],
             processing: true,
             serverSide: true,
+            lengthMenu: [
+                [ 10, 25, 50,100, -1 ],
+                [ '10 rows', '25 rows', '50 rows','100 rows', 'Show all' ]
+            ],
             buttons: [
                 {'extend': 'pageLength'},
                 {
@@ -71,7 +75,7 @@
             },
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
-                {data: 'schools', title: 'ID'},
+                {data: 'schools', title: 'Schools'},
                 {data: 'parent', title: 'Parent'},
                 {data: 'number', title: 'Phone Number'},
                 {data: 'child', title: 'Child'},

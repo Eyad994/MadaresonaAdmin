@@ -20,7 +20,10 @@ class DiscountController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('created_at', function ($data) {
+                    if($data->created_at != '')
                     return $data->created_at->format('d m Y - g:i A');
+                    else
+                        return null;
                 })
                 ->editColumn('class_id', function ($data){
                     return $data->level->class_en;
