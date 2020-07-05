@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
+use App\School;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.main');
+        $activeSchools = School::where('active', 1)->count();
+        $onHoldSchools = School::where('status', 1)->count();
+        $inCallingSchools = School::where('status', 2)->count();
+        $completedSchools = School::where('status', 3)->count();
+        $activeSupplier = Supplier::where('active', 1)->count();
+        $inActiveSupplier = School::where('active', 0)->count();
+        return view('madaresona.home', compact('activeSchools', 'onHoldSchools', 'inCallingSchools', 'completedSchools', 'activeSupplier', 'inActiveSupplier'));
     }
 }

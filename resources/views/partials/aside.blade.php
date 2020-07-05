@@ -38,7 +38,7 @@
                 data-menu-scroll="1" data-menu-dropdown-timeout="500">
             <!--begin::Menu Nav-->
             <ul class="menu-nav ">
-                <li class="menu-item  menu-item-active" aria-haspopup="true"><a href="index.html"
+                <li class="menu-item  menu-item-active" aria-haspopup="true"><a href="{{ route('home') }}"
                                                                                 class="menu-link "><span
                                 class="svg-icon menu-icon"><!--begin::Svg Icon | path:/assets/media/svg/icons/Design/Layers.svg--><svg
                                     xmlns="http://www.w3.org/2000/svg"

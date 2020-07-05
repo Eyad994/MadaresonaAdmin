@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 use Yajra\DataTables\Facades\DataTables;
 
 class NewsController extends Controller
@@ -57,6 +58,11 @@ class NewsController extends Controller
             $image = $request->file('img');
             $imageNews = time() . '_news.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/Main News'), $imageNews);
+
+            $img = Image::make(public_path('images/Main News/' . $imageNews));
+            File::delete(public_path('images/Main News/' . $imageNews));
+            $img->insert(public_path('logo.png'), 'top-right', 10, 10);
+            $img->save(public_path('images/Main News/' . $imageNews));
         }
 
         News::create([
@@ -114,6 +120,12 @@ class NewsController extends Controller
             $image = $request->file('img');
             $imageNews = time() . '_news.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/Main News'), $imageNews);
+
+            $img = Image::make(public_path('images/Main News/' . $imageNews));
+            File::delete(public_path('images/Main News/' . $imageNews));
+            $img->insert(public_path('logo.png'), 'top-right', 10, 10);
+            $img->save(public_path('images/Main News/' . $imageNews));
+
             $news->update([
                 'img' => $imageNews
             ]);
@@ -187,9 +199,15 @@ class NewsController extends Controller
         $schoolName = School::where('id', $request->school_id)->value('name_en');
 
         if (isset($request->img)) {
+
             $image = $request->file('img');
             $imageNews = time() . '_news.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/' . $schoolName . '/news'), $imageNews);
+
+            $img = Image::make(public_path('images/' . $schoolName . '/news/' . $imageNews));
+            File::delete(public_path('images/' . $schoolName . '/news/' . $imageNews));
+            $img->insert(public_path('logo.png'), 'top-right', 10, 10);
+            $img->save(public_path('images/' . $schoolName . '/news/' . $imageNews));
         }
 
         News::create([
@@ -237,6 +255,12 @@ class NewsController extends Controller
             $image = $request->file('img');
             $imageNews = time() . '_news.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/' . $schoolName . '/news'), $imageNews);
+
+            $img = Image::make(public_path('images/' . $schoolName . '/news/' . $imageNews));
+            File::delete(public_path('images/' . $schoolName . '/news/' . $imageNews));
+            $img->insert(public_path('logo.png'), 'top-right', 10, 10);
+            $img->save(public_path('images/' . $schoolName . '/news/' . $imageNews));
+
             $news->update([
                 'img' => $imageNews
             ]);

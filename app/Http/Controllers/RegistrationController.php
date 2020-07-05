@@ -128,7 +128,7 @@ class RegistrationController extends Controller
     public function registrationDatatable(Request $request)
     {
         if ($request->ajax()) {
-            $data = Registration::orderBy('created_at', 'desc')->get();
+            $data = Registration::orderBy('created_at', 'desc')->whereYear('created_at', date('Y'))->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('schools', function ($data) {

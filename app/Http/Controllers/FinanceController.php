@@ -168,8 +168,23 @@ class FinanceController extends Controller
 
     public function editSubscription($id, $uid)
     {
-
         $subscription = Finance::where('id', $id)->first();
+
+        if ($uid == 0)
+        {
+            if ($subscription->uuid == '')
+            {
+                $subscription->update([
+                    'uuids' => null
+                ]);
+            } else {
+                $subscription->update([
+                    'uuid' => null
+                ]);
+            }
+            return response()->json(['message' => 'Updated successfully', 'status' => 200]);
+        }
+
         if ($subscription->uuid == '') {
             $validation = Finance::where('uuids', $uid)->first();
             if (is_null($validation)) {

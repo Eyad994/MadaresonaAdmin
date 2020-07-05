@@ -76,7 +76,7 @@
                 {
                     title: 'Services', "mRender": function (data, type, row) {
                         var gallery = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn gallerySpecial" id="' + row.id + '"  title="Special gallery"><i class="fa fa-file-image"></i></a>';
-                        var notes = '<a href="/supplier/all/' + row.user_id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" title="Notes"><i class="fa fa-sticky-note""></i><span class="badge badge-primary">'+ row.message_count +'</span></a>';
+                        var notes = '<a href="/supplier/all/' + row.user_id + '" target="_blank" class="btn btn-sm btn-clean btn-icon action-btn" title="Messages"><i class="far fa-comments""></i><span class="badge badge-pill badge-primary" style="font-size: 8px; top: -7px; background-color: red">'+ row.message_count +'</span></a>';
                         return gallery + notes;
 
                     }

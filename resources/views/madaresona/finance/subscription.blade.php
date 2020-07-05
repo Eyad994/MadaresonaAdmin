@@ -209,8 +209,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-
-
+                            $('#schoolModal').modal('hide');
                         }
                     }
                 });

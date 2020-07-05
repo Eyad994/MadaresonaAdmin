@@ -39,10 +39,10 @@ class GalleryController extends Controller
 
             $image->move(public_path('images/' . $schoolName . '/gallery'), $imageGallery);
 
-           /* $img = Image::make(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
+            $img = Image::make(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
             File::delete(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
             $img->insert(public_path('logo.png'), 'top-right', 10, 10);
-            $img->save(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));*/
+            $img->save(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
 
             $counter++;
 
@@ -70,9 +70,7 @@ class GalleryController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function gallerySupplier($id)
-
     {
-
         $gallery = SupplierGallery::where('supplier_id', $id)->get();
         $supplierName = Supplier::where('id', $id)->value('name_en');
         return view('madaresona.supplier.gallery.create', compact('gallery', 'id', 'supplierName'));
@@ -80,7 +78,6 @@ class GalleryController extends Controller
 
     public function storeGallerySupplier(Request $request)
     {
-
         $supplierName = Supplier::where('id', $request->supplier_id)->value('name_en');
         $validations = Validator::make($request->all(), [
             'galleries' => 'required'
@@ -96,10 +93,10 @@ class GalleryController extends Controller
 
             $image->move(public_path('images/' . $supplierName . '/gallery'), $imageGallery);
 
-            /* $img = Image::make(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
-             File::delete(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
+             $img = Image::make(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
+             File::delete(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
              $img->insert(public_path('logo.png'), 'top-right', 10, 10);
-             $img->save(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));*/
+             $img->save(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
 
             $counter++;
 
