@@ -169,8 +169,9 @@ class FinanceController extends Controller
     public function editSubscription($id, $uid)
     {
         $subscription = Finance::where('id', $id)->first();
+        $type = $subscription->user->type;
 
-        if ($uid == 0)
+        if ($uid == '0')
         {
             if ($subscription->uuid == '')
             {
@@ -185,7 +186,7 @@ class FinanceController extends Controller
             return response()->json(['message' => 'Updated successfully', 'status' => 200]);
         }
 
-        if ($subscription->uuid == '') {
+        if ($type == 4) {
             $validation = Finance::where('uuids', $uid)->first();
             if (is_null($validation)) {
                 $subscription->update(['uuids' => $uid]);
@@ -193,7 +194,7 @@ class FinanceController extends Controller
             } else {
                 return response()->json(['message' => 'Please choose another SN', 'status' => 422]);
             }
-        } else {
+        } else if ($type == 5) {
             $validation = Finance::where('uuid', $uid)->first();
             if (is_null($validation)) {
                 $subscription->update(['uuid' => $uid]);
