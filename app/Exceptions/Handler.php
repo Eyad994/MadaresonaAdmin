@@ -55,7 +55,8 @@ class Handler extends ExceptionHandler
             $statusCode = $exception->getStatusCode();
             switch ($statusCode)
             {
-                case '404': return response()->view('error.404', array(), 404);
+                case '404': return redirect()->route('http://madaresonajo.com/');
+                //case '404': return response()->view('error.404', array(), 404);
             }
         }
 
