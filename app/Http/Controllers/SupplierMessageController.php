@@ -9,6 +9,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SupplierMessageController extends Controller
 {
+
     public function index($id)
     {
         $supplier_name = Supplier::where('user_id', $id)->value('name_en');
@@ -33,6 +34,10 @@ class SupplierMessageController extends Controller
 
     public function edit($id)
     {
+        if (auth()->user()->type == 4)
+        {
+            SupplierMessage::where('id', $id)->update(['seen' => 1]);
+        }
         $messages= SupplierMessage::where('id', $id)->first();
         return view('madaresona.supplier.messages.show', compact('messages'));
     }

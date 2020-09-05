@@ -58,6 +58,10 @@ class Handler extends ExceptionHandler
                 case '404': return redirect('http://dashboard.madaresonajo.com');
                 //case '404': return response()->view('error.404', array(), 404);
             }
+            switch ($statusCode)
+            {
+                case '403': return redirect('home');
+            }
         }
 
         return parent::render($request, $exception);

@@ -12,6 +12,14 @@ use Yajra\DataTables\Facades\DataTables;
 class SaleController extends Controller
 {
     /**
+     * SaleController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

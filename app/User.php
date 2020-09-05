@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Supplier;
+use App\Models\SupplierMessage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,4 +40,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     protected $guarded = [];
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'id', 'user_id');
+    }
+
+    public function supplierMessage()
+    {
+        return $this->hasMany(SupplierMessage::class, 'user_id')->where('seen', 0);
+    }
 }

@@ -11,7 +11,16 @@ use Yajra\DataTables\Facades\DataTables;
 
 class AdvertisementController extends Controller
 {
+
     //
+    /**
+     * AdvertisementController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('editor');
+    }
+
     public function index()
     {
         return view('madaresona.advertisement.index');

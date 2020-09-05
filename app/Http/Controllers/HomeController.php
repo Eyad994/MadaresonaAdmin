@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use App\School;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {

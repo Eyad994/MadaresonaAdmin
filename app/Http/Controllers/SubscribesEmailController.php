@@ -8,6 +8,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SubscribesEmailController extends Controller
 {
+
+    /**
+     * SubscribesEmailController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('editor');
+    }
+
     public function index()
     {
         return view('madaresona.subscribesEmail.index');

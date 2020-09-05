@@ -11,6 +11,14 @@ use Yajra\DataTables\Facades\DataTables;
 class FaqController extends Controller
 {
     /**
+     * FaqController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('editor');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

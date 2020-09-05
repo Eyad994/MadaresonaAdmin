@@ -14,6 +14,14 @@ use Yajra\DataTables\Facades\DataTables;
 class NewsController extends Controller
 {
 
+    /**
+     * NewsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('editor');
+    }
+
     public function indexMain()
     {
         return view('madaresona.MainNews.index');

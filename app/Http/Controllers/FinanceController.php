@@ -16,12 +16,18 @@ use Yajra\DataTables\Facades\DataTables;
 
 class FinanceController extends Controller
 {
+
+    /**
+     * FinanceController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
-
         return view('madaresona.finance.index');
-
-
     }
 
     public function financeDatable(Request $request)

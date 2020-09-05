@@ -13,6 +13,14 @@ use Yajra\DataTables\Facades\DataTables;
 class RegistrationController extends Controller
 {
     /**
+     * RegistrationController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('editor');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

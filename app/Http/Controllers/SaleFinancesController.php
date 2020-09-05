@@ -14,6 +14,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SaleFinancesController extends Controller
 {
+
+    /**
+     * SaleFinancesController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index($id)
     {
         $user_name = User::where('id', $id)->value('name');

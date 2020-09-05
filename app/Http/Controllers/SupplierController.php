@@ -20,6 +20,14 @@ use Yajra\DataTables\Facades\DataTables;
 class SupplierController extends Controller
 {
     /**
+     * SupplierController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin')->except(['edit', 'update']);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -148,7 +156,7 @@ class SupplierController extends Controller
 
             Finance::create([
                 'user_id' => $supplier->user_id,
-                'uuid' => $uid,
+                'uuids' => $uid,
                 'balance' => $request->subscribe_price,
                 'type' => $request->subscribe_type,
                 'is_tax' => $request->tax,
@@ -186,8 +194,15 @@ class SupplierController extends Controller
         $cities = City::all();
         $regions = Region::all();
         $lastSupplierOrder = Supplier::orderBy('id', 'desc')->value('supplier_order');
-        return view('madaresona.supplier.addSupplier', compact('cities', 'regions', 'lastSupplierOrder', 'supplier', 'trueFalseArray'
-        , 'supplierTypesExploded'));
+        if (request()->ajax())
+        {
+            return view('madaresona.supplier.addSupplier', compact('cities', 'regions', 'lastSupplierOrder', 'supplier', 'trueFalseArray'
+                , 'supplierTypesExploded'));
+        }
+
+        return view('madaresona.supplier.editSupplier', compact('cities', 'regions', 'lastSupplierOrder', 'supplier', 'trueFalseArray'
+            , 'supplierTypesExploded'));
+
     }
 
     /**
@@ -199,54 +214,105 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        $validations = Validator::make($request->all(), [
-            'name_ar' => 'required', // name_en,' . $request->id
-            'name_en' => 'required|unique:suppliers,name_en,'. $supplier->id,
-            'phone' => 'required|numeric',
-        ]);
 
-        if ($validations->fails()) {
-            return response()->json(['errors' => $validations->errors(), 'status' => 422]);
-        }
-        if (isset($request->logo) && $request->logo != $supplier->supplier_logo)
+        if (request()->ajax())
         {
-            $image = $request->file('logo');
-            $logo = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/' . $request->name_en), $logo);
-            $supplier->update([
-                'supplier_logo' => $logo
+            $validations = Validator::make($request->all(), [
+                'name_ar' => 'required', // name_en,' . $request->id
+                'name_en' => 'required|unique:suppliers,name_en,'. $supplier->id,
+                'phone' => 'required|numeric',
             ]);
+
+            if ($validations->fails()) {
+                return response()->json(['errors' => $validations->errors(), 'status' => 422]);
+            }
+
+            if (isset($request->logo) && $request->logo != $supplier->supplier_logo)
+            {
+                $image = $request->file('logo');
+                $logo = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/' . $request->name_en), $logo);
+                $supplier->update([
+                    'supplier_logo' => $logo
+                ]);
+            }
+
+            $supplier->update([
+                'supplier_order' => $request->supplier_order,
+                'supplier_type' => implode(',', $request->type),
+                'name_ar' => $request->name_ar,
+                'name_en' => $request->name_en,
+                'email' => $request->email_supplier,
+                'phone' => $request->phone,
+                'mobile' => $request->mobile,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'location' => $request->location,
+                'supplier_details_ar' => $request->supplier_details_ar,
+                'supplier_details_en' => $request->supplier_details_en,
+                'facebook_link' => $request->facebook_link,
+                'twitter_link' => $request->twitter_link,
+                'instagram_link' => $request->instagram_link,
+                'linkedin_link' => $request->linkedin_link,
+                'googleplus_link' => $request->googleplus_link,
+                'lat' => $request->lat,
+                'lng' => $request->lng,
+                'city_id' => $request->city_id,
+                'region_id' => $request->region_id,
+                'active' => $request->active,
+                'special' => $request->special,
+            ]);
+
+            $supplier->save();
+
+            return response()->json(['message' => 'Updated successfully', 'status' => 200]);
+        } else {
+            $request->validate([
+                'name_ar' => 'required', // name_en,' . $request->id
+                'name_en' => 'required|unique:suppliers,name_en,'. $supplier->id,
+                'phone' => 'required|numeric',
+            ]);
+
+            if (isset($request->logo) && $request->logo != $supplier->supplier_logo)
+            {
+                $image = $request->file('logo');
+                $logo = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/' . $request->name_en), $logo);
+                $supplier->update([
+                    'supplier_logo' => $logo
+                ]);
+            }
+
+            $supplier->update([
+                'supplier_order' => $request->supplier_order,
+                'supplier_type' => implode(',', $request->type),
+                'name_ar' => $request->name_ar,
+                'name_en' => $request->name_en,
+                'email' => $request->email_supplier,
+                'phone' => $request->phone,
+                'mobile' => $request->mobile,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'location' => $request->location,
+                'supplier_details_ar' => $request->supplier_details_ar,
+                'supplier_details_en' => $request->supplier_details_en,
+                'facebook_link' => $request->facebook_link,
+                'twitter_link' => $request->twitter_link,
+                'instagram_link' => $request->instagram_link,
+                'linkedin_link' => $request->linkedin_link,
+                'googleplus_link' => $request->googleplus_link,
+                'lat' => $request->lat,
+                'lng' => $request->lng,
+                'city_id' => $request->city_id,
+                'region_id' => $request->region_id,
+                'active' => $request->active,
+                'special' => $request->special,
+            ]);
+
+            $supplier->save();
+
+            return back()->with(['success' => 'تم التعديل بنجاح']);
         }
-
-        $supplier->update([
-            'supplier_order' => $request->supplier_order,
-            'supplier_type' => implode(',', $request->type),
-            'name_ar' => $request->name_ar,
-            'name_en' => $request->name_en,
-            'email' => $request->email_supplier,
-            'phone' => $request->phone,
-            'mobile' => $request->mobile,
-            'fax' => $request->fax,
-            'website' => $request->website,
-            'location' => $request->location,
-            'supplier_details_ar' => $request->supplier_details_ar,
-            'supplier_details_en' => $request->supplier_details_en,
-            'facebook_link' => $request->facebook_link,
-            'twitter_link' => $request->twitter_link,
-            'instagram_link' => $request->instagram_link,
-            'linkedin_link' => $request->linkedin_link,
-            'googleplus_link' => $request->googleplus_link,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
-            'city_id' => $request->city_id,
-            'region_id' => $request->region_id,
-            'active' => $request->active,
-            'special' => $request->special,
-        ]);
-
-        $supplier->save();
-
-        return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
 
     /**

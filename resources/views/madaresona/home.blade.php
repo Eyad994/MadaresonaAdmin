@@ -2,6 +2,7 @@
 
 @section('content')
 
+    @if(auth()->user()->type == 1)
     <div class="container">
         <div class="row">
 
@@ -128,5 +129,6 @@
             </div>
         </div>
     </div>
+    @endif
 
 @endsection

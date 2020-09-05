@@ -13,6 +13,15 @@ use Yajra\DataTables\Facades\DataTables;
 class UserController extends Controller
 {
     /**
+     * UserController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

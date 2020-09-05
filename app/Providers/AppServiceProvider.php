@@ -44,6 +44,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with('supplierTypes', $supplierTypes);
         });
 
+        View::composer('madaresona.supplier.editSupplier', function ($view) {
+            $supplierTypes = SupplierType::all();
+            $view->with('supplierTypes', $supplierTypes);
+        });
+
         View::composer('madaresona.registration.create', function ($view) {
             $allSchools = School::all();
             $allClasses = SchoolClass::all();

@@ -22,6 +22,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SchoolController extends Controller
 {
+    /**
+     * SchoolController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('editor');
+    }
+
     public function index()
     {
         $schoolsStatus = Status::all();
@@ -30,7 +38,6 @@ class SchoolController extends Controller
 
     public function schoolsDatable(Request $request)
     {
-
         if ($request->ajax()) {
             $data = School::latest()->get();
             return Datatables::of($data)
@@ -50,7 +57,6 @@ class SchoolController extends Controller
                 })
                 ->make(true);
         }
-
     }
 
     /*public function show($id)
