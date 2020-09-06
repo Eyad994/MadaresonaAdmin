@@ -13,15 +13,6 @@ use Yajra\DataTables\Facades\DataTables;
 class UserController extends Controller
 {
     /**
-     * UserController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -98,6 +89,24 @@ class UserController extends Controller
          Mail::to($request->email)->send(new MailtrapExample($password, $request->name));
 
          return response()->json(['message' => 'Added successfully', 'status' => 200]);
+    }
+
+
+
+    public function generatePassword($userid)
+    {
+        $user = User::where('id', $userid)->first();
+
+        $password = mt_rand(100000, 999999);
+
+        $user->update([
+            'password' => Hash::make($password),
+
+        ]);
+
+        Mail::to($user->email)->send(new MailtrapExample($password, $user->name));
+
+        return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
 
     /**

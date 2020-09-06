@@ -10,13 +10,13 @@
     .btn_close
     {
         position: absolute;
-        right: 50px;
+        left: 300px;
         top: -8px;
     }
 </style>
 @section('content')
 
-    <div class="container">
+    <div class="container" style="direction: rtl; text-align: right;">
         @if(Session::has('success'))
             <div style="text-align: center; font-size: 15px" class="alert alert-success">
                 {{ session('success') }}

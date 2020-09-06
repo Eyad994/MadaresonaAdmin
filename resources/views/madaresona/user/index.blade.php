@@ -96,8 +96,8 @@
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
                         var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn edit-user-btn" id="' + row.id + '" title="View & Edit"><i class="fa fa-edit" style="color: #00aff0"></i></i></a>';
-                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-user-btn" id="' + row.id + '"  title="Remove "><i class="far fa-trash-alt" style="color: #f64e60"></i></i></a>';
-                        return edit ;
+                        var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn generate-password-btn" id="' + row.id + '"  title="Generate Password "><i class="fas fa-unlock-alt" style="color: #f64e60"></i></i></a>';
+                        return edit + remove;
                     }
                 }
             ]
@@ -158,7 +158,39 @@
                 }
             });
         });
+        $(document).on('click', '.generate-password-btn', function () {
 
+            var id = $(this).attr('id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Generate it!'
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        url: '/generate/' + id ,
+                        method: 'post',
+                        success: function (data) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Your user has Generate Password Successfully' ,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            table.ajax.reload();
+                        }
+                    });
+                }
+            });
+
+        });
 
         $(document).on('click', '.edit-user-btn', function () {
             var id = $(this).attr('id');

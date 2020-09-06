@@ -206,6 +206,7 @@ Route::middleware('auth')->group(function () {
     // User
     Route::resource('user', 'UserController');
     Route::get('userDatatable', 'UserController@userDatatable')->name('userDatatable');
+    Route::post('generate/{id}', 'UserController@generatePassword');
     /************************************************************************************/
 
     //Sender

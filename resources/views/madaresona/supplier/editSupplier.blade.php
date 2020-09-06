@@ -1,89 +1,46 @@
 @extends('layouts.main')
-    <link rel="stylesheet" href="{{ asset('assets/smartwizard/css/smart_wizard_all.css') }}">
-    <style>
+<link rel="stylesheet" href="{{ asset('assets/smartwizard/css/smart_wizard_all.css') }}">
+<style>
 
 
-        .imagePreview {
-            width: 170px;
-            height: 150px;
-            background-position: center center;
-            background: url('{{asset('/images/default/supplier.png')}}');
-            background-color: #fff;
-            background-size: cover;
-            background-repeat: no-repeat;
-            border-radius: 10px;
-            display: inline-block;
-            webkit-box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
-            box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
-            border: 3px solid #fff;
-        }
+    .imagePreview {
+        width: 170px;
+        height: 150px;
+        background-position: center center;
+        background: url('{{asset('/images/default/supplier.png')}}');
+        background-color: #fff;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 10px;
+        display: inline-block;
+        webkit-box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
+        box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
+        border: 3px solid #fff;
+    }
 
-        .btn_edit_img {
-            margin-top: -333px;
-            margin-left: 155px;
+    .btn_edit_img {
+        margin-top: -161px;
+        margin-right: 155px;
 
-        }
+    }
 
-        .imgUp {
-            margin-bottom: 15px;
-        }
+    .imgUp {
+        margin-bottom: 15px;
+    }
 
-        .controls {
-            margin-top: 16px;
-            border: 1px solid transparent;
-            border-radius: 2px 0 0 2px;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            height: 32px;
-            outline: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        }
 
-        #pac-input {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 15px;
-            font-weight: 300;
-            margin-left: 12px;
-            padding: 0 11px 0 13px;
-            text-overflow: ellipsis;
-            width: 300px;
-            top: -6px !important;
-            z-index: 100000 !important;
-        }
-
-        .modal {
-            z-index: 550 !important;
-        }
-
-        .modal-backdrop {
-            z-index: 10;
-        }
-
-        ​
-        #pac-input:focus {
-            border-color: #4d90fe;
-        }
-
-        #map-canvas {
-            height: 350px;
-            margin: 20px;
-            width: 780px;
-            padding: 0px;
-        }
-
-        .ck-editor__editable {
-            max-height: 175px !important;
-        }
-    </style>
+    .select2-container--default .select2-selection--multiple .select2-selection__rendered .select2-selection__choice {
+        float: right !important;
+    }
+</style>
 
 @section('content')
-    <div class="container">
+    <div class="container" style="text-align: right; direction:rtl;">
         @if(Session::has('success'))
             <div style="text-align: center; font-size: 15px" class="alert alert-success">
-            {{ session('success') }}
+                {{ session('success') }}
             </div>
-            @endif
+        @endif
 
         <div id="smartwizard">
 
@@ -91,36 +48,24 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="#step-1">
-                        <strong>Supplier Basic Information</strong>
+                        <strong>المعلومات الاساسية </strong>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#step-2">
-                        <strong>Supplier Details</strong>
+                        <strong> كلمة عن المورد</strong>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#step-3">
-                        <strong>Supplier Address</strong>
+                        <strong>العنوان</strong>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#step-4">
-                        <strong>Supplier Social Media Links</strong>
+                        <strong>روابط وسائل التواصل الاجتماعي </strong>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#step-7">
-                        <strong>Supplier Account Information</strong>
-                    </a>
-                </li>
-                @if(!isset($supplier))
-                    <li class="nav-item">
-                        <a class="nav-link" href="#step-8">
-                            <strong>Supplier Financial Issues</strong>
-                        </a>
-                    </li>
-                @endif
             </ul>
             <hr>
             @if(isset($supplier))
@@ -140,7 +85,7 @@
 
                                     <div class="row">
                                         <div class="col-md-6 form-group">
-                                            <label>Supplier Type</label>
+                                            <label> القسم</label>
                                             <select class="multiple-select" name="type[]" multiple="multiple">
                                                 @if(!isset($supplier))
                                                     <option value="" disabled>Select Supplier Type</option>
@@ -150,72 +95,65 @@
                                                 @endforeach
                                             </select>
                                         </div>
-
                                         <div class="col-md-6 form-group">
-                                            <label>Supplier Order</label>
-                                            <input type="number" class="form-control" placeholder="Supplier Order"
-                                                   name="supplier_order"
-                                                   id="supplier_order"
-                                                   value="{{ isset($supplier) ? $supplier->supplier_order : '' }}">
-                                            <small>Last Supplier Order:{{ $lastSupplierOrder }}</small>
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Arabic Name</label>
+                                            <label>الاسم بالعربي</label>
                                             <input type="text" class="form-control" id="name_ar" name="name_ar"
                                                    style="direction: rtl"
-                                                   placeholder="Arabic Name"
+                                                   placeholder="الاسم بالعربي"
                                                    value="{{ isset($supplier) ? $supplier->name_ar : '' }}">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>English Name</label>
+                                            <label>الاسم بالانجليزي</label>
                                             <input type="text" class="form-control" id="name_en" name="name_en"
-                                                   placeholder="English Name"
-                                                   value="{{ isset($supplier) ? $supplier->name_en : '' }}">
+                                                   placeholder="الاسم بالانجليزي"
+                                                   value="{{ isset($supplier) ? $supplier->name_en : '' }}"
+                                                   style="text-align: left;direction: ltr;">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Email Address </label>
+                                            <label>البريد الالكتروني </label>
                                             <input type="email" class="form-control" id="email_supplier"
                                                    name="email_supplier"
-                                                   placeholder="Email Supplier Address"
+                                                   placeholder="البريد الالكتروني"
                                                    value="{{ isset($supplier) ? $supplier->email : '' }}">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Phone </label>
+                                            <label>الهاتف </label>
                                             <input type="text" class="form-control" id="phone" name="phone"
-                                                   placeholder="Phone"
+                                                   placeholder="الهاتف"
                                                    value="{{ isset($supplier) ? $supplier->phone : '' }}">
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label>Mobile</label>
+                                            <label>هاتف اخر</label>
                                             <input type="text" class="form-control" id="mobile" name="mobile"
-                                                   placeholder="Mobile"
+                                                   placeholder="هاتف اخر"
                                                    value="{{ isset($supplier) ? $supplier->mobile : '' }}">
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label> Fax</label>
-                                            <input type="text" class="form-control" id="fax" name="fax" placeholder="Fax"
+                                            <label> فاكس</label>
+                                            <input type="text" class="form-control" id="fax" name="fax"
+                                                   placeholder="فاكس"
                                                    value="{{ isset($supplier) ? $supplier->fax : '' }}">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label> Website</label>
+                                            <label> موقع الكتروني</label>
                                             <input type="text" class="form-control" id="website" name="website"
-                                                   placeholder="Website"
+                                                   placeholder="موقع الكتروني"
                                                    value="{{ isset($supplier) ? $supplier->website : '' }}"
                                             >
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label>Location</label>
+                                            <label>الموقع</label>
                                             <input type="text" class="form-control" id="location" name="location"
-                                                   placeholder="Location"
+                                                   placeholder="الموقع"
                                                    value="{{ isset($supplier) ? $supplier->location : '' }}"
                                             >
                                         </div>
 
                                         <div class="col-sm-2 imgUp">
-                                            <label>Supplier Logo </label>
+                                            <label>شعار </label>
                                             <div class="imagePreview" style="@if(isset($supplier))
                                                     background:url('{{asset('/images/'.$supplier->name_en.'/'.$supplier->supplier_logo.'')}}');
                                                     background-position: center center;
@@ -238,37 +176,35 @@
                                 <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
                                     <div class="row">
                                         <div class="col-md-6 form-group">
-                                            <label>Supplier details Arabic </label>
+                                            <label>كلمة بالعربي </label>
                                             <textarea name="supplier_details_ar" id="supplier_details_ar"
-                                                      placeholder="Supplier details Arabic">@if(isset($supplier)) {!! $supplier->supplier_details_ar!!} @endif</textarea>
+                                                      placeholder="كلمة بالعربي">@if(isset($supplier)) {!! $supplier->supplier_details_ar!!} @endif</textarea>
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Supplier details English</label>
+                                            <label>كلمة بالانجليزي</label>
                                             <textarea name="supplier_details_en" id="supplier_details_en"
-                                                      placeholder="Supplier details English">@if(isset($supplier)) {!! $supplier->supplier_details_en!!} @endif</textarea>
+                                                      placeholder="كلمة بالانجليزي">@if(isset($supplier)) {!! $supplier->supplier_details_en!!} @endif</textarea>
                                         </div>
                                     </div>
                                     <script>
-                                        ClassicEditor.create(document.querySelector('#supplier_details_ar'));
-                                        ClassicEditor.create(document.querySelector('#supplier_details_en'));
-                                    </script>
 
+                                    </script>
                                 </div>
+
                                 <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
                                     <div class="row">
                                         <div class="col-md-6 form-group">
-                                            <label> Country</label>
+                                            <label> البلد</label>
                                             <select class="form-control" id="country" name="country" disabled>
                                                 <option disabled selected value="1">Jordan</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label> City</label>
+                                            <label> المدنية</label>
                                             <select class="form-control" id="city_id" name="city_id">
                                                 @if(!isset($supplier))
-                                                    <option value="" selected disabled>Select city</option>
+                                                    <option value="" selected disabled>اختار المدنية</option>
                                                 @endif
-
                                                 @foreach($cities as $city)
                                                     <option @if(isset($supplier) && $city->id == $supplier->city->id) value="{{ $city->id }}"
                                                             selected
@@ -278,30 +214,11 @@
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label> Region</label>
+                                            <label> المنطقة</label>
                                             <select class="form-control" id="region_id" name="region_id"
                                                     @if(isset($supplier)) @else disabled="" @endif>
-                                                <option value="" selected>Select Region</option>
-                                                @if(isset($supplier))
-                                                    <script>
-                                                        var value = {{ $supplier->city_id }}
-                                        $.ajax({
-                                                            url: '/getRegions/' + value,
-                                                            method: 'get',
-                                                            success: function (result) {
-                                                                var supplierId = {{ $supplier->region_id }}
-                                                $('#region_id option:not(:first)').remove();
-                                                                $.each(result, function (index, value) {
-                                                                    if (supplierId == value.id)
-                                                                        $('#region_id').append("<option value='" + value.id + "' selected>" + value.area_name_ar + "");
-                                                                    else
-                                                                        $('#region_id').append("<option value='" + value.id + "'>" + value.area_name_ar + "");
-                                                                });
-
-                                                                $('#region_id').removeAttr('disabled');
-                                                            }
-                                                        });
-                                                    </script>
+                                                @if(!isset($supplier))
+                                                    <option value="" selected>اختار المنطقة</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -312,138 +229,45 @@
                                 <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
                                     <div class="row">
                                         <div class="col-md-6 form-group">
-                                            <label>Facebook Link </label>
-                                            <input type="text" class="form-control" id="facebook_link" name="facebook_link"
-                                                   placeholder="Facebook Link"
+                                            <label>رابط الفيس بوك </label>
+                                            <input type="text" class="form-control" id="facebook_link"
+                                                   name="facebook_link"
+                                                   placeholder="رابط الفيس بوك"
                                                    value="{{isset($supplier) ? $supplier->facebook_link : ''}}">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label>Twitter Link </label>
-                                            <input type="text" class="form-control" id="twitter_link" name="twitter_link"
-                                                   placeholder="Instagram Link"
+                                            <label>رابط التويتر </label>
+                                            <input type="text" class="form-control" id="twitter_link"
+                                                   name="twitter_link"
+                                                   placeholder="رابط التويتر"
                                                    value="{{isset($supplier) ? $supplier->twitter_link : ''}}">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label> Instagram Link</label>
+                                            <label> رابط انستقرام </label>
                                             <input type="text" class="form-control" id="instagram_link"
                                                    name="instagram_link"
-                                                   placeholder="Instagram Link"
+                                                   placeholder="رابط انستقرام "
                                                    value="{{isset($supplier) ? $supplier->instagram_link : ''}}">
                                         </div>
                                         <div class="col-md-6 form-group">
-                                            <label> Linkedin Link</label>
-                                            <input type="text" class="form-control" id="linkedin_link" name="linkedin_link"
-                                                   placeholder="Linkedin Link"
+                                            <label> رابط لينك ايند</label>
+                                            <input type="text" class="form-control" id="linkedin_link"
+                                                   name="linkedin_link"
+                                                   placeholder="رابط لينك ايند"
                                                    value="{{isset($supplier) ? $supplier->linkedin_link : ''}}">
                                         </div>
 
                                         <div class="col-md-6 form-group">
-                                            <label> Google Plus Link</label>
+                                            <label> رابط جوجل بلس</label>
                                             <input type="text" class="form-control" id="googleplus_link"
                                                    name="googleplus_link"
-                                                   placeholder="Google Plus Link"
+                                                   placeholder="رابط جوجل بلس"
                                                    value="{{isset($supplier) ? $supplier->googleplus_link : ''}}">
                                         </div>
 
-                                        <div class="col-md-12 form-group">
-                                            <label> Google Map</label>
-                                            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                                            <div id="map-canvas"></div>
-                                            <input type="hidden" name="lat" id="lat"
-                                                   value="{{ isset($supplier) ? $supplier->lat : 0.0 }}"
-                                                   readonly="yes">
-                                            <input type="hidden" name="lng" id="lng"
-                                                   value="{{ isset($supplier) ? $supplier->lng : 0.0 }}"
-                                                   readonly="yes">
-                                        </div>
                                     </div>
                                 </div>
-                                <div id="step-7" class="tab-pane" role="tabpanel" aria-labelledby="step-7">
-                                    <div class="row">
 
-                                        @if(!isset($supplier))
-                                            <div class="col-md-6 form-group">
-                                                <label> Email</label>
-                                                <input type="email" class="form-control" id="email" name="email"
-                                                       placeholder="Email">
-                                            </div>
-                                            <div class="col-md-6 form-group">
-                                                <label> User Name</label>
-                                                <input type="text" class="form-control" id="user_name" name="user_name"
-                                                       placeholder="User Name">
-                                            </div>
-                                        @endif
-                                        <div class="col-md-6 form-group">
-                                            <label>Active</label>
-                                            <select class="form-control" id="active" name="active">
-                                                @if(isset($supplier))
-                                                    @foreach($trueFalseArray as $index => $value)
-                                                        <option value="{{ $index }}"
-                                                                @if($supplier->active == $index) selected @endif> {{ $value }}</option>
-                                                    @endforeach
-                                                @else
-                                                    <option selected value="0"> False</option>
-                                                    <option value="1"> True</option>
-                                                @endif
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>special</label>
-                                            <select class="form-control" id="special" name="special">
-                                                @if(isset($supplier))
-                                                    @foreach($trueFalseArray as $index => $value)
-                                                        <option value="{{ $index }}"
-                                                                @if($supplier->special == $index) selected @endif> {{ $value }}</option>
-                                                    @endforeach
-                                                @else
-                                                    <option selected value="0"> False</option>
-                                                    <option value="1"> True</option>
-                                                @endif
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                @if(!isset($supplier))
-                                    <div id="step-8" class="tab-pane" role="tabpanel" aria-labelledby="step-8">
-                                        <div class="row">
-                                            <div class="col-md-6 form-group">
-                                                <label>Subscribe Price</label>
-                                                <input type="text" name="subscribe_price" class="form-control"
-                                                       placeholder="Subscribe Price">
-                                            </div>
-                                            <div class="col-md-6 form-group">
-                                                <label>Subscribe Type</label>
-                                                <input type="text" name="subscribe_type" class="form-control"
-                                                       placeholder="Subscribe Type">
-                                            </div>
-
-                                            <div class="col-md-12 form-group">
-
-                                                <label>Date</label>
-                                                <div class="input-daterange input-group" id="kt_datepicker_5">
-                                                    <input type="text" class="form-control" name="start"
-                                                           placeholder="From Date">
-                                                    <div class="input-group-append">
-                                                    <span class="input-group-text"><i
-                                                                class="fa fa-ellipsis-h"></i></span>
-                                                    </div>
-                                                    <input type="text" class="form-control" name="end"
-                                                           placeholder="To Date">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 form-group">
-                                                <label>Tax</label>
-                                                <select class="form-control" id="tax" name="tax">
-                                                    <option selected value="0">False</option>
-                                                    <option value="1"> True</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                @endif
                             </div>
                         </form>
         </div>
@@ -452,7 +276,7 @@
         @endforeach
     </div>
 
-    @endsection
+@endsection
 
 
 @section('script')
@@ -461,6 +285,30 @@
     <script type="text/javascript" src="{{ asset('assets/js/pages/crud/forms/widgets/select27a4a.js') }}"></script>
     <script src="{{ asset('assets/js/pages/crud/forms/widgets/bootstrap-datepicker7a4a.js') }}"></script>
     <script type="text/javascript">
+        f();
+        function f() {
+            var value = {{ $supplier->city_id }}
+            $.ajax({
+                url: '/getRegions/' + value,
+                method: 'get',
+                success: function (result) {
+                    var supplierId = {{ $supplier->region_id }}
+                    $('#region_id option:not(:first)').remove();
+                    $.each(result, function (index, value) {
+                        if (supplierId == value.id)
+                            $('#region_id').append("<option value='" + value.id + "' selected>" + value.area_name_ar + "");
+                        else
+                            $('#region_id').append("<option value='" + value.id + "'>" + value.area_name_ar + "");
+                    });
+
+                    $('#region_id').removeAttr('disabled');
+                }
+            });
+        }
+
+
+        ClassicEditor.create(document.querySelector('#supplier_details_ar'));
+        ClassicEditor.create(document.querySelector('#supplier_details_en'));
         $(document).ready(function () {
 
             $(document).on("click", "i.del", function () {
@@ -519,6 +367,7 @@
                 }, toolbarSettings: {
                     toolbarPosition: 'bottom', // none, top, bottom, both
                     toolbarButtonPosition: 'right', // left, right, center
+
                     showNextButton: true, // show/hide a Next button
                     showPreviousButton: true, // show/hide a Previous button
                     toolbarExtraButtons: [
@@ -576,98 +425,6 @@
         });
 
 
-        // google maps
-        var map;
-        var marker = false;
-        var lat;
-        var lng;
-        initialize();
-        function initialize() {
-            if ($("#map-canvas").length != 0) {
-                @if(isset($supplier))
-                    lat = parseFloat(document.getElementById('lat').value);
-                lng = parseFloat(document.getElementById('lng').value);
-
-                var myLocationEdit = {
-                    lat: lat,
-                    lng: lng
-                };
-                map = new google.maps.Map(document.getElementById('map-canvas'), {
-                    center: myLocationEdit,
-                    zoom: 16,
-                    mapTypeId: 'roadmap'
-                });
-                marker = new google.maps.Marker({
-                    position: myLocationEdit,
-                    map: map,
-                    draggable: true
-                });
-                        @else
-                var markers = [];
-                map = new google.maps.Map(document.getElementById('map-canvas'), {
-                    center: {lat: 31.95411763246642, lng: 35.89202087546278},
-                    zoom: 12
-                });
-                        @endif
-                var input = /** @type {HTMLInputElement} */(
-                        document.getElementById('pac-input'));
-                new google.maps.places.Autocomplete(input);
-                google.maps.event.addDomListener(window, 'load', initialize);
-
-                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-                var searchBox = new google.maps.places.SearchBox((input));
-
-                google.maps.event.addListener(searchBox, 'places_changed', function () {
-                    var places = searchBox.getPlaces();
-                    if (places.length == 0) {
-                        return;
-                    }
-                    markers = [];
-                    var mLatLng;
-                    var bounds = new google.maps.LatLngBounds();
-                    for (var i = 0, place; place = places[i]; i++) {
-                        if (marker === false) {
-                            marker = new google.maps.Marker({
-                                position: place.geometry.location,
-                                map: map,
-                            });
-                            google.maps.event.addListener(marker, 'dragend', function () {
-                                markerLocation();
-                            });
-                        } else {
-                            marker.setPosition(place.geometry.location);
-                        }
-                        mLatLng = place.geometry.location;
-                    }
-                    document.getElementById('lat').value = mLatLng.lat(); //latitude
-                    document.getElementById('lng').value = mLatLng.lng();
-                    map.setCenter(mLatLng);
-                    map.setZoom(18);
-                });
-                google.maps.event.addListener(map, 'click', function (event) {
-
-                    var clickedLocation = event.latLng;
-                    if (marker === false) {
-                        marker = new google.maps.Marker({
-                            position: clickedLocation,
-                            map: map,
-                        });
-                        google.maps.event.addListener(marker, 'dragend', function () {
-                            markerLocation();
-                        });
-                    } else {
-                        marker.setPosition(clickedLocation);
-                    }
-                    markerLocation();
-                });
-            }
-        }
-
-        function markerLocation() {
-            var currentLocation = marker.getPosition();
-            document.getElementById('lat').value = currentLocation.lat(); //latitude
-            document.getElementById('lng').value = currentLocation.lng(); //longitude
-        }
 
     </script>
-    @endsection
+@endsection

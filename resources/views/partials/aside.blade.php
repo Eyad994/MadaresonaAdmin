@@ -188,30 +188,29 @@
 
                 @if(auth()->user()->type == 4)
 
-                    <li class="menu-item " aria-haspopup="true">
+                    <li class="menu-item " aria-haspopup="true" style="direction: rtl; text-align: right;">
                         <a href="/supplier/{{ auth()->user()->supplier->id }}/edit" class="menu-link ">
-                            <i class="fa fa-university left-icon-menu"><span></span></i>
-                            <span class="menu-text">Profile</span>
+                            <i class="fas fa-id-badge left-icon-menu" style="padding-left: 10px;"><span></span></i>
+                            <span class="menu-text">الملف الشخصي</span>
                         </a>
                     </li>
 
-                    <li class="menu-item " aria-haspopup="true">
+                    <li class="menu-item " aria-haspopup="true" style="direction: rtl; text-align: right;">
                         <a href="/gallery/supplier/{{ auth()->user()->id }}" class="menu-link ">
-                            <i class="fa fa-university left-icon-menu"><span></span></i>
-                            <span class="menu-text">Gallery</span>
+                            <i class="fab fa-product-hunt left-icon-menu" style="padding-left: 10px;"><span></span></i>
+                            <span class="menu-text">المنتجات </span>
                         </a>
                     </li>
-                    <li class="menu-item " aria-haspopup="true">
+                    <li class="menu-item " aria-haspopup="true" style="direction: rtl; text-align: right;">
                         <a href="/supplier/all/{{ auth()->user()->id }}" class="menu-link ">
-                            <i class="fa fa-university left-icon-menu"><span></span></i>
-                            <span class="menu-text">Messages</span>
-                            <span class="badge badge-warning">
+                            <i class="fas fa-envelope-open left-icon-menu" style="padding-left: 10px;"><span></span></i>
+                            <span class="menu-text">الرسائل</span>
+                            <span class="badge badge-warning" style="color: #fff;">
                                 {{ auth()->user()->supplierMessage->count() }}
                             </span>
                         </a>
                     </li>
                     @endif
-
             </ul>
             <!--end::Menu Nav-->
         </div>
