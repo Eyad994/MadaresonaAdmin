@@ -42,20 +42,91 @@
                             <span class="navi-text text-muted text-hover-primary"> {{ auth()->user()->email }}</span>
                         </span>
                     </a>
+                    @if(!(auth()->user()->type == 1))
 
+                    <a href="#" class="navi-item">
+                        <span class="navi-link p-0 pb-2"> <i class="fas fa-unlock-alt" style="padding-right: 15px; color: #3699ff;padding-left: 4px;"></i>
+                            <span class="navi-text text-muted text-hover-primary reset_password " style="text-decoration: underline;"> Reset Password</span> </span>
+
+                        </span>
+                    </a>
+                    @endif
                     <a href="{{ route('logout') }}" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Sign Out
                     </a>
+
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </div>
             </div>
         </div>
+    @include('madaresona.schools.shcoolModal')
         <!--end::Header-->
 
     </div>
     <!--end::Content-->
 </div>
 <!-- end::User Panel-->
+@section('script')
+    <script type="text/javascript">
+
+        $('#reset_password').on('click', function () {
+            alert('1')
+            $('#schoolModal').modal('show');
+            /*$.ajax({
+                url:
+                method: 'get',
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $('.modal-title').text('Add Faq');
+                    $('#schoolModal').modal('show');
+
+                    $('#faqForm').submit(function (e) {
+                        e.preventDefault();
+                        var form = $(this);
+                        var url = form.attr('action');
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: new FormData(this),
+                            dataType: "json",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+
+                                if (data.status === 422) {
+                                    console.log(data);
+                                    var error_html = '';
+
+                                    for (let value of Object.values(data.errors)) {
+                                        error_html += '<div class="alert alert-danger">' + value + '</div>';
+                                    }
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        html: error_html,
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: data.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+
+                                    table.ajax.reload();
+                                    $('#schoolModal').modal('hide');
+                                }
+                            }
+                        });
+
+                    });
+                }
+            });*/
+        });
+    </script>
+@endsection

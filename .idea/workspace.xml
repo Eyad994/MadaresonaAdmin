@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3779f3f2-2144-4324-a470-19fe726bf6d4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/madaresonaAdmin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/madaresonaAdmin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/supplier/editSupplier.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/supplier/editSupplier.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/supplier/gallery/createWithoutAjax.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/supplier/gallery/createWithoutAjax.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/user/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/aside.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/userPanel.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/userPanel.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,10 +17,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/web.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1533">
+              <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/partials/aside.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1078">
-              <caret line="195" column="25" selection-start-line="195" selection-start-column="25" selection-end-line="195" selection-end-column="25" />
+            <state relative-caret-position="228">
+              <caret line="189" lean-forward="true" selection-start-line="188" selection-start-column="16" selection-end-line="189" />
               <folding>
                 <element signature="n#style#0;n#li#11;n#ul#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#i#0;n#a#0;n#li#11;n#ul#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -43,8 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/madaresona/supplier/editSupplier.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+            <state relative-caret-position="860">
+              <caret line="428" column="4" selection-start-line="428" selection-start-column="4" selection-end-line="428" selection-end-column="13" />
               <folding>
                 <element signature="e#2049#2090#0#HTML" expanded="true" />
                 <element signature="e#2104#2147#0#HTML" expanded="true" />
@@ -54,7 +57,36 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/madaresona/faq/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="31" column="50" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="50" />
+              <folding>
+                <element signature="e#1423#2977#0#HTML" />
+                <element signature="n#style#0;n#i#0;n#a#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#a#0;n#!!top" expanded="true" />
+                <element signature="e#3026#5251#0#HTML" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="529">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/Supplier.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/madaresona/supplier/gallery/createWithoutAjax.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
@@ -67,20 +99,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/partials/subHeader.blade.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/partials/userPanel.blade.php">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="515">
+              <caret line="131" column="11" lean-forward="true" selection-start-line="131" selection-start-column="11" selection-end-line="131" selection-end-column="11" />
+              <folding>
+                <element signature="n#a#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" />
+                <element signature="n#style#0;n#i#0;n#span#0;n#a#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#span#0;n#a#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#4275#6451#0#HTML" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="120" column="74" lean-forward="true" selection-start-line="120" selection-start-column="74" selection-end-line="120" selection-end-column="74" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/partials/header.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SupplierMessageController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="380">
+              <caret line="44" column="2" lean-forward="true" selection-start-line="44" selection-start-column="2" selection-end-line="48" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -89,7 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>id=&quot;SvgjsSvg1006&quot;</find>
       <find>1006</find>
       <find>apexchartsrrix2h0w</find>
       <find>kt_mixed_widget_1_chart</find>
@@ -119,6 +164,7 @@
       <find>show-message-btn</find>
       <find>Next</find>
       <find>supplier_details_ar</find>
+      <find>messagesDatatable</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\Eyad\Documents\Laravel Projects\MadaresonaAdmin\resources</dir>
@@ -130,7 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/madaresona/salesFinances/index.blade.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/resources/views/madaresona/schools/shcoolModal.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/madaresona/supplier/messages/index.blade.php" />
@@ -174,13 +219,14 @@
         <option value="$PROJECT_DIR$/app/Exceptions/Handler.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/GalleryController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SupplierMessageController.php" />
-        <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
         <option value="$PROJECT_DIR$/resources/views/madaresona/user/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/partials/aside.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/partials/header.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/madaresona/supplier/editSupplier.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/madaresona/supplier/gallery/createWithoutAjax.blade.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="$PROJECT_DIR$/resources/views/partials/userPanel.blade.php" />
       </list>
     </option>
   </component>
@@ -292,7 +338,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1990" />
+    <option name="x" value="70" />
     <option name="y" value="27" />
     <option name="width" value="1850" />
     <option name="height" value="1053" />
@@ -337,37 +383,6 @@
               <item name="MadaresonaAdmin" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MadaresonaAdmin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MadaresonaAdmin" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="madaresona" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MadaresonaAdmin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MadaresonaAdmin" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="madaresona" type="462c0819:PsiDirectoryNode" />
-              <item name="supplier" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MadaresonaAdmin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MadaresonaAdmin" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="madaresona" type="462c0819:PsiDirectoryNode" />
-              <item name="supplier" type="462c0819:PsiDirectoryNode" />
-              <item name="gallery" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MadaresonaAdmin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MadaresonaAdmin" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="partials" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MadaresonaAdmin" type="b2602c69:ProjectViewProjectNode" />
@@ -489,15 +504,15 @@
       <workItem from="1598134098176" duration="5702000" />
       <workItem from="1598553031392" duration="76000" />
       <workItem from="1599342775446" duration="3679000" />
-      <workItem from="1599375808117" duration="5679000" />
+      <workItem from="1599375808117" duration="10578000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73728000" />
+    <option name="totallyTimeSpent" value="78627000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1990" y="27" width="1850" height="1053" extended-state="6" />
+    <frame x="70" y="27" width="1850" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21937639" />
@@ -514,7 +529,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.25971144" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.25971144" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -526,18 +541,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/TrustHosts.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Authenticate.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -726,13 +729,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/EditorMiddleware.php" />
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/AdminMiddleware.php" />
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="75" column="74" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/madaresona/supplier/gallery/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -776,20 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SupplierMessageController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FaqController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -825,9 +807,6 @@
     <entry file="file://$PROJECT_DIR$/resources/views/partials/subHeader.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/partials/userPanel.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/partials/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -835,10 +814,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Supplier.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SupplierMessageController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="44" column="2" lean-forward="true" selection-start-line="44" selection-start-column="2" selection-end-line="48" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1533">
+          <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/partials/aside.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1078">
-          <caret line="195" column="25" selection-start-line="195" selection-start-column="25" selection-end-line="195" selection-end-column="25" />
+        <state relative-caret-position="228">
+          <caret line="189" lean-forward="true" selection-start-line="188" selection-start-column="16" selection-end-line="189" />
           <folding>
             <element signature="n#style#0;n#li#11;n#ul#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#a#0;n#li#11;n#ul#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -851,17 +854,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/madaresona/supplier/editSupplier.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-          <folding>
-            <element signature="e#2049#2090#0#HTML" expanded="true" />
-            <element signature="e#2104#2147#0#HTML" expanded="true" />
-            <element signature="e#6236#6276#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/main.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/madaresona/supplier/gallery/createWithoutAjax.blade.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -870,6 +864,51 @@
           <folding>
             <element signature="e#437#479#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/madaresona/supplier/editSupplier.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="860">
+          <caret line="428" column="4" selection-start-line="428" selection-start-column="4" selection-end-line="428" selection-end-column="13" />
+          <folding>
+            <element signature="e#2049#2090#0#HTML" expanded="true" />
+            <element signature="e#2104#2147#0#HTML" expanded="true" />
+            <element signature="e#6236#6276#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/madaresona/faq/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="31" column="50" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="50" />
+          <folding>
+            <element signature="e#1423#2977#0#HTML" />
+            <element signature="n#style#0;n#i#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="e#3026#5251#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/userPanel.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="131" column="11" lean-forward="true" selection-start-line="131" selection-start-column="11" selection-end-line="131" selection-end-column="11" />
+          <folding>
+            <element signature="n#a#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" />
+            <element signature="n#style#0;n#i#0;n#span#0;n#a#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#0;n#a#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#4275#6451#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="120" column="74" lean-forward="true" selection-start-line="120" selection-start-column="74" selection-end-line="120" selection-end-column="74" />
         </state>
       </provider>
     </entry>
