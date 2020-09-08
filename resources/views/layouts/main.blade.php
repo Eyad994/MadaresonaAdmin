@@ -172,6 +172,63 @@
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle7a4a.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/ckeditor/ckeditor-classic.bundle7a4a.js') }}"></script>
 
+<script>
+
+    $('.reset_password').on('click', function () {
+         $('#schoolModal').modal('show');
+        /*$.ajax({
+         url:
+         method: 'get',
+         success: function (data) {
+         $('.modal-body').html(data);
+         $('.modal-title').text('Add Faq');
+         $('#schoolModal').modal('show');
+
+         $('#faqForm').submit(function (e) {
+         e.preventDefault();
+         var form = $(this);
+         var url = form.attr('action');
+         $.ajax({
+         type: "POST",
+         url: url,
+         data: new FormData(this),
+         dataType: "json",
+         contentType: false,
+         cache: false,
+         processData: false,
+         success: function (data) {
+
+         if (data.status === 422) {
+         console.log(data);
+         var error_html = '';
+
+         for (let value of Object.values(data.errors)) {
+         error_html += '<div class="alert alert-danger">' + value + '</div>';
+         }
+         Swal.fire({
+         icon: 'error',
+         title: 'Oops...',
+         html: error_html,
+         })
+         } else {
+         Swal.fire({
+         icon: 'success',
+         title: data.message,
+         showConfirmButton: false,
+         timer: 1500
+         });
+
+         table.ajax.reload();
+         $('#schoolModal').modal('hide');
+         }
+         }
+         });
+
+         });
+         }
+         });*/
+    });
+</script>
 @yield('script')
 
 </body>

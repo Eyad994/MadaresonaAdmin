@@ -33,17 +33,20 @@
             processing: true,
             serverSide: true,
             buttons: [
-                {'extend': 'pageLength'},
                 {
-                    text: 'Reload',
-                    action: function (e, dt, node, config) {
+                    text: 'اعادة تحميل',
+                    action: function ( e, dt, node, config ) {
                         dt.ajax.reload();
                     }
                 },
-                {'extend': 'excel'},
-                {'extend': 'print'},
-                {'extend': 'pdf'}
+                {'extend':'excel','text':'أكسيل'},
+                {'extend':'print','text':'طباعة'},
+                {'extend':'pdf','text':'pdf'},
+                {'extend':'pageLength','text':'حجم العرض'},
             ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Arabic.json',
+            },
             ajax: {
                 url: "{{ route('messageDatatable') }}",
                 type: "get",
@@ -53,7 +56,7 @@
             },
             columns: [
                 {data: 'DT_RowIndex', title: 'ID'},
-                {data: 'name', title: 'Name'},
+                {data: 'name', title: 'الاسم'},
                 {data: 'subject', title: 'Subject'},
                 {
                     title: 'Email', "mRender": function (data, type, row) {

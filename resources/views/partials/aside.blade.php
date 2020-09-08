@@ -210,7 +210,33 @@
                             </span>
                         </a>
                     </li>
-                    @endif
+                @endif
+
+                @if(auth()->user()->type == 5)
+
+                    <li class="menu-item " aria-haspopup="true" style="direction: rtl; text-align: right;">
+                        <a href="/school/edit/{{ auth()->user()->school->id }}" class="menu-link ">
+                            <i class="fas fa-id-badge left-icon-menu" style="padding-left: 10px;"><span></span></i>
+                            <span class="menu-text">الملف الشخصي</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item " aria-haspopup="true" style="direction: rtl; text-align: right;">
+                        <a href="/gallery/supplier/{{ auth()->user()->id }}" class="menu-link ">
+                            <i class="fab fa-product-hunt left-icon-menu" style="padding-left: 10px;"><span></span></i>
+                            <span class="menu-text">المنتجات </span>
+                        </a>
+                    </li>
+                    <li class="menu-item " aria-haspopup="true" style="direction: rtl; text-align: right;">
+                        <a href="/supplier/all/{{ auth()->user()->id }}" class="menu-link ">
+                            <i class="fas fa-envelope-open left-icon-menu" style="padding-left: 10px;"><span></span></i>
+                            <span class="menu-text">الرسائل</span>
+                            <span class="badge badge-warning" style="color: #fff;">
+                                {{ auth()->user()->supplierMessage->count() }}
+                            </span>
+                        </a>
+                    </li>
+                @endif
             </ul>
             <!--end::Menu Nav-->
         </div>

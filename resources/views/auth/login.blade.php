@@ -122,6 +122,9 @@
                     </form>
 
                 </div>
+                @if(session()->has('active'))
+                    <div class="alert alert-danger">{{ session('active') }}</div>
+                    @endif
 
                 <div class="login-forgot">
                     <div class="mb-20">

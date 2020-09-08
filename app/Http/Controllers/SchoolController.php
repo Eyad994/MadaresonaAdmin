@@ -9,6 +9,7 @@ use App\Models\Region;
 use App\Models\SchoolType;
 use App\Models\Status;
 use App\School;
+use App\Traits\SMS;
 use App\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SchoolController extends Controller
 {
+    use SMS;
     /**
      * SchoolController constructor.
      */
