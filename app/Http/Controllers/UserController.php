@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\MailtrapExample;
+use App\Models\School;
+use App\Models\Supplier;
+use App\Traits\SMS;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +15,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
+    use SMS;
+
     /**
      * Display a listing of the resource.
      *
@@ -86,24 +91,40 @@ class UserController extends Controller
             'password' => Hash::make($password)
         ]);
 
-         Mail::to($request->email)->send(new MailtrapExample($password, $request->name));
+        Mail::to($request->email)->send(new MailtrapExample($password, $request->name));
 
-         return response()->json(['message' => 'Added successfully', 'status' => 200]);
+        return response()->json(['message' => 'Added successfully', 'status' => 200]);
     }
-
 
 
     public function generatePassword($userid)
     {
+
         $user = User::where('id', $userid)->first();
-
         $password = mt_rand(100000, 999999);
-
+        if ($user->type == 1 || $user->type == 3) {
+            $phone = $user->phone;
+        } elseif ($user->type == 4) {
+            $supplier = Supplier::where('user_id', $userid)->first();
+            if ($supplier->mobile == null) {
+                $phone = $supplier->phone;
+            } else {
+                $phone = $supplier->mobile;
+            }
+        } elseif ($user->type == 5) {
+            $school = School::where('user_id', $userid)->first();
+            if ($school->phone == null) {
+                $phone = $school->contact_person_phone;
+            } else {
+                $phone = $school->phone;
+            }
+        }
         $user->update([
             'password' => Hash::make($password),
-
         ]);
-
+        if (!($phone == null)) {
+            $this->sms('تم تفعيل حسابك بنجاح كلمة السر الخاصة بك هي :', $phone);
+        }
         Mail::to($user->email)->send(new MailtrapExample($password, $user->name));
 
         return response()->json(['message' => 'Updated successfully', 'status' => 200]);
@@ -142,7 +163,7 @@ class UserController extends Controller
     {
         $validations = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email|unique:email,'.$user->id,
+            'email' => 'required|email|unique:email,' . $user->id,
             'active' => 'required',
         ]);
 

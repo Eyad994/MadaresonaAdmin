@@ -6,7 +6,7 @@ use App\Models\Finance;
 use App\Models\Paymenet;
 use App\Models\Status;
 use App\Models\Supplier;
-use App\School;
+use App\Models\School;
 use App\User;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;

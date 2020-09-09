@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Finance;
 use App\Models\Note;
-use App\School;
+use App\Models\School;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

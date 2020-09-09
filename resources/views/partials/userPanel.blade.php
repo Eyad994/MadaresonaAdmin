@@ -1,4 +1,9 @@
 <!-- begin::User Panel-->
+<style>
+    .modal-backdrop {
+        z-index: 10 !important;
+    }
+</style>
 <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
     <!--begin::Header-->
     <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">

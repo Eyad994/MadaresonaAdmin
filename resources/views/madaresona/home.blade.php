@@ -1,8 +1,12 @@
 @extends('layouts.main')
-
+<style>
+    .modal-backdrop {
+        z-index: 10 !important;
+    }
+</style>
 @section('content')
 
-    @if(auth()->user()->type == 1)
+    @if(auth()->user()->type == 1 ||auth()->user()->type == 3)
     <div class="container">
         <div class="row">
 

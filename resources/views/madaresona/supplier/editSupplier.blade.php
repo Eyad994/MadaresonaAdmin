@@ -42,7 +42,7 @@
             </div>
         @endif
 
-        <div id="smartwizard">
+        <div id="smartwizard" style="z-index: 0;">
 
             <ul class="nav">
 

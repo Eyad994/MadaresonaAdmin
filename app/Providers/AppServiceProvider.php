@@ -6,7 +6,7 @@ use App\Models\Department;
 use App\Models\FaqType;
 use App\Models\SchoolClass;
 use App\Models\SupplierType;
-use App\School;
+use App\Models\School;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

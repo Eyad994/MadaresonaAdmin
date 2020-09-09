@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\School;
 use App\Models\Supplier;
 use App\Models\SupplierMessage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -44,6 +45,11 @@ class User extends Authenticatable
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'id', 'user_id');
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class, 'id', 'user_id');
     }
 
     public function supplierMessage()

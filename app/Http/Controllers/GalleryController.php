@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\GallarySchool;
 use App\Models\Supplier;
 use App\Models\SupplierGallery;
-use App\School;
+use App\Models\School;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -20,40 +20,70 @@ class GalleryController extends Controller
     {
         $gallery = GallarySchool::where('school_id', $id)->get();
         $schoolName = School::where('id', $id)->value('name_en');
-        return view('madaresona.schools.gallery.create', compact('gallery', 'id', 'schoolName'));
+        if (request()->ajax()) {
+            return view('madaresona.schools.gallery.create', compact('gallery', 'id', 'schoolName'));
+        }
+        return view('madaresona.schools.gallery.createWithoutAjax', compact('gallery', 'id', 'schoolName'));
     }
 
     public function store(Request $request)
     {
         $schoolName = School::where('id', $request->school_id)->value('name_en');
-        $validations = Validator::make($request->all(), [
-            'galleries' => 'required'
-        ]);
-        if ($validations->fails()) {
-            return response()->json(['errors' => $validations->errors(), 'status' => 422]);
-        }
-
-        $counter = 0;
-        foreach ($request->galleries as $gallery) {
-            $image = $gallery;
-            $imageGallery = time() + $counter . '_gallery.' . $image->getClientOriginalExtension();
-
-            $image->move(public_path('images/' . $schoolName . '/gallery'), $imageGallery);
-
-            $img = Image::make(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
-            File::delete(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
-            $img->insert(public_path('logo.png'), 'top-right', 10, 10);
-            $img->save(public_path('images/' . $schoolName . '/gallery/'.$imageGallery));
-
-            $counter++;
-
-            GallarySchool::create([
-                'school_id' => $request->school_id,
-                'img' => $imageGallery
+        if (request()->ajax()) {
+            $validations = Validator::make($request->all(), [
+                'galleries' => 'required'
             ]);
+            if ($validations->fails()) {
+                return response()->json(['errors' => $validations->errors(), 'status' => 422]);
+            }
 
+            $counter = 0;
+            foreach ($request->galleries as $gallery) {
+                $image = $gallery;
+                $imageGallery = time() + $counter . '_gallery.' . $image->getClientOriginalExtension();
+
+                $image->move(public_path('images/' . $schoolName . '/gallery'), $imageGallery);
+
+                $img = Image::make(public_path('images/' . $schoolName . '/gallery/' . $imageGallery));
+                File::delete(public_path('images/' . $schoolName . '/gallery/' . $imageGallery));
+                $img->insert(public_path('logo.png'), 'top-right', 10, 10);
+                $img->save(public_path('images/' . $schoolName . '/gallery/' . $imageGallery));
+
+                $counter++;
+
+                GallarySchool::create([
+                    'school_id' => $request->school_id,
+                    'img' => $imageGallery
+                ]);
+
+            }
+            return response()->json(['message' => 'Successfully added galleries', 'status' => 200]);
+        } else {
+            $request->validate([
+                'galleries' => 'required'
+            ]);
+            $counter = 0;
+            foreach ($request->galleries as $gallery) {
+                $image = $gallery;
+                $imageGallery = time() + $counter . '_gallery.' . $image->getClientOriginalExtension();
+
+                $image->move(public_path('images/' . $schoolName . '/gallery'), $imageGallery);
+
+                $img = Image::make(public_path('images/' . $schoolName . '/gallery/' . $imageGallery));
+                File::delete(public_path('images/' . $schoolName . '/gallery/' . $imageGallery));
+                $img->insert(public_path('logo.png'), 'top-right', 10, 10);
+                $img->save(public_path('images/' . $schoolName . '/gallery/' . $imageGallery));
+
+                $counter++;
+
+                GallarySchool::create([
+                    'school_id' => $request->school_id,
+                    'img' => $imageGallery
+                ]);
+
+            }
+            return back()->with(['success' => 'Successfully added galleries']);
         }
-        return response()->json(['message' => 'Successfully added galleries', 'status' => 200]);
     }
 
     public function destroy($id)
@@ -74,8 +104,7 @@ class GalleryController extends Controller
     {
         $gallery = SupplierGallery::where('supplier_id', $id)->get();
         $supplierName = Supplier::where('id', $id)->value('name_en');
-        if (request()->ajax())
-        {
+        if (request()->ajax()) {
             return view('madaresona.supplier.gallery.create', compact('gallery', 'id', 'supplierName'));
         }
         return view('madaresona.supplier.gallery.createWithoutAjax', compact('gallery', 'id', 'supplierName'));
@@ -83,8 +112,7 @@ class GalleryController extends Controller
 
     public function storeGallerySupplier(Request $request)
     {
-        if (request()->ajax())
-        {
+        if (request()->ajax()) {
             $supplierName = Supplier::where('id', $request->supplier_id)->value('name_en');
             $validations = Validator::make($request->all(), [
                 'galleries' => 'required'
@@ -100,10 +128,10 @@ class GalleryController extends Controller
 
                 $image->move(public_path('images/' . $supplierName . '/gallery'), $imageGallery);
 
-                $img = Image::make(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
-                File::delete(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
+                $img = Image::make(public_path('images/' . $supplierName . '/gallery/' . $imageGallery));
+                File::delete(public_path('images/' . $supplierName . '/gallery/' . $imageGallery));
                 $img->insert(public_path('logo.png'), 'top-right', 10, 10);
-                $img->save(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
+                $img->save(public_path('images/' . $supplierName . '/gallery/' . $imageGallery));
 
                 $counter++;
 
@@ -127,10 +155,10 @@ class GalleryController extends Controller
 
                 $image->move(public_path('images/' . $supplierName . '/gallery'), $imageGallery);
 
-                $img = Image::make(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
-                File::delete(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
+                $img = Image::make(public_path('images/' . $supplierName . '/gallery/' . $imageGallery));
+                File::delete(public_path('images/' . $supplierName . '/gallery/' . $imageGallery));
                 $img->insert(public_path('logo.png'), 'top-right', 10, 10);
-                $img->save(public_path('images/' . $supplierName . '/gallery/'.$imageGallery));
+                $img->save(public_path('images/' . $supplierName . '/gallery/' . $imageGallery));
 
                 $counter++;
 

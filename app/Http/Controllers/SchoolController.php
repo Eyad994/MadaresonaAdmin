@@ -8,7 +8,7 @@ use App\Models\Finance;
 use App\Models\Region;
 use App\Models\SchoolType;
 use App\Models\Status;
-use App\School;
+use App\Models\School;
 use App\Traits\SMS;
 use App\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -27,10 +27,6 @@ class SchoolController extends Controller
     /**
      * SchoolController constructor.
      */
-    public function __construct()
-    {
-        $this->middleware('editor');
-    }
 
     public function index()
     {
@@ -93,7 +89,12 @@ class SchoolController extends Controller
         $regions = Region::all();
         $schoolsStatus = Status::all();
         $lastSchoolOrder = School::orderBy('id', 'desc')->value('school_order');
-        return view('madaresona.schools.addSchool', compact('schoolsType', 'cities', 'regions', 'schoolsStatus', 'lastSchoolOrder',
+        if (request()->ajax())
+        {
+            return view('madaresona.schools.addSchool', compact('schoolsType', 'cities', 'regions', 'schoolsStatus', 'lastSchoolOrder',
+                'school', 'trueFalseArray', 'schoolTypesExploded', 'genderArray', 'genderSchool'));
+        }
+        return view('madaresona.schools.editSchool', compact('schoolsType', 'cities', 'regions', 'schoolsStatus', 'lastSchoolOrder',
             'school', 'trueFalseArray', 'schoolTypesExploded', 'genderArray', 'genderSchool'));
     }
 

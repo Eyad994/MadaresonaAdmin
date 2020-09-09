@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\School;
+use App\Models\School;
 use Illuminate\Database\Eloquent\Model;
 
 class GallarySchool extends Model

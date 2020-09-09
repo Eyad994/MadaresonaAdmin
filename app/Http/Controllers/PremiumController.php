@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Premium;
 use App\Models\SchoolClass;
-use App\School;
+use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;

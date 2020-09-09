@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\School;
+use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -19,7 +19,7 @@ class NewsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('editor');
+        $this->middleware('school');
     }
 
     public function indexMain()
