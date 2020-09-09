@@ -139,14 +139,24 @@ class FinanceController extends Controller
     {
         $validations = Validator::make($request->all(), [
             'payed' => 'required|numeric',
+            'date' => 'required'
         ]);
 
         if ($validations->fails()) {
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
+        $dateMonthArray = explode('-', $request->date);
+        $day = $dateMonthArray[0];
+        $month = $dateMonthArray[1];
+        $year = $dateMonthArray[2];
+
+
+        $date = Carbon::createFromDate($year, $month, $day);
+
         Paymenet::create([
             'user_id' => $request->user_id,
+            'date' => $date,
             'payed' => $request->payed,
             'added_by' => auth()->user()->id,
         ]);

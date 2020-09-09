@@ -116,7 +116,7 @@ class SaleController extends Controller
             'user_id' => 'required|unique:sales',
             'department' => 'required',
             'date' => 'required',
-            'target' => 'required',
+            'target' => 'required|numeric',
         ]);
 
         if ($validations->fails()) {

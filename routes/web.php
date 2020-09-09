@@ -215,6 +215,6 @@ Route::middleware('auth')->group(function () {
     Route::get('emailSender', 'SenderController@email');
     Route::post('emailSender', 'SenderController@sendEmail');
     Route::get('smsSender', 'SenderController@sms');
-    Route::post('smsSender', 'SenderController@sendSMS');
+    Route::post('smsSenders', 'SenderController@sendSMS');
 });
 
