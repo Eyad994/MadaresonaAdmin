@@ -9,7 +9,6 @@
             </div>
 
             <div class="card-body">
-
                 <form action="smsSender" method="POST">
                     @csrf
                     <div class="row">
@@ -27,7 +26,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
 
