@@ -20,7 +20,7 @@
         }
 
         .btn_edit_img {
-            margin-top: -333px;
+            margin-top: -160px;
             margin-left: 155px;
 
         }

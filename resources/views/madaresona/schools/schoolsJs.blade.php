@@ -7,8 +7,8 @@
             dom: 'Bfrtip',
             "columnDefs": [
 
-                {"width": "160px", "targets": 7},
-                {"width": "50px", "targets": 8},
+                {"width": "160px", "targets": 6},
+                {"width": "50px", "targets": 7},
             ],
             processing: true,
             serverSide: true,
@@ -52,28 +52,6 @@
 
                     }
                 },
-                /*{
-                    title: 'logo', "mRender": function (data, type, row) {
-                        var imgeUrl = ' asset('images/') ';
-                        if (row.school_logo != '') {
-                            return '<img src="' + imgeUrl + '/' + row.name_en + '/' + row.school_logo + '" class="avatar" width="50" height="50"/>';
-                        } else
-                            return "Not Found Logo";
-
-                    }
-                },*/
-                {
-                    data: 'status_name', title: 'Status', "mRender": function (data, type, row) {
-                        if (row.status == 1) {
-                            return '<span class="label font-weight-bold label-lg  label-light-danger label-inline">' + row.status_name + '</span>'
-                        } else if (row.status == 2) {
-                            return '<span class="label font-weight-bold label-lg  label-light-info label-inline">' + row.status_name + '</span>'
-                        } else if (row.status == 3) {
-                            return '<span class="label font-weight-bold label-lg  label-light-success label-inline">' + row.status_name + '</span>'
-                        }
-                    }
-                },
-
                 {
                     data: 'special', title: 'Special', "mRender": function (data, type, row) {
                         if (row.special == 'General') {

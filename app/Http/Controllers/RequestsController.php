@@ -23,9 +23,9 @@ class RequestsController extends Controller
                     return $data->created_at->format('d m Y - g:i A');
                 })
                 ->editColumn('type', function ($data) {
-                    if ($data->type == 1)
+                    if ($data->type == 2)
                         return 'School';
-                    else if ($data->type == 2)
+                    else if ($data->type == 1)
                         return 'Supplier';
                 })
                 ->make(true);

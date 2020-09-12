@@ -302,12 +302,8 @@ class SupplierController extends Controller
                 'instagram_link' => $request->instagram_link,
                 'linkedin_link' => $request->linkedin_link,
                 'googleplus_link' => $request->googleplus_link,
-                'lat' => $request->lat,
-                'lng' => $request->lng,
                 'city_id' => $request->city_id,
                 'region_id' => $request->region_id,
-                'active' => $request->active,
-                'special' => $request->special,
             ]);
 
             $supplier->save();

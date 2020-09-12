@@ -24,6 +24,7 @@ use Yajra\DataTables\Facades\DataTables;
 class SchoolController extends Controller
 {
     use SMS;
+
     /**
      * SchoolController constructor.
      */
@@ -40,9 +41,6 @@ class SchoolController extends Controller
             $data = School::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('status_name', function ($data) {
-                    return Status::where('id', $data->status)->value('name_en');
-                })
                 ->editColumn('special', function ($data) {
                     return $data->special == 0 ? 'General' : 'Special';
                 })
@@ -89,8 +87,7 @@ class SchoolController extends Controller
         $regions = Region::all();
         $schoolsStatus = Status::all();
         $lastSchoolOrder = School::orderBy('id', 'desc')->value('school_order');
-        if (request()->ajax())
-        {
+        if (request()->ajax()) {
             return view('madaresona.schools.addSchool', compact('schoolsType', 'cities', 'regions', 'schoolsStatus', 'lastSchoolOrder',
                 'school', 'trueFalseArray', 'schoolTypesExploded', 'genderArray', 'genderSchool'));
         }
@@ -104,7 +101,7 @@ class SchoolController extends Controller
             'name_ar' => 'required',
             'name_en' => 'required|unique:schools',
             'gender' => 'required',
-            'email' => 'required|email|unique:users',
+            'email_school' => 'required|email|unique:users',
             'start' => 'date|required',
             'end' => 'date|required',
             'phone' => 'required|numeric',
@@ -185,7 +182,7 @@ class SchoolController extends Controller
 
             $user = User::create([
                 'name' => $request->user_name,
-                'email' => $request->email,
+                'email' => $request->email_school,
                 'password' => Hash::make($password),
                 'type' => 5
             ]);
@@ -215,80 +212,152 @@ class SchoolController extends Controller
 
     public function update(Request $request)
     {
-        $validations = Validator::make($request->all(), [
-            'name_ar' => 'required',
-            'name_en' => 'required|unique:schools,name_en,' . $request->id,
-            'gender' => 'required',
-            'phone' => 'required|numeric',
-            'status' => 'required'
-        ]);
-
-        if ($validations->fails()) {
-            return response()->json(['errors' => $validations->errors(), 'status' => 422]);
-        }
-
-        $school = School::where('id', $request->id)->first();
-        $school->update([
-            'type' => implode(',', $request->type),
-            'name_ar' => $request->name_ar,
-            'name_en' => $request->name_en,
-            'school_order' => $request->school_order,
-            'email_school' => $request->email_school,
-            'phone' => $request->phone,
-            'fax' => $request->fax,
-            'website' => $request->website,
-            'principle_title_ar' => $request->principle_title_ar,
-            'principle_title_en' => $request->principle_title_en,
-            'principle_ar' => $request->principle_ar,
-            'principle_en' => $request->principle_en,
-            'school_details_ar' => $request->school_details_ar,
-            'school_details_en' => $request->school_details_en,
-            'zip_code' => $request->zip_code,
-            'po_box' => $request->po_box,
-            'country' => 1,
-            'special' => $request->special,
-            'active' => $request->active,
-            'city_id' => $request->city_id,
-            'region_id' => $request->region_id,
-            'status' => $request->status,
-            'facebook_link' => $request->facebook_link,
-            'twitter_link' => $request->twitter_link,
-            'instagram_link' => $request->instagram_link,
-            'linkedin_link' => $request->linkedin_link,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
-            'curriculum_ls_local' => $request->curriculum_ls_local,
-            'curriculum_ls_public' => $request->curriculum_ls_public,
-            'discounts_superior' => $request->discounts_superior,
-            'discounts_quran' => $request->discounts_quran,
-            'discounts_sport' => $request->discounts_sport,
-            'discounts_brothers' => $request->discounts_brothers,
-            'gender' => implode(',', $request->gender),
-            'madaresona_discounts' => $request->madaresona_discounts,
-            'contact_person_name' => $request->contact_person_name,
-            'contact_person_phone' => $request->contact_person_phone,
-            'contact_person_email' => $request->contact_person_email,
-        ]);
-        if (isset($request->logo) && $request->logo != $school->school_logo) {
-            $image = $request->file('logo');
-            $logo = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/' . $request->name_en), $logo);
-
-            $school->update([
-                'school_logo' => $logo
+        if (request()->ajax()) {
+            $validations = Validator::make($request->all(), [
+                'name_ar' => 'required',
+                'name_en' => 'required|unique:schools,name_en,' . $request->id,
+                'gender' => 'required',
+                'phone' => 'required|numeric',
+                'status' => 'required'
             ]);
 
-        }
-        if (isset($request->brochure) && $request->brochure != $school->school_brochure) {
-            $image = $request->file('brochure');
-            $brochure = time() . '_brochure.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/' . $request->name_en), $brochure);
+            if ($validations->fails()) {
+                return response()->json(['errors' => $validations->errors(), 'status' => 422]);
+            }
+
+            $school = School::where('id', $request->id)->first();
             $school->update([
-                'school_brochure' => $brochure
+                'type' => implode(',', $request->type),
+                'name_ar' => $request->name_ar,
+                'name_en' => $request->name_en,
+                'school_order' => $request->school_order,
+                'email_school' => $request->email_school,
+                'phone' => $request->phone,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'principle_title_ar' => $request->principle_title_ar,
+                'principle_title_en' => $request->principle_title_en,
+                'principle_ar' => $request->principle_ar,
+                'principle_en' => $request->principle_en,
+                'school_details_ar' => $request->school_details_ar,
+                'school_details_en' => $request->school_details_en,
+                'zip_code' => $request->zip_code,
+                'po_box' => $request->po_box,
+                'country' => 1,
+                'special' => $request->special,
+                'active' => $request->active,
+                'city_id' => $request->city_id,
+                'region_id' => $request->region_id,
+                'status' => $request->status,
+                'facebook_link' => $request->facebook_link,
+                'twitter_link' => $request->twitter_link,
+                'instagram_link' => $request->instagram_link,
+                'linkedin_link' => $request->linkedin_link,
+                'lat' => $request->lat,
+                'lng' => $request->lng,
+                'curriculum_ls_local' => $request->curriculum_ls_local,
+                'curriculum_ls_public' => $request->curriculum_ls_public,
+                'discounts_superior' => $request->discounts_superior,
+                'discounts_quran' => $request->discounts_quran,
+                'discounts_sport' => $request->discounts_sport,
+                'discounts_brothers' => $request->discounts_brothers,
+                'gender' => implode(',', $request->gender),
+                'madaresona_discounts' => $request->madaresona_discounts,
+                'contact_person_name' => $request->contact_person_name,
+                'contact_person_phone' => $request->contact_person_phone,
+                'contact_person_email' => $request->contact_person_email,
             ]);
+            if (isset($request->logo) && $request->logo != $school->school_logo) {
+                $image = $request->file('logo');
+                $logo = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/' . $request->name_en), $logo);
+
+                $school->update([
+                    'school_logo' => $logo
+                ]);
+
+            }
+            if (isset($request->brochure) && $request->brochure != $school->school_brochure) {
+                $image = $request->file('brochure');
+                $brochure = time() . '_brochure.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/' . $request->name_en), $brochure);
+                $school->update([
+                    'school_brochure' => $brochure
+                ]);
+            }
+
+            return response()->json(['message' => 'Updated successfully', 'status' => 200]);
+        }else{
+            $request->validate([
+                'name_ar' => 'required',
+                'name_en' => 'required|unique:schools,name_en,' . $request->id,
+                'gender' => 'required',
+                'phone' => 'required|numeric',
+            ]);
+            $school = School::where('id', $request->id)->first();
+            $school->update([
+                'type' => implode(',', $request->type),
+                'name_ar' => $request->name_ar,
+                'name_en' => $request->name_en,
+                'school_order' => $request->school_order,
+                'email_school' => $request->email_school,
+                'phone' => $request->phone,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'principle_title_ar' => $request->principle_title_ar,
+                'principle_title_en' => $request->principle_title_en,
+                'principle_ar' => $request->principle_ar,
+                'principle_en' => $request->principle_en,
+                'school_details_ar' => $request->school_details_ar,
+                'school_details_en' => $request->school_details_en,
+                'zip_code' => $request->zip_code,
+                'po_box' => $request->po_box,
+                'country' => 1,
+                'special' => $request->special,
+                'active' => $request->active,
+                'city_id' => $request->city_id,
+                'region_id' => $request->region_id,
+                'status' => $request->status,
+                'facebook_link' => $request->facebook_link,
+                'twitter_link' => $request->twitter_link,
+                'instagram_link' => $request->instagram_link,
+                'linkedin_link' => $request->linkedin_link,
+                'lat' => $request->lat,
+                'lng' => $request->lng,
+                'curriculum_ls_local' => $request->curriculum_ls_local,
+                'curriculum_ls_public' => $request->curriculum_ls_public,
+                'discounts_superior' => $request->discounts_superior,
+                'discounts_quran' => $request->discounts_quran,
+                'discounts_sport' => $request->discounts_sport,
+                'discounts_brothers' => $request->discounts_brothers,
+                'gender' => implode(',', $request->gender),
+                'madaresona_discounts' => $request->madaresona_discounts,
+                'contact_person_name' => $request->contact_person_name,
+                'contact_person_phone' => $request->contact_person_phone,
+                'contact_person_email' => $request->contact_person_email,
+            ]);
+            if (isset($request->logo) && $request->logo != $school->school_logo) {
+                $image = $request->file('logo');
+                $logo = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/' . $request->name_en), $logo);
+
+                $school->update([
+                    'school_logo' => $logo
+                ]);
+
+            }
+            if (isset($request->brochure) && $request->brochure != $school->school_brochure) {
+                $image = $request->file('brochure');
+                $brochure = time() . '_brochure.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/' . $request->name_en), $brochure);
+                $school->update([
+                    'school_brochure' => $brochure
+                ]);
+            }
+
+            return response()->json(['message' => 'Updated successfully', 'status' => 200]);
         }
 
-        return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
 
     public function regions($id)
