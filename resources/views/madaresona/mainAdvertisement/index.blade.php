@@ -29,31 +29,38 @@
     </style>
     <div class="container">
 
-        <div class="card">
-            <div class="card-header">
-                <b>Main Advertisement</b>
-            </div>
+        <form action="/storeMainAdvertisement" enctype="multipart/form-data" method="POST">
+            @csrf
 
-            <div class="card-body">
-                <div class="col-sm-2 imgUp">
-                    <label> Image </label>
-                    <div class="imagePreview" style="@if(isset($news))
-                            background:url('{{asset('/images/Main News/'.$news->img.'')}}');
-                            background-position: center center;
-                            background-color: #fff;
-                            background-size: 100% 700px;
-                            background-repeat: no-repeat;
-                    @endif"></div>
-                    <label class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                           style="color: #262673 !important;">
-                        <i class="fa fa-pen icon-sm text-muted"></i>
-                        <input type="file" name="img" id="img" class="uploadFile img"
-                               value="{{ isset($news) ? $news->img: '' }}"
-                               style="width: 0px;height: 0px;overflow: hidden;">
-                    </label>
+            <div class="form-group card">
+                <div class="card-header">
+                    <b>Main Advertisement</b>
+                </div>
+
+                <div class="card-body">
+                    <div class="col-sm-2 imgUp">
+                        <label> Image </label>
+                        <div class="imagePreview" style="@if(isset($news))
+                                background:url('{{asset('/images/Main News/'.$news->img.'')}}');
+                                background-position: center center;
+                                background-color: #fff;
+                                background-size: 100% 700px;
+                                background-repeat: no-repeat;
+                        @endif"></div>
+                        <label class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                               style="color: #262673 !important;">
+                            <i class="fa fa-pen icon-sm text-muted"></i>
+                            <input type="file" name="img" id="img" class="uploadFile img"
+                                   value="{{ isset($news) ? $news->img: '' }}"
+                                   style="width: 0px;height: 0px;overflow: hidden;">
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Upload">
+            </div>
+        </form>
 
     </div>
 

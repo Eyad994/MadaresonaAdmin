@@ -8,7 +8,10 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 /***************End Auth Routes*************/
 
+
 Route::middleware('auth')->group(function () {
+
+    Route::post('storeMainAdvertisement', 'HomeController@storeAdv')->name('storeMainAdvertisement');
 
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('/', 'HomeController@index')->name('home');

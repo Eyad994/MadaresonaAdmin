@@ -60,4 +60,26 @@ class HomeController extends Controller
 
         return response()->json(['message' => 'Update Password successfully', 'status' => 200]);
     }
+
+    public function storeAdv(Request $request)
+    {
+        $request->validate([
+            'img' => 'required|mimes:jpeg,jpg'
+        ]);
+
+        $image = $request->file('img');
+        $extension = $request->img->getClientOriginalextension();
+        $image->move(public_path(), 'mainAdv.'. $extension);
+    }
+
+    public function changeAdvStatus()
+    {
+        $status = env('ADV_STATUS');
+        if ($status == 0)
+        {
+            $_ENV['ADV_STATUS'] = 1;
+        } else {
+            $_ENV['ADV_STATUS'] = 0;
+        }
+    }
 }
