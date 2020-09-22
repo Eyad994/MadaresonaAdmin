@@ -16,6 +16,11 @@
                         <input type="email" class="form-control" name="email" placeholder="Email"
                                @if(isset($user)) value="{{ $user->email }}" @endif>
                     </div>
+                    <div class="col-md-6 form-group">
+                        <label>Phone</label>
+                        <input type="number" class="form-control" name="phone" placeholder="Phone"
+                               @if(isset($user)) value="0{{ $user->phone }}" @endif>
+                    </div>
                     @if(!isset($user))
                         <div class="col-md-6 form-group">
                             <label>Type</label>

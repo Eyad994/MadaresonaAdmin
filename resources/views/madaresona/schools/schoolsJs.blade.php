@@ -4,6 +4,7 @@
 
         // show all products
         var table = $('.data-table').DataTable({
+            responsive: true,
             dom: 'Bfrtip',
             "columnDefs": [
 

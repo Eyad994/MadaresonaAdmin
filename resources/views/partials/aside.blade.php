@@ -59,141 +59,125 @@
                 </li>
 
                 @if(auth()->user()->type == 1 || auth()->user()->type == 3)
-                <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ route('allSchools') }}" class="menu-link ">
-                        <i class="fa fa-university left-icon-menu"><span></span></i>
-                        <span class="menu-text">Schools</span>
-                    </a>
-                </li>
-                <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ route('supplier.index') }}" class="menu-link ">
-                        <i class="fas fa-house-user left-icon-menu"><span></span></i>
-                        <span class="menu-text">Suppliers</span>
-                    </a>
-                </li>
-                @if(auth()->user()->type == 1 )
                     <li class="menu-item " aria-haspopup="true">
-                        <a href="{{ route('allFinance') }}" class="menu-link ">
-                            <i class="fas fa-hand-holding-usd left-icon-menu"
-                               style="color: #ffa800 !important;"><span></span></i>
-                            <span class="menu-text">Finance</span>
+                        <a href="{{ route('allSchools') }}" class="menu-link ">
+                            <i class="fa fa-university left-icon-menu"><span></span></i>
+                            <span class="menu-text">Schools</span>
                         </a>
                     </li>
-                @endif
-                <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ route('registration.index') }}" class="menu-link ">
-                        <i class="fas fa-registered left-icon-menu "><span></span></i>
-                        <span class="menu-text">Registrations</span>
-                    </a>
-                </li>
-                @if(auth()->user()->type == 1 )
                     <li class="menu-item " aria-haspopup="true">
-                        <a href="{{ route('sale.index') }}" class="menu-link ">
-                            <i class="fas fa-funnel-dollar left-icon-menu"></i>
-                            <span class="menu-text">Sales</span>
+                        <a href="{{ route('supplier.index') }}" class="menu-link ">
+                            <i class="fas fa-house-user left-icon-menu"><span></span></i>
+                            <span class="menu-text">Suppliers</span>
                         </a>
                     </li>
-                @endif
-                <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-                        <i class="fas fa-file-signature left-icon-menu"></i>
-                        <span class="menu-text">Sub Content</span><i class="menu-arrow"></i></a>
-                    <div class="menu-submenu " kt-hidden-height="80" style=""><i class="menu-arrow"></i>
-
-                        <ul class="menu-subnav">
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('allMainNews') }}" class="menu-link ">
-                                    <i class="fa fa-newspaper left-icon-menu" style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                    <span class="menu-text">Main News</span></a>
-                            </li>
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('allMainAdvertisement') }}" class="menu-link ">
-                                    <i class="fab fa-adversal left-icon-menu" style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                    <span class="menu-text">Main Advertisement</span></a>
-                            </li>
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('allAdvertisement') }}" class="menu-link ">
-                                    <i class="fas fa-ad left-icon-menu"
-                                       style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                    <span class="menu-text">Advertisement</span></a>
-                            </li>
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('faq.index') }}" class="menu-link ">
-                                    <i class="far fa-question-circle left-icon-menu"
-                                       style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                    <span class="menu-text">FAQ's</span></a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </li>
-                <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-                        <i class="fas fa-hand-holding-medical left-icon-menu"></i>
-                        <span class="menu-text">Managing Requests</span><i class="menu-arrow"></i></a>
-                    <div class="menu-submenu " kt-hidden-height="80" style=""><i class="menu-arrow"></i>
-
-                        <ul class="menu-subnav">
-
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('allSuggestions') }}" class="menu-link ">
-                                    <i class="fas fa-lightbulb left-icon-menu"
-                                       style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                    <span class="menu-text">Suggestions</span></a>
-                            </li>
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('allSubscribesEmail') }}" class="menu-link ">
-                                    <i class="fas fa-mail-bulk left-icon-menu"
-                                       style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                    <span class="menu-text">Subscribes Email</span></a>
-                            </li>
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('allDiscount') }}" class="menu-link ">
-                                    <i class="fas fa-percent left-icon-menu"
-                                       style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                    <span class="menu-text">Discount Forms</span></a>
-                            </li>
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('allRequests') }}" class="menu-link ">
-                                    <i class="far fa-question-circle left-icon-menu"
-                                       style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                    <span class="menu-text">Requests join</span></a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </li>
-                @if(auth()->user()->type == 1 )
+                    @if(auth()->user()->type == 1 )
+                        <li class="menu-item " aria-haspopup="true">
+                            <a href="{{ route('allFinance') }}" class="menu-link ">
+                                <i class="fas fa-hand-holding-usd left-icon-menu"
+                                   style="color: #ffa800 !important;"><span></span></i>
+                                <span class="menu-text">Finance</span>
+                            </a>
+                        </li>
+                    @endif
+                    <li class="menu-item " aria-haspopup="true">
+                        <a href="{{ route('registration.index') }}" class="menu-link ">
+                            <i class="fas fa-registered left-icon-menu "><span></span></i>
+                            <span class="menu-text">Registrations</span>
+                        </a>
+                    </li>
+                    @if(auth()->user()->type == 1 )
+                        <li class="menu-item " aria-haspopup="true">
+                            <a href="{{ route('sale.index') }}" class="menu-link ">
+                                <i class="fas fa-funnel-dollar left-icon-menu"></i>
+                                <span class="menu-text">Sales</span>
+                            </a>
+                        </li>
+                    @endif
                     <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
                         <a href="javascript:;" class="menu-link menu-toggle">
-                            <i class="far fa-paper-plane left-icon-menu"></i>
-                            <span class="menu-text">Managing Senders</span><i class="menu-arrow"></i></a>
+                            <i class="fas fa-file-signature left-icon-menu"></i>
+                            <span class="menu-text">Sub Content</span><i class="menu-arrow"></i></a>
+                        <div class="menu-submenu " kt-hidden-height="80" style=""><i class="menu-arrow"></i>
+
+                            <ul class="menu-subnav">
+                                <li class="menu-item " aria-haspopup="true">
+                                    <a href="{{ route('allMainNews') }}" class="menu-link ">
+                                        <i class="fa fa-newspaper left-icon-menu"
+                                           style="margin-top: 15px;font-size: 12px;"><span></span></i>
+                                        <span class="menu-text">Main News</span></a>
+                                </li>
+                                <li class="menu-item " aria-haspopup="true">
+                                    <a href="{{ route('allMainAdvertisement') }}" class="menu-link ">
+                                        <i class="fab fa-adversal left-icon-menu"
+                                           style="margin-top: 15px;font-size: 12px;"><span></span></i>
+                                        <span class="menu-text">Main Advertisement</span></a>
+                                </li>
+                                <li class="menu-item " aria-haspopup="true">
+                                    <a href="{{ route('allAdvertisement') }}" class="menu-link ">
+                                        <i class="fas fa-ad left-icon-menu"
+                                           style="margin-top: 15px;font-size: 12px;"><span></span></i>
+                                        <span class="menu-text">Advertisement</span></a>
+                                </li>
+                                <li class="menu-item " aria-haspopup="true">
+                                    <a href="{{ route('faq.index') }}" class="menu-link ">
+                                        <i class="far fa-question-circle left-icon-menu"
+                                           style="margin-top: 15px;font-size: 12px;"><span></span></i>
+                                        <span class="menu-text">FAQ's</span></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
+                        <a href="javascript:;" class="menu-link menu-toggle">
+                            <i class="fas fa-hand-holding-medical left-icon-menu"></i>
+                            <span class="menu-text">Managing Requests</span><i class="menu-arrow"></i></a>
                         <div class="menu-submenu " kt-hidden-height="80" style=""><i class="menu-arrow"></i>
 
                             <ul class="menu-subnav">
 
                                 <li class="menu-item " aria-haspopup="true">
-                                    <a href="/emailSender" class="menu-link ">
-                                        <i class="fas fa-mail-bulk left-icon-menu"
+                                    <a href="{{ route('allSuggestions') }}" class="menu-link ">
+                                        <i class="fas fa-lightbulb left-icon-menu"
                                            style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                        <span class="menu-text">Email Sender</span></a>
+                                        <span class="menu-text">Suggestions</span></a>
                                 </li>
                                 <li class="menu-item " aria-haspopup="true">
-                                    <a href="/smsSender" class="menu-link ">
-                                        <i class="fas fa-sms left-icon-menu"
+                                    <a href="{{ route('allSubscribesEmail') }}" class="menu-link ">
+                                        <i class="fas fa-mail-bulk left-icon-menu"
                                            style="margin-top: 15px;font-size: 12px;"><span></span></i>
-                                        <span class="menu-text">SMS Sender</span></a>
+                                        <span class="menu-text">Subscribes Email</span></a>
                                 </li>
-
+                                <li class="menu-item " aria-haspopup="true">
+                                    <a href="{{ route('allDiscount') }}" class="menu-link ">
+                                        <i class="fas fa-percent left-icon-menu"
+                                           style="margin-top: 15px;font-size: 12px;"><span></span></i>
+                                        <span class="menu-text">Discount Forms</span></a>
+                                </li>
+                                <li class="menu-item " aria-haspopup="true">
+                                    <a href="{{ route('allRequests') }}" class="menu-link ">
+                                        <i class="far fa-question-circle left-icon-menu"
+                                           style="margin-top: 15px;font-size: 12px;"><span></span></i>
+                                        <span class="menu-text">Requests join</span></a>
+                                </li>
                             </ul>
                         </div>
 
                     </li>
-                    <li class="menu-item" aria-haspopup="true">
-                        <a href="{{route('user.index') }}" class="menu-link ">
-                            <i class="fas fa-users-cog left-icon-menu"></i>
-                            <span class="menu-text">User Management</span></a></li>
-                @endif
+                    @if(auth()->user()->type == 1 )
+
+                        <li class="menu-item" aria-haspopup="true">
+                            <a href="/smsSender" class="menu-link ">
+                                <i class="fas fa-sms left-icon-menu"></i>
+                                <span class="menu-text">SMS Sender</span></a></li>
+
+                        <li class="menu-item" aria-haspopup="true">
+                            <a href="{{route('user.index') }}" class="menu-link ">
+                                <i class="fas fa-users-cog left-icon-menu"></i>
+                                <span class="menu-text">User Management</span></a></li>
+
+                    @endif
                 @endif
 
                 @if(auth()->user()->type == 4)

@@ -68,6 +68,7 @@ class NewsController extends Controller
             $image->move(public_path('images/Main News'), $imageNews);
 
             $img = Image::make(public_path('images/Main News/' . $imageNews));
+
             File::delete(public_path('images/Main News/' . $imageNews));
             $img->insert(public_path('logo.png'), 'top-right', 10, 10);
             $img->save(public_path('images/Main News/' . $imageNews));

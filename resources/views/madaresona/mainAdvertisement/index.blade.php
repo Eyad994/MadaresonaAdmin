@@ -29,19 +29,33 @@
     </style>
     <div class="container">
 
-        <form action="/storeMainAdvertisement" enctype="multipart/form-data" method="POST">
+        <form action="{{ route('storeMainAdvertisement') }}" method="POST" id="Form">
             @csrf
 
-            <div class="form-group card">
+            <div class="form-group card" style="padding: 10px 20px;">
                 <div class="card-header">
                     <b>Main Advertisement</b>
                 </div>
 
-                <div class="card-body">
+                <row class="card-body">
+
+                    <div class="col-md-6 form-group">
+                        <label>Link </label>
+                        <input type="text" class="form-control" name="link" placeholder="Link" value="@if(isset($advertisement)){{$advertisement->url}}@endif">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Status</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="0" @if(!isset($advertisement)) selected @elseif($advertisement->active== 0) selected @endif > False</option>
+                            <option value="1" @if(isset($advertisement))@if($advertisement->active== 1) selected @endif @endif> True </option>
+                        </select>
+                    </div>
+
                     <div class="col-sm-2 imgUp">
                         <label> Image </label>
-                        <div class="imagePreview" style="@if(isset($news))
-                                background:url('{{asset('/images/Main News/'.$news->img.'')}}');
+                        <div class="imagePreview" style="@if($advertisement != null)
+                                background:url('{{asset('/images/'.$advertisement->img.'')}}');
                                 background-position: center center;
                                 background-color: #fff;
                                 background-size: 100% 700px;
@@ -51,23 +65,62 @@
                                style="color: #262673 !important;">
                             <i class="fa fa-pen icon-sm text-muted"></i>
                             <input type="file" name="img" id="img" class="uploadFile img"
-                                   value="{{ isset($news) ? $news->img: '' }}"
+                                   value="@if($advertisement != null){{$advertisement->img}}@endif"
                                    style="width: 0px;height: 0px;overflow: hidden;">
                         </label>
                     </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <input type="submit" value="submit" id="submitBtn" class="btn btn-success" style="float: right">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-success" value="Upload">
-            </div>
-        </form>
 
+        </form>
+           </div>
     </div>
 
 @endsection
 @section('script')
     <script>
+        $('#Form').submit(function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: new FormData(this),
+                dataType: "json",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    if (data.status === 422) {
+                        var error_html = '';
 
+                        for (let value of Object.values(data.errors)) {
+                            error_html += '<div class="alert alert-danger">' + value + '</div>';
+                        }
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: error_html,
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        table.ajax.reload();
+                        $('#schoolModal').modal('hide');
+                    }
+                }
+            });
+
+        });
         $(function () {
             $(document).on("change", ".uploadFile", function () {
                 var uploadFile = $(this);

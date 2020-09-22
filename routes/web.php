@@ -11,7 +11,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::middleware('auth')->group(function () {
 
-    Route::post('storeMainAdvertisement', 'HomeController@storeAdv')->name('storeMainAdvertisement');
+    Route::post('storeMainAdvertisement', 'MainAdvertisementController@store')->name('storeMainAdvertisement');
 
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('/', 'HomeController@index')->name('home');
@@ -215,8 +215,8 @@ Route::middleware('auth')->group(function () {
     /************************************************************************************/
 
     //Sender
-    Route::get('emailSender', 'SenderController@email');
-    Route::post('emailSender', 'SenderController@sendEmail');
+
+    Route::post('emailSender', 'SenderController@sendEmail')->name('emailSender');
     Route::get('smsSender', 'SenderController@sms');
     Route::post('smsSenders', 'SenderController@sendSMS');
 });

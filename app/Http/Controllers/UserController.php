@@ -73,7 +73,8 @@ class UserController extends Controller
     {
         $validations = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required|unique:users',
             'type' => 'required',
         ]);
 
@@ -86,6 +87,7 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->email,
             'type' => $request->type,
             'active' => $request->active,
             'password' => Hash::make($password)
@@ -123,9 +125,10 @@ class UserController extends Controller
             'password' => Hash::make($password),
         ]);
         if (!($phone == null)) {
-            $this->sms('تم تفعيل حسابك بنجاح كلمة السر الخاصة بك هي :', $phone);
+            $phone = '962'.$phone;
+            $this->sms('تم تفعيل حسابك بنجاح كلمة السر الخاصة بك هي :', $phone , $password  );
         }
-        Mail::to($user->email)->send(new MailtrapExample($password, $user->name));
+        //Mail::to($user->email)->send(new MailtrapExample($password, $user->name));
 
         return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
@@ -161,9 +164,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
         $validations = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email|unique:email,' . $user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'phone' => 'required|unique:users,phone,'.$user->id,
             'active' => 'required',
         ]);
 
@@ -171,15 +176,12 @@ class UserController extends Controller
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
-        $oldEmail = $user->email;
-
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'active' => $request->active,
         ]);
-
-        $newEmail = $user->email;
 
 
         return response()->json(['message' => 'Updated successfully', 'status' => 200]);

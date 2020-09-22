@@ -34,6 +34,7 @@
     <link href="{{ asset('assets/css/themes/layout/header/menu/light7a4a.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/themes/layout/aside/dark7a4a.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle7a4a.css') }}" rel="stylesheet" type="text/css"/>
+    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/smartwizard/css/smart_wizard.css') }}">
     <!--end::Layout Themes-->
     <link rel="shortcut icon"
@@ -170,6 +171,7 @@
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{ asset('assets/js/pages/widgets7a4a.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle7a4a.js') }}"></script>
+<script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 <script src="{{ asset('assets/plugins/custom/ckeditor/ckeditor-classic.bundle7a4a.js') }}"></script>
 
 <script>

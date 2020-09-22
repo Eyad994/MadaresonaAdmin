@@ -4,12 +4,17 @@
 
         // show all products
         var table = $('.data-table').DataTable({
-            dom: 'Bfrtip',
-            "columnDefs": [
+            responsive: true,
 
-                {"width": "80px", "targets": 6},
-                {"width": "50px", "targets": 7}
+            dom: 'Bfrtip',
+            'columnDefs': [
+                {
+                    'targets': 0,
+                    "width": "80px", "targets": 6,
+                    "width": "50px", "targets": 7,
+                }
             ],
+
             processing: true,
             serverSide: true,
             lengthMenu: [

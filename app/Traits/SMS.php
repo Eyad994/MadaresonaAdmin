@@ -4,16 +4,16 @@ namespace App\Traits;
 
 trait SMS
 {
-    public function sms($message,$userMobile)
+    public function sms($message, $userMobile, $password)
     {
-        $url = '';
-
+        $url = 'http://josmsservice.com/sms/api/SendSingleMessage.cfm';
+        $massage2 = $message . " " . $password ;
         $fields = array(
-            'AccName' => "",		// The user name of gateway
-            'AccPass' => '', // the password of gateway
+            'AccName' => "Madaresona",        // The user name of gateway
+            'AccPass' => 'E0!pW7@BiR7', // the password of gateway
             'numbers' => $userMobile, // [962790000000, 962790000000, 962790000000]
-            'msg' => $message,
-            'senderid' => ""
+            'msg' => $massage2,
+            'senderid' => "Madaresona"
         );
 
         //open connection
