@@ -124,11 +124,13 @@ class UserController extends Controller
         $user->update([
             'password' => Hash::make($password),
         ]);
+
         if (!($phone == null)) {
             $phone = '962'.$phone;
+            dd($password);
             $this->sms('تم تفعيل حسابك بنجاح كلمة السر الخاصة بك هي :', $phone , $password  );
         }
-        //Mail::to($user->email)->send(new MailtrapExample($password, $user->name));
+        Mail::to($user->email)->send(new MailtrapExample($password, $user->name));
 
         return response()->json(['message' => 'Updated successfully', 'status' => 200]);
     }
