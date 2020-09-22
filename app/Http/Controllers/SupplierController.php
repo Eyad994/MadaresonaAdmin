@@ -199,10 +199,12 @@ class SupplierController extends Controller
         {
             return view('madaresona.supplier.addSupplier', compact('cities', 'regions', 'lastSupplierOrder', 'supplier', 'trueFalseArray'
                 , 'supplierTypesExploded'));
+        }else
+        {
+            return view('madaresona.supplier.editSupplier', compact('cities', 'regions', 'lastSupplierOrder', 'supplier', 'trueFalseArray'
+                , 'supplierTypesExploded'));
         }
 
-        return view('madaresona.supplier.editSupplier', compact('cities', 'regions', 'lastSupplierOrder', 'supplier', 'trueFalseArray'
-            , 'supplierTypesExploded'));
 
     }
 
