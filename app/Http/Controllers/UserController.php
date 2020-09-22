@@ -126,9 +126,9 @@ class UserController extends Controller
         ]);
 
         if (!($phone == null)) {
+            $var = ltrim($phone, '0');
             $phone = '962'.$phone;
-            dd($password);
-            $this->sms('تم تفعيل حسابك بنجاح كلمة السر الخاصة بك هي :', $phone , $password  );
+            $this->sms('تم تفعيل حسابك بنجاح كلمة السر الخاصة بك هي :', $phone , $password );
         }
         Mail::to($user->email)->send(new MailtrapExample($password, $user->name));
 
