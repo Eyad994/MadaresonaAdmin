@@ -205,7 +205,6 @@ class SupplierController extends Controller
                 , 'supplierTypesExploded'));
         }
 
-
     }
 
     /**

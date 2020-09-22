@@ -17,7 +17,7 @@ class EditorMiddleware
     public function handle($request, Closure $next)
     {
         $this->user = auth()->user();
-        if ($this->user->type != 1 && $this->user->type != 3 ) {
+        if ($this->user->type != 1 && $this->user->type != 3 && $this->user->type != 4 ) {
            abort(403);
         }
         return $next($request);
