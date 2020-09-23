@@ -15,7 +15,7 @@ class SchoolMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->type != 1 && auth()->user()->type != 5 ) {
+        if ($request->user() && $request->user()->type != 1 && auth()->user()->type != 5 && auth()->user()->type != 3  ) {
             abort(403);
         }
         return $next($request);
