@@ -11,7 +11,7 @@
                 <label class="" style="padding: 10px 0px 0px 19px;"> Supplier Name : <b style="color:#ffa800;">{{$supplier_name}}</b> </label>
             </div>
             <div class="card-body">
-                <table class="table" id="messageTable"></table>
+                <table class="table" id="messageTable" style="direction: rtl;"></table>
             </div>
         </div>
 
@@ -26,8 +26,10 @@
     <script type="text/javascript">
 
         var table = $('#messageTable').DataTable({
+            fixedColumns:   true,
             dom: 'Bfrtip',
             "columnDefs": [
+                { className: "dt-right", "targets": [0,1,2,3,4,5,6] },
                 {"width": "50px", "targets": 6}
             ],
             processing: true,
@@ -55,17 +57,17 @@
                 }
             },
             columns: [
-                {data: 'DT_RowIndex', title: 'ID'},
+                {data: 'DT_RowIndex', title: '#'},
                 {data: 'name', title: 'الاسم'},
-                {data: 'subject', title: 'Subject'},
+                {data: 'subject', title: 'الموضوع'},
                 {
-                    title: 'Email', "mRender": function (data, type, row) {
+                    title: 'البريد الالكتروني', "mRender": function (data, type, row) {
                         return'<span class="font-weight-bold text-primary">' + row.email + '</span>';
                     }
                 },
-                {data: 'created_at', title: 'date'},
+                {data: 'created_at', title: 'التاريخ'},
                 {
-                    data: 'seen', title: 'Seen', "mRender": function (data, type, row) {
+                    data: 'seen', title: 'رأيت', "mRender": function (data, type, row) {
                         if (row.seen == 'NO') {
                             return "<span class='label font-weight-bold label-lg  label-light-danger label-inline'>NO</span>";
                         } else if (row.seen == 'Yes') {
@@ -76,7 +78,7 @@
                     }
                 },
                 {
-                    title: 'Actions', "mRender": function (data, type, row) {
+                    title: 'أجراءات', "mRender": function (data, type, row) {
                         var edit = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn show-message-btn" id="' + row.id + '" title="View"><i class="fa fa-eye" style="color: #00aff0"></i></a>';
                         var remove = '<a href="#" class="btn btn-sm btn-clean btn-icon action-btn remove-message-btn" id="' + row.id + '"  title="Remove"><i class="far fa-trash-alt" style="color: #f64e60"></i></a>';
                         return edit + remove;
