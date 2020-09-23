@@ -286,7 +286,6 @@ class SupplierController extends Controller
             }
 
             $supplier->update([
-                'supplier_order' => $request->supplier_order,
                 'supplier_type' => implode(',', $request->type),
                 'name_ar' => $request->name_ar,
                 'name_en' => $request->name_en,
