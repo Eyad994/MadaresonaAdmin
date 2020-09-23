@@ -69,9 +69,9 @@
                 {
                     data: 'seen', title: 'رأيت', "mRender": function (data, type, row) {
                         if (row.seen == 'NO') {
-                            return "<span class='label font-weight-bold label-lg  label-light-danger label-inline'>NO</span>";
+                            return "<span class='label font-weight-bold label-lg  label-light-danger label-inline'>لا</span>";
                         } else if (row.seen == 'Yes') {
-                            return "<span class='label font-weight-bold label-lg  label-light-success label-inline'>Yes</span>";
+                            return "<span class='label font-weight-bold label-lg  label-light-success label-inline'>نعم</span>";
 
                         }
 
