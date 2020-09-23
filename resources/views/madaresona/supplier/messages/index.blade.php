@@ -7,9 +7,11 @@
             <div class="card-header">
                 <b>Suggestions</b>
             </div>
+            @if(auth()->user()->type != 4)
             <div class="col-md-12">
                 <label class="" style="padding: 10px 0px 0px 19px;"> Supplier Name : <b style="color:#ffa800;">{{$supplier_name}}</b> </label>
             </div>
+            @endif
             <div class="card-body">
                 <table class="table" id="messageTable" style="direction: rtl;"></table>
             </div>
