@@ -32,6 +32,7 @@ trait SMS
 
     public function smsMulti($message, $Mobiles)
     {
+
         $url = 'http://josmsservice.com/sms/api/SendBulkMessages.cfm';
         $fields = array(
             'AccName' => "Madaresona",        // The user name of gateway

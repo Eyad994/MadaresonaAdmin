@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
 use App\Mail\MailtrapExample;
 use App\Mail\MultipleEmails;
 use App\Models\SubscribesEmail;
+use App\Traits\SMS;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SenderController extends Controller
 {
+    use SMS;
     public function email()
     {
         return view('madaresona.sender.email');
@@ -34,11 +38,10 @@ class SenderController extends Controller
         }
 
         if ($request->option == 1) {
-            $emails=SubscribesEmail::get()->pluck('email')->toArray();
-                $emails=implode(',',$emails);
-        }elseif ($request->option == 2)
-        {
-            $emails= $request->emails;
+            $emails = SubscribesEmail::get()->pluck('email')->toArray();
+            $emails = implode(',', $emails);
+        } elseif ($request->option == 2) {
+            $emails = $request->emails;
         }
 
         Mail::to($emails)->send(new MultipleEmails($request->title, $request->subjcet));
@@ -54,6 +57,17 @@ class SenderController extends Controller
 
     public function sendSMS(Request $request)
     {
+        $arrayphone = [];
+        $phones = Excel::toCollection(new UsersImport, request()->file('phones'));
+        foreach ($phones[0] as $phone) {
+            if ($phone[0] != null) {
+                array_push($arrayphone, $phone[0]);
+            }
+        }
+        $array_chunk = array_chunk($arrayphone, 100);
 
+        foreach ($array_chunk as  $array_send) {
+            $this->smsMulti($request->sms_text , $array_send);
+        }
     }
 }

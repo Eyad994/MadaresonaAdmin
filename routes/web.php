@@ -218,6 +218,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('emailSender', 'SenderController@sendEmail')->name('emailSender');
     Route::get('smsSender', 'SenderController@sms');
-    Route::post('smsSenders', 'SenderController@sendSMS');
+    Route::post('smsSenders', 'SenderController@sendSMS')->name('smsSenders');
 });
 
