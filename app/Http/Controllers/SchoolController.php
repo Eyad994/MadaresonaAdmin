@@ -28,6 +28,10 @@ class SchoolController extends Controller
     /**
      * SchoolController constructor.
      */
+    public function __construct()
+    {
+        $this->middleware('school');
+    }
 
     public function index()
     {
