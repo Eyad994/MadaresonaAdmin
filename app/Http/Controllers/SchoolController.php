@@ -105,7 +105,6 @@ class SchoolController extends Controller
             'name_ar' => 'required',
             'name_en' => 'required|unique:schools',
             'gender' => 'required',
-            'email_school' => 'required|email|unique:users',
             'start' => 'date|required',
             'end' => 'date|required',
             'phone' => 'required|numeric',
