@@ -53,7 +53,10 @@ class SchoolController extends Controller
                 })
                 ->addColumn('sn', function ($data) {
                     $finance = Finance::where('user_id', $data->user_id)->orderBy('end_date', 'desc')->first();
-                    return $finance->uuid;
+                    if ($finance != null)
+                        return $finance->uuid;
+                    else
+                        return null;
                 })
                 ->make(true);
         }
@@ -290,7 +293,7 @@ class SchoolController extends Controller
             }
 
             return response()->json(['message' => 'Updated successfully', 'status' => 200]);
-        }else{
+        } else {
             $request->validate([
                 'name_ar' => 'required',
                 'name_en' => 'required|unique:schools,name_en,' . $request->id,

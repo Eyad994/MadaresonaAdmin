@@ -31,7 +31,7 @@ class MultipleEmails extends Mailable
     public function build()
     {
         return $this->from('omer@arakjo.com', 'MadaresonaJo')
-            ->subject('Madaresona Confirmation')
+            ->subject('Madaresona')
             ->markdown('mails.multipleEmails')
             ->with([
                 'title' => $this->title,
