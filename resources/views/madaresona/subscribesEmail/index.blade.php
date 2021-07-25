@@ -103,6 +103,7 @@
                         return '<span class="font-weight-bold text-primary">' + row.email + '</span>';
                     }
                 },
+
                 {data: 'created_at', title: 'date'},
                 {
                     title: 'Actions', "mRender": function (data, type, row) {
