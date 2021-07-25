@@ -25,7 +25,7 @@ class SubscribesEmailController extends Controller
     public function subscribesEmailDatatable(Request $request)
     {
         if ($request->ajax()) {
-            $data = SubscribesEmail::latest()->get();
+            $data = SubscribesEmail::latest();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('created_at', function ($data) {

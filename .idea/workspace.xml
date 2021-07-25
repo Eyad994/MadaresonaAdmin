@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d973f827-8277-45b6-bca4-96f411207589" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/MadaresonaAdmin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MadaresonaAdmin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SubscribesEmailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SubscribesEmailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/subscribesEmail/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/subscribesEmail/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -390,7 +389,7 @@
       <workItem from="1605780845328" duration="38000" />
       <workItem from="1606123161496" duration="1829000" />
       <workItem from="1606393760545" duration="201000" />
-      <workItem from="1627238608157" duration="660000" />
+      <workItem from="1627238608157" duration="2337000" />
     </task>
     <servers />
   </component>

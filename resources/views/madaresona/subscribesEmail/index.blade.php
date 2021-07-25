@@ -97,7 +97,7 @@
                 type: "get",
             },
             columns: [
-                {data: 'DT_RowIndex', title: 'ID'},
+                {data: 'DT_RowIndex', title: 'ID', orderable: false, searchable: false},
                 {
                     title: 'Email', "mRender": function (data, type, row) {
                         return '<span class="font-weight-bold text-primary">' + row.email + '</span>';
