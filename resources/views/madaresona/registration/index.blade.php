@@ -74,7 +74,7 @@
                 type: "get"
             },
             columns: [
-                {data: 'DT_RowIndex', title: 'ID'},
+                {data: 'DT_RowIndex', title: 'ID' , orderable: false, searchable: false },
                 {data: 'schools', title: 'Schools'},
                 {data: 'parent', title: 'Parent'},
                 {data: 'number', title: 'Phone Number'},

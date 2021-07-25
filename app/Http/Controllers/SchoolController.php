@@ -42,7 +42,7 @@ class SchoolController extends Controller
     public function schoolsDatable(Request $request)
     {
         if ($request->ajax()) {
-            $data = School::latest()->get();
+            $data = School::latest();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('special', function ($data) {

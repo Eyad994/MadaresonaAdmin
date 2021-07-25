@@ -30,7 +30,7 @@
             ],
             ajax: "{{ route('schoolsDatable') }}",
             columns: [
-                {data: 'DT_RowIndex', title: 'ID'},
+                {data: 'DT_RowIndex', title: 'ID', orderable: false, searchable: false},
 
                 {
                     title: 'SN', "mRender": function (data, type, row) {

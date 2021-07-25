@@ -43,7 +43,7 @@ class RegistrationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -53,12 +53,12 @@ class RegistrationController extends Controller
             'class_id' => 'required',
             'phone_number' => 'required',
         ]);
-        if ($validations->fails()){
+        if ($validations->fails()) {
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
         Registration::create([
-           'schools' => implode(',', $request->schools),
+            'schools' => implode(',', $request->schools),
             'class_id' => $request->class_id,
             'parent' => $request->parent,
             'child' => $request->student,
@@ -72,7 +72,7 @@ class RegistrationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Registration $registration
+     * @param \App\Models\Registration $registration
      * @return \Illuminate\Http\Response
      */
     public function show(Registration $registration)
@@ -83,7 +83,7 @@ class RegistrationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Registration $registration
+     * @param \App\Models\Registration $registration
      * @return \Illuminate\Http\Response
      */
     public function edit(Registration $registration)
@@ -95,8 +95,8 @@ class RegistrationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Models\Registration $registration
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Registration $registration
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Registration $registration)
@@ -107,7 +107,7 @@ class RegistrationController extends Controller
             'phone_number' => 'required',
         ]);
 
-        if ($validations->fails()){
+        if ($validations->fails()) {
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
@@ -125,7 +125,7 @@ class RegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Registration $registration
+     * @param \App\Models\Registration $registration
      * @return \Illuminate\Http\Response
      */
     public function destroy(Registration $registration)
@@ -136,26 +136,25 @@ class RegistrationController extends Controller
     public function registrationDatatable(Request $request)
     {
         if ($request->ajax()) {
-            $data = Registration::orderBy('created_at', 'desc')->whereYear('created_at', date('Y'))->get();
+            $data = Registration::latest();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('schools', function ($data) {
                     $schoolsArray = explode(',', $data->schools);
                     $schools = School::whereIn('id', $schoolsArray)->get('name_ar')->toArray();
                     $schoolsString = '';
-                    foreach ($schools as $school)
-                    {
-                        $schoolsString .= $school['name_ar'].',';
+                    foreach ($schools as $school) {
+                        $schoolsString .= $school['name_ar'] . ',';
                     }
                     return $schoolsString;
                 })
                 ->editColumn('created_at', function ($data) {
                     return $data->created_at->format('d-m-Y ');
                 })
-                ->editColumn('by_admin', function ($data){
+                ->editColumn('by_admin', function ($data) {
                     return $data->user->name;
                 })
-                ->editColumn('class_id', function ($data){
+                ->editColumn('class_id', function ($data) {
                     return $data->schoolClass->class_en;
                 })
                 ->make(true);
@@ -173,7 +172,7 @@ class RegistrationController extends Controller
         $validations = Validator::make($request->all(), [
             'note_text' => 'required',
         ]);
-        if ($validations->fails()){
+        if ($validations->fails()) {
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
