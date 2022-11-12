@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d973f827-8277-45b6-bca4-96f411207589" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SchoolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SchoolController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/1592143263.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/1592143263_brochure.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/1592416180.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/gallery/1593775374_gallery.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/news/1592679770_news.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/news/1592679784_news.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG2/1593514145.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test/1592417215.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test/gallery/1593875540_gallery.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/1593201349.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/1593201361.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/1593201369.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/1593201397.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593879840_gallery.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880229_gallery" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880606_gallery" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880647_gallery" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880672_gallery.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880697_gallery.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/madaresona/schools/addSchool.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/schools/addSchool.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -424,7 +399,7 @@
       <workItem from="1606393760545" duration="201000" />
       <workItem from="1627238608157" duration="2939000" />
       <workItem from="1667935402554" duration="5540000" />
-      <workItem from="1668192128510" duration="3024000" />
+      <workItem from="1668192128510" duration="3883000" />
     </task>
     <servers />
   </component>

@@ -24,7 +24,7 @@
             border: 3px solid #fff;
         }
 
-        .btn_edit_img {
+        .btn_edit_logo {
             margin-top: -333px;
             margin-left: 155px;
 
@@ -278,7 +278,7 @@
                                         background-repeat: no-repeat;
                                        ' @endif></div>
                                         <label
-                                            class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                            class="btn_edit_logo btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                             style="color: #262673 !important;">
                                             <i class="fa fa-pen icon-sm text-muted"></i>
                                             <input type="file" name="logo" id="logo" class="uploadFile img"
