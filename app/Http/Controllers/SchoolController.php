@@ -17,6 +17,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
@@ -119,17 +120,26 @@ class SchoolController extends Controller
             return response()->json(['errors' => $validations->errors(), 'status' => 422]);
         }
 
-        if (isset($request->logo)) {
-            $image = $request->file('logo');
-            $logo = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/' . $request->name_en), $logo);
+        $filesPath = 'Institution/' . Str::slug($request->name_en, '_');
+
+        if ($request->hasFile('logo')) {
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $fileNameToStore = 'logo' . '_' . uniqid() . '.' . $extension;
+            $logo_path = Storage::putFileAs($filesPath, $request->file('logo'), $fileNameToStore);
         }
 
-        if (isset($request->brochure)) {
-            $image = $request->file('brochure');
-            $brochure = time() . '_brochure.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/' . $request->name_en), $brochure);
+        if ($request->hasFile('hero')) {
+            $extension = $request->file('hero_path')->getClientOriginalExtension();
+            $fileNameToStore = 'hero_path' . '_' . uniqid() . '.' . $extension;
+            $hero_path = Storage::putFileAs($filesPath, $request->file('hero_path'), $fileNameToStore);
         }
+
+        if ($request->hasFile('brochure')) {
+            $extension = $request->file('brochure')->getClientOriginalExtension();
+            $fileNameToStore = 'brochure' . '_' . uniqid() . '.' . $extension;
+            $brochure_path = Storage::putFileAs($filesPath, $request->file('brochure'), $fileNameToStore);
+        }
+
 
         $school = School::create([
             'type' => implode(',', $request->type),
@@ -148,12 +158,13 @@ class SchoolController extends Controller
             'school_details_en' => $request->school_details_en,
             'zip_code' => $request->zip_code,
             'po_box' => $request->po_box,
-            'school_logo' => isset($logo) ? $logo : null,
+            'school_logo' => $logo_path ?? null,
+            'hero_path' => $hero_path ?? null,
             'country' => 1,
             'city_id' => $request->city_id,
             'region_id' => $request->region_id,
             'status' => $request->status,
-            'school_brochure' => isset($brochure) ? $brochure : null,
+            'school_brochure' => $brochure_path ?? null,
             'facebook_link' => $request->facebook_link,
             'twitter_link' => $request->twitter_link,
             'instagram_link' => $request->instagram_link,
@@ -219,6 +230,7 @@ class SchoolController extends Controller
     public function update(Request $request)
     {
         if (request()->ajax()) {
+
             $validations = Validator::make($request->all(), [
                 'name_ar' => 'required',
                 'name_en' => 'required|unique:schools,name_en,' . $request->id,
@@ -232,7 +244,10 @@ class SchoolController extends Controller
             }
 
             $school = School::where('id', $request->id)->first();
-            $school->update([
+
+            $filesPath = 'Institution/' . Str::slug($request->name_en, '_');
+
+            $values = [
                 'type' => implode(',', $request->type),
                 'name_ar' => $request->name_ar,
                 'name_en' => $request->name_en,
@@ -272,25 +287,34 @@ class SchoolController extends Controller
                 'contact_person_name' => $request->contact_person_name,
                 'contact_person_phone' => $request->contact_person_phone,
                 'contact_person_email' => $request->contact_person_email,
-            ]);
-            if (isset($request->logo) && $request->logo != $school->school_logo) {
-                $image = $request->file('logo');
-                $logo = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('images/' . $request->name_en), $logo);
+            ];
 
-                $school->update([
-                    'school_logo' => $logo
-                ]);
+            if ($request->hasFile('logo')) {
+                Storage::delete($school->school_logo);
+                $extension = $request->file('logo')->getClientOriginalExtension();
+                $fileNameToStore = 'logo' . '_' . uniqid() . '.' . $extension;
+                $logo_path = Storage::putFileAs($filesPath, $request->file('logo'), $fileNameToStore);
+                $values['school_logo'] = $logo_path;
+            }
 
+            if ($request->hasFile('hero_path')) {
+                Storage::delete($school->hero_path);
+                $extension = $request->file('hero_path')->getClientOriginalExtension();
+                $fileNameToStore = 'hero' . '_' . uniqid() . '.' . $extension;
+                $hero_path = Storage::putFileAs($filesPath, $request->file('hero_path'), $fileNameToStore);
+                $values['hero_path'] = $hero_path;
             }
-            if (isset($request->brochure) && $request->brochure != $school->school_brochure) {
-                $image = $request->file('brochure');
-                $brochure = time() . '_brochure.' . $image->getClientOriginalExtension();
-                $image->move(public_path('images/' . $request->name_en), $brochure);
-                $school->update([
-                    'school_brochure' => $brochure
-                ]);
+
+            if ($request->hasFile('brochure')) {
+                Storage::delete($school->school_brochure);
+                $extension = $request->file('brochure')->getClientOriginalExtension();
+                $fileNameToStore = 'brochure' . '_' . uniqid() . '.' . $extension;
+                $brochure_path = Storage::putFileAs($filesPath, $request->file('brochure'), $fileNameToStore);
+                $values['school_brochure'] = $brochure_path;
             }
+
+            $school->update($values);
+
 
             return response()->json(['message' => 'Updated successfully', 'status' => 200]);
         } else {

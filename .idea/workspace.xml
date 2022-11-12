@@ -2,7 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d973f827-8277-45b6-bca4-96f411207589" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/MadaresonaAdmin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MadaresonaAdmin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SchoolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SchoolController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/1592143263.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/1592143263_brochure.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/1592416180.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/gallery/1593775374_gallery.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/news/1592679770_news.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG/news/1592679784_news.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Zarqa University Schools &amp; KG2/1593514145.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test/1592417215.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test/gallery/1593875540_gallery.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/1593201349.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/1593201361.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/1593201369.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/1593201397.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593879840_gallery.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880229_gallery" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880606_gallery" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880647_gallery" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880672_gallery.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/test12312321321/gallery/1593880697_gallery.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/madaresona/schools/addSchool.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/madaresona/schools/addSchool.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +123,9 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/SchoolController.php" />
       </list>
     </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -211,6 +240,9 @@
       <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
       <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
       <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -299,12 +331,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../kbg" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/omar/Documents/Project/T4D_API&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Omar\Desktop\work\MadaresonaAdmin" />
@@ -387,6 +423,8 @@
       <workItem from="1606123161496" duration="1829000" />
       <workItem from="1606393760545" duration="201000" />
       <workItem from="1627238608157" duration="2939000" />
+      <workItem from="1667935402554" duration="5540000" />
+      <workItem from="1668192128510" duration="3024000" />
     </task>
     <servers />
   </component>
@@ -422,6 +460,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/resources/views/madaresona/supplier/messages/index.blade.php">

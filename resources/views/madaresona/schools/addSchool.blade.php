@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ asset('assets/smartwizard/css/smart_wizard_all.css') }}">
     <style>
 
-
         .imagePreview {
             width: 170px;
             height: 150px;
@@ -67,7 +66,6 @@
             z-index: 10;
         }
 
-        ​
         #pac-input:focus {
             border-color: #4d90fe;
         }
@@ -82,6 +80,27 @@
         .ck-editor__editable {
             max-height: 175px !important;
         }
+
+        .hero_Preview {
+            width: 100%;
+            height: 150px;
+            background-position: center center;
+            background: url('{{asset('images/default/add.svg')}}');
+            background-color: #fff;
+            background-size: 100% 150px;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, .075);
+            border: 3px solid #fff;
+        }
+
+        .btn_edit_img {
+            margin-top: -326px;
+            margin-left: calc(100% - 15px);
+            border: 1px solid #f5f8fa !important;
+        }
+
     </style>
 
 </head>
@@ -137,7 +156,8 @@
         </ul>
         <hr>
         @if(isset($school))
-            <form action="{{ route('updateSchool') }}" method="POST" id="updateSchoolForm" enctype="multipart/form-data">
+            <form action="{{ route('updateSchool') }}" method="POST" id="updateSchoolForm"
+                  enctype="multipart/form-data">
                 {{ method_field('put') }}
                 @else
                     <form action="{{ route('submitSchool') }}" method="POST" id="addSchoolForm"
@@ -249,26 +269,48 @@
 
                                     <div class="col-sm-2 imgUp">
                                         <label>School Logo </label>
-                                        <div class="imagePreview" style="@if(isset($school))
-                                                background:url('{{asset('/images/'.$school->name_en.'/'.$school->school_logo.'')}}');
-                                                background-position: center center;
-                                                background-color: #fff;
-                                                background-size: cover;
-                                                background-repeat: no-repeat;
-                                        @endif"></div>
-                                        <label class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                               style="color: #262673 !important;">
+                                        <div class="imagePreview"  @if(isset($school))
+                                            style='
+                                                 background:url("{{$school->school_logo ? config('filesystems.disks.public.url').$school->school_logo : asset('images/default/add.svg') }}");
+                                        background-position: center center;
+                                        background-color: #fff;
+                                        background-size: cover;
+                                        background-repeat: no-repeat;
+                                       ' @endif></div>
+                                        <label
+                                            class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                            style="color: #262673 !important;">
                                             <i class="fa fa-pen icon-sm text-muted"></i>
                                             <input type="file" name="logo" id="logo" class="uploadFile img"
                                                    value="{{ isset($school) ? $school->school_logo: '' }}"
                                                    style="width: 0px;height: 0px;overflow: hidden;">
                                         </label>
                                     </div>
-                                    {{-- <div class="col-md-4">
-                                         <label>School Logo</label>
-                                         <input type="file" name="logo" id="logo" class="form-control-file">
-                                         <img src="{{ asset('images/Zarqa University Schools & KG/1592143263.png') }}" alt="">
-                                     </div>--}}
+
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6 imgUp form-group">
+                                        <label class="d-block">Hero Image</label>
+                                        <div class="hero_Preview"
+                                             @if(isset($school))
+                                                 style='
+                                                 background:url("{{$school->hero_path ? config('filesystems.disks.public.url').$school->hero_path : asset('images/default/add.svg') }}");
+                                        background-position: center center;
+                                        background-color: #fff;
+                                        background-size: cover;
+                                        background-repeat: no-repeat;
+                                       ' @endif>
+                                        </div>
+                                        <label
+                                            class="btn_edit_img btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                            style="color: #262673 !important;">
+                                            <i class="fas fa-pen icon-sm text-muted"></i>
+                                            <input type="file" name="hero_path" id="image" class="uploadHero img"
+                                                   style="width: 0px;height: 0px;overflow: hidden;" accept="image/*"
+                                                   @if(isset($school)) value="{{ $school->hero_path }}" @endif>
+                                        </label>
+                                    </div>
+
+
                                 </div>
 
                             </div>
@@ -278,22 +320,30 @@
                                     <div class="col-md-6 form-group">
                                         <label> Principal Arabic</label>
                                         <textarea name="principle_ar" id="principle_ar"
-                                                  placeholder="Principal Arabic">@if(isset($school)) {!! $school->principle_ar!!} @endif</textarea>
+                                                  placeholder="Principal Arabic">@if(isset($school))
+                                                {!! $school->principle_ar!!}
+                                            @endif</textarea>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label> Principal English</label>
                                         <textarea name="principle_en" id="principle_en"
-                                                  placeholder="Principal English">@if(isset($school)) {!! $school->principle_en!!} @endif</textarea>
+                                                  placeholder="Principal English">@if(isset($school))
+                                                {!! $school->principle_en!!}
+                                            @endif</textarea>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label>School details Arabic </label>
                                         <textarea name="school_details_ar" id="school_details_ar"
-                                                  placeholder="School details Arabic">@if(isset($school)) {!! $school->school_details_ar!!} @endif</textarea>
+                                                  placeholder="School details Arabic">@if(isset($school))
+                                                {!! $school->school_details_ar!!}
+                                            @endif</textarea>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label>School details English</label>
                                         <textarea name="school_details_en" id="school_details_en"
-                                                  placeholder="School details English">@if(isset($school)) {!! $school->school_details_en!!} @endif</textarea>
+                                                  placeholder="School details English">@if(isset($school))
+                                                {!! $school->school_details_en!!}
+                                            @endif</textarea>
                                     </div>
                                 </div>
                                 <script>
@@ -320,9 +370,10 @@
                                             @endif
 
                                             @foreach($cities as $city)
-                                                <option @if(isset($school) && $city->id == $school->city->id) value="{{ $city->id }}"
-                                                        selected
-                                                        @else value="{{ $city->id }}" @endif>{{ $city->city_name_ar }}</option>
+                                                <option
+                                                    @if(isset($school) && $city->id == $school->city->id) value="{{ $city->id }}"
+                                                    selected
+                                                    @else value="{{ $city->id }}" @endif>{{ $city->city_name_ar }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -335,12 +386,12 @@
                                             @if(isset($school))
                                                 <script>
                                                     var value = {{ $school->city_id }}
-                                        $.ajax({
+                                                    $.ajax({
                                                         url: '/getRegions/' + value,
                                                         method: 'get',
                                                         success: function (result) {
                                                             var schoolId = {{ $school->region_id }}
-                                                $('#region_id option:not(:first)').remove();
+                                                            $('#region_id option:not(:first)').remove();
                                                             $.each(result, function (index, value) {
                                                                 if (schoolId == value.id)
                                                                     $('#region_id').append("<option value='" + value.id + "' selected>" + value.area_name_ar + "");
@@ -492,13 +543,13 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label>Gender </label>
-
-                                        <select class="multiple-select" name="gender[]" multiple="multiple" id="gender">
+                                        <select class="form-control select2" name="gender[]" multiple="multiple" id="gender">
                                             @if(!isset($school))
                                                 <option disabled value=""> Select Gender</option>
                                             @endif
                                             @foreach($genderArray as $key => $value)
-                                                <option value="{{ $key }}" {{ isset($school) ? (in_array($key, $genderSchool)) ? 'selected' : '' : ''}}>{{ $value }}</option>
+                                                <option
+                                                    value="{{ $key }}" {{ isset($school) ? (in_array($key, $genderSchool)) ? 'selected' : '' : ''}}>{{ $value }}</option>
                                             @endforeach
 
                                         </select>
@@ -611,13 +662,13 @@
                                             <label>Date</label>
                                             <div class="input-daterange input-group" id="kt_datepicker_5">
                                                 <input type="text" class="form-control" name="start"
-                                                       placeholder="From Date">
+                                                       placeholder="From Date"  autocomplete="off">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i
-                                                                class="fa fa-ellipsis-h"></i></span>
+                                                            class="fa fa-ellipsis-h"></i><  /span>
                                                 </div>
                                                 <input type="text" class="form-control" name="end"
-                                                       placeholder="To Date">
+                                                       placeholder="To Date" autocomplete="off">
                                             </div>
                                         </div>
 
@@ -647,11 +698,27 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        $('#gender').select2({dropdownParent: $('#schoolModal')});
+
         $(document).on("click", "i.del", function () {
             $(this).parent().remove();
         });
 
         $(function () {
+            $(document).on("change", ".uploadHero", function () {
+                var uploadFile = $(this);
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+                if (/^image/.test(files[0].type)) { // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[0]); // read the local file
+                    reader.onloadend = function () { // set image data as background of div
+                        //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                        uploadFile.closest(".imgUp").find('.hero_Preview').css("background-image", "url(" + this.result + ")");
+                    }
+                }
+            });
+
             $(document).on("change", ".uploadFile", function () {
                 var uploadFile = $(this);
                 var files = !!this.files ? this.files : [];
@@ -766,6 +833,7 @@
     var lat;
     var lng;
     initialize();
+
     function initialize() {
         if ($("#map-canvas").length != 0) {
             @if(isset($school))
@@ -786,15 +854,15 @@
                 map: map,
                 draggable: true
             });
-                    @else
+            @else
             var markers = [];
             map = new google.maps.Map(document.getElementById('map-canvas'), {
                 center: {lat: 31.95411763246642, lng: 35.89202087546278},
                 zoom: 12
             });
-                    @endif
+            @endif
             var input = /** @type {HTMLInputElement} */(
-                    document.getElementById('pac-input'));
+                document.getElementById('pac-input'));
             new google.maps.places.Autocomplete(input);
             google.maps.event.addDomListener(window, 'load', initialize);
 
