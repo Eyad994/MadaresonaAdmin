@@ -267,7 +267,7 @@
                                         >
                                     </div>
 
-                                    <div class="col-sm-2 imgUp">
+                                    <div class="col-sm-2 mr-10 imgUp">
                                         <label>School Logo </label>
                                         <div class="imagePreview"  @if(isset($school))
                                             style='
