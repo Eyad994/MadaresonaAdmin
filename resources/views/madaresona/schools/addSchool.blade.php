@@ -665,7 +665,7 @@
                                                        placeholder="From Date"  autocomplete="off">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i
-                                                            class="fa fa-ellipsis-h"></i><  /span>
+                                                            class="fa fa-ellipsis-h"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control" name="end"
                                                        placeholder="To Date" autocomplete="off">

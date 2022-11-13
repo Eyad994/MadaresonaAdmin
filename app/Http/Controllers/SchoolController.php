@@ -113,7 +113,8 @@ class SchoolController extends Controller
             'end' => 'date|required',
             'phone' => 'required|numeric',
             'subscribe_price' => 'numeric|required',
-            'status' => 'required'
+            'status' => 'required',
+            'madaresona_discounts'=> 'numeric|nullable'
         ]);
 
         if ($validations->fails()) {
@@ -236,7 +237,8 @@ class SchoolController extends Controller
                 'name_en' => 'required|unique:schools,name_en,' . $request->id,
                 'gender' => 'required',
                 'phone' => 'required|numeric',
-                'status' => 'required'
+                'status' => 'required',
+                'madaresona_discounts'=> 'numeric|nullable'
             ]);
 
             if ($validations->fails()) {
