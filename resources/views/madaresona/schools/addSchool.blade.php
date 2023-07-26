@@ -359,7 +359,12 @@
                                     <div class="col-md-6 form-group">
                                         <label> Country</label>
                                         <select class="form-control" id="country" name="country" disabled>
-                                            <option disabled selected value="1">Jordan</option>
+                                             @if(request()->getHttpHost() == 'dashboard.madaresonaps.com')
+                                             <option disabled selected value="1">Palestine</option>
+                                            @else
+                                             <option disabled selected value="1">Jordan</option>
+                                            @endif
+                                           
                                         </select>
                                     </div>
                                     <div class="col-md-6 form-group">
